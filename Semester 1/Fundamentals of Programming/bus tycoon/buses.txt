@@ -1,0 +1,5 @@
+1,1,mercedes,7
+2,1,electric,13
+3,5,iveco,7
+4,10,electric,2
+5,23,iveco,10
