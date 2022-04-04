@@ -1,0 +1,9 @@
+*the exact form of the input/output will be written in quotation marks: " "
+
+-input: 
+"1"
+
+-output:
+"1. the number of bases of the vector space Z2^1 over Z2 is 1.
+2. the vectors of each such basis are: 
+((1))"

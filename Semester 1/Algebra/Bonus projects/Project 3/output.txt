@@ -1,0 +1,1 @@
+The input should be a non-zero natural number.

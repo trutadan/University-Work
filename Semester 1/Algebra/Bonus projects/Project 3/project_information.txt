@@ -1,0 +1,17 @@
+*Any (reasonable) programming language may be used*
+I chose python along with some well-known libraries
+
+Which was the process of thinking?
+In order to get the bases I was thinking to get all combinations of d vectors (d = dim V -> which can be 2 for n=2, 3 for n=3 and 4 for n=4, etc..).
+After that, the next step is to check if each combination of d vectors you take are linearly independent. You can do that by computing the determinant of the matrix formed by these vectors.
+This calculation is done in the classical way,  but we take the rest of the result after dividing by 2(modulo 2), because we are working in Z2. If the determinant is not zero, then the vectors are linearly independent.
+Now, because the number of vector chosen is equal to the dimension, it will be a system of generators too, so a basis.
+
+How to run the program?
+In the input file - "input.txt" should be present a string representing a number between 1 and 4, no additional spaces, newlines, or other characters. Otherwise, a suitable message will be displayed.
+The python program can be run now.
+In the output file - "output.txt" should now be displayed the output format mentioned in the pdf of the project, or the corresponding message if the input was not in the correct format.
+
+Remarks:
+-the input_and_output_example_x.txt files represent all the possible outputs that can be displayed by the program.
+-in order to run the application, itertools and numpy python libraries should be installed on the system.

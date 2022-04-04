@@ -1,0 +1,7 @@
+*the exact form of the input/output will be written in quotation marks: " "
+
+-input: 
+" s  f"
+
+-output:
+"The number's value should be an integer between one and four(no spaces or any other characters)!"
