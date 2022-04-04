@@ -1,0 +1,6 @@
+*the exact form of the input/output will be written in quotation marks: " "
+
+-input: "0"
+
+-output:
+"The input should be a non-zero natural number."
