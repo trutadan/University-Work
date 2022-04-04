@@ -1,0 +1,315 @@
+http://www.cs.ubbcluj.ro/~rares/course/os/res/practice/bradut.html
+
+GREP.1	
+Folosind utilitarul GREP afisati pe ecran toate liniile dintr-un fisier care contin un numar de caractere divizibil cu 3.
+grep -E "^(.{3})*$" example.txt
+
+GREP.2	
+Folosind utilitarul GREP afisati pe ecran toate linile unui fisier care contin cel putin 3 vocale mari si nu contin cifre impare.
+grep -E "^([^13579]*[AEIOU][^13579]*){3,}$" example.txt
+
+GREP.3	
+Folosind utilitarul GREP afisati pe ecran toate linile unui fisier care incep cu un numar par de cifre impare si se termina cu un numar impar de cifre pare.
+grep -E "^([13579]{2})+.*([02468]{2})*[02468]$" example.txt 
+
+GREP.4	
+Folosind utilitarul GREP afisati pe ecran toate linile unui fisier care contin cel mult 3 vocale mari si nu contin cifre impare.
+grep -E "^([^AEIOU13579]*[AEIOU][^AEIOU13579]*){,3}$" example.txt
+
+GREP.5	
+Folosid utilitarul GREP afisati pe ecran toate caraterele care apar intre prima aparitie a caracterului '|' si ultima aparitie a caracterului '^' de pe toate linile dintr-un fisier.
+grep -E -o "\|.*\^" example.txt
+
+GREP.6	
+Using grep display how many lines from a file contains only big letters.
+grep -E "^[A-Z]*$" example.txt
+
+GREP.7	
+Using grep display the lines and the line index of thoese lines that start and end with 2 digits.
+grep -E "^[0-9]{2}.*[0-9]{2}$" example.txt
+
+GREP.8	
+Using grep display all the characters of each line from a file after the last aparition of the '$', character includig the '$'.
+grep -E -o "[$][^$]*$" example.txt
+
+GREP.9	
+Using grep display all the lines from a file that don't contain any letter or digit.
+grep -E "^[^0-9a-zA-Z]*$" example.txt
+
+
+SED.1	
+Folosind SED inlocuiti toate vocalele dintr-un fisier cu upparcase-ul acestora.
+cat example.txt | sed -s "y/aeiou/AEIOU/"
+
+SED.2	
+Folosind SED stergeti primele 2 si ultimele 3 caractere de pe fiecare linie dintr-un fisier.
+cat example.txt | sed -E "s/(.?){2}//" | sed -E "s/(.?){3}$//"
+
+SED.3	
+Triple all the big letters from a file.
+cat example.txt | sed -E "s/([A-Z])/\1\1\1/g"
+
+SED.4	
+Put all groups of digits from a file, that contain at least 2 digits between curly brakets ( { } ).
+cat example.txt | sed -E "s/([0-9]{2,})/{\1}/g"
+
+SED.5	
+A file containing at least 2 words separated by space on each line is given. Delete the 2nd word from each line.
+cat example.txt | sed -E "s/(([^ ]*) +([^ ]*))/\2/"
+
+SED.6	
+Se da un fisier care contine cel putin 2 cuvinte pe fiecare linie separate prin spatiu. Folosind utilitarul SED interschimbati primul si ultimul cuvant de pe fiecare linie.
+cat example.txt | sed -E "s/^([^ ]*) (.*) ([^ ]*)$/\3 \2 \1/g"
+
+SED.7	
+Folosind utilitarul SED interschimbati primul si ultimul caracter de pe fiecare linie dintr-un un fisier.
+cat example.txt | sed -E "s/^(.)(.*)(.)$/\3\2\1/g"
+
+SED.8	
+Folosind utilitarul SED stergeti toate grupurile de caractere dintr-un fisier formate din cel putin 3 vocale mari.
+cat example.txt | sed -E "s/([^A-Z]*[A-Z]){3}//g"
+
+
+AWK.1	
+Se da un fisier care contine doar numere (oricate numere pe linie, fisierul poate contine oricate lini). 
+Folosind doar utilitarul AWK afisati pe ecran suma numerelor de pe liniile pare si media aritmetica a numerelor impare.
+Indexare liniilor incepe de la 1.
+{
+
+s = 0;
+for(i = 1; i <= NF; i++)
+{
+        s = s + $i;
+}
+
+if (NR % 2 == 1){
+        print "Media aritmetica a numerelor de pe linia " NR " este " s/NF ".";
+}
+
+else{
+        print "Suma numerelor de pe linia " NR " este " s ".";
+}
+
+}
+
+cat file.txt | awk -f script.awk
+
+AWK.2	
+Se da un fisier care contine cuvinte (oricate cuvinte pe orice linie, fisierul poate contine oricate lini). 
+Folosind utulitarul AWK afisati pe ecran urmatoarele informati:
+- numarul total de cuvinte de pe linile pare
+- numarul mediu de cuvinte de pe linile impare
+Indexarea linilor se face de la 1
+BEGIN{
+par = 0;
+impar = 0;
+}
+
+{
+if (NR % 2 == 0){
+        par = par + NF;
+}
+
+else {
+        impar = impar + NF;
+}
+}
+
+
+END{
+print "Numarul total de cuvinte de pe liniile pare este " par ".";
+nr_linii_impare = (NR + NR % 2)/2;
+print "Numarul mediu de cuvinte de pe liniile impare este " impar/nr_linii_impare ".";
+}
+
+cat file.txt | awk -f script.awk
+
+AWK.3	
+Se da un fisier care contine doar numere (oricate numere pe linie, fisierul poate contine oricate lini). 
+Folosind utilitarul AWK afisati pe ecran suma primului si ultimului numar de pe linile care contin un numar par de numere
+si media aritmetica a numerelor de pe pozitia din mijloc de pe liniile care contin un numar impar de numere.
+BEGIN{
+        par = 0;
+        impar = 0;
+}
+
+{
+if (NF != 0) {
+
+if (NF % 2 == 1){
+        impar = impar + $((NF+1)/2);
+}
+
+else{
+        par = par + $1 + $NF;
+}
+
+}
+
+}       
+
+END{
+        print "Suma primului si ultimului numar de pe liniile cu nr par de numere este " par ".";
+        nr_linii_impare = (NR + NR % 2) / 2;
+        print "Media aritmetica a numerelor de pe pozitia din mijloc de pe liniile care contin un numar impare de numere este " impar/nr_linii_impare ".";
+}
+
+cat file.txt | awk -f script.awk
+
+AWK.4	
+Se da un fisier care contine oricate civinte pe linie. Folosind utlitarul AWK 
+afisati pe ecran linile care contin cele mai multe si cele mai putine
+cuvinte si numarul mediu de cuvinte per linie din fisier.
+{
+a[NR] = NF;
+}
+
+END{
+        max = a[1];
+        max_pos = 1;
+        min = a[1];
+        min_pos = 1;
+        sum = a[1];
+
+        for (i = 2; i < NR; i ++){
+                if (a[i]>max){
+                        max = a[i];
+                        max_pos = i;
+                }
+                if (a[i]<min){
+                        min = a[i];
+                        min_pos = i;
+                }
+                sum = sum + a[i];
+        }
+
+        print "Linia care contine cele mai multe cuvinte(" max ") este linia " max_pos ".";
+        print "Linia care contine cele mai putine cuvinte(" min ") este linia " min_pos ".";
+        print "Numarul mediue de cuvinte per linie este de " sum/NR " cuvinte." ;
+}
+
+cat file.txt | awk -f script.awk
+
+AWK.5	
+Folosind utilitarul AWK afisti pe ecran numarul mediu de cuvinte per linie dintr-un fisier,
+si cuvintele a caror frecventa este mai mica decat media respectiva.
+BEGIN{
+        words = 0;
+}
+
+{
+for (i = 1; i <= NF; i++)
+        a[$i]++;
+
+words = words + NF;
+}
+
+END{
+        print "Numarul mediu de cuvinte per linie: " words/NR;
+        print "Cuvinte cu frecventa mai mica: ";
+        for (element in a)
+                if (a[element] < words/NR)
+                        print element;
+}
+
+cat file.txt | awk -f script.awk
+
+AWK.7	
+Folosind AWK Afisati vectorul de frecventa a unui fisier.
+{
+for (i = 1; i <= NF; i++)
+        a[$i]++;
+}
+
+END{    
+        for (element in a)
+                print "element: " element "; frequency: " a[element];
+}  
+
+cat file.txt | awk -f script.awk
+
+AWK.8	
+Se sa un fisier cu urmatorul format: Nume Prenume nota1 nota2 nota 3.
+Folosind AWK afisati pe ecran urmatoarele informatii: Nume Prenume Medie,
+pe aceeasi linie unde media este media aritmetica a celor 3 note, dupa care afisati unmele si
+prenumele celor care au media mai mare decat 8
+ex:
+input:
+nume1 prenume1 8 9 7
+nume2 prenume2 8 2 4
+nume3 prenume3 10 10 9
+
+output
+nume1 prenume1 8
+nume2 prenume2 4.66667
+nume3 prenume3 9.66667
+nume3 prenume3
+
+BEGIN{
+        i = 1;
+}
+
+{
+        media = ($3+$4+$5)/3;
+        full_name = $1 " " $2;
+        print full_name " " media;
+        if (media > 8){
+                a[i] = full_name;
+                i++;
+                }       
+}
+
+END{
+        for (element in a)
+                print a[element];
+} 
+
+cat file.txt | awk -f script.awk
+
+AWK.9	
+A file containing a random number of words is given. For each line, if the
+line contains an odd number of words diplay the number of words, otherwise
+diplay the first and last word from that line.
+{
+        
+if (NF % 2 == 1){
+        print "Line " NR " - number of words: " NF;
+        }
+else{
+        print "Line " NR " - First word: " $1 "; last word: " $NF;
+}
+
+}
+
+cat file.txt | awk -f script.awk
+
+AWK.10	
+A file containing at least 5 words per line is given. Knowing that the first
+word and the last 2 words from each line are numbets, for each line display
+the sum of those 3 numbers, and then display the average of the first numbers
+from all the line.
+ex:
+input:
+1 a a 3 3
+3 b b 4 5 5
+5 c c 8 7 9 9
+output:
+7
+13
+23
+3
+BEGIN{
+        sum = 0;
+}       
+
+{
+        sum = sum + $1;
+        current_line_sum = $1 + $NF + $(NF-1);
+        print current_line_sum;
+}       
+
+END{
+        print sum/NR;
+}
+
+cat file.txt | awk -f script.awk

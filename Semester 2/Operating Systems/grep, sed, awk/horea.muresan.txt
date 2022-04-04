@@ -1,0 +1,120 @@
+https://www.cs.ubbcluj.ro/~horea.muresan/os/problems-gsa
+
+L4-1. Afisati numarul de linii care se termina cu vocala si numarul de linii care se termina cu consoana dintr-un fisier. awk -f file.awk input.txt
+Fisierul file.awk contine solutia:
+BEGIN{
+        v = 0;
+        c = 0;
+}
+
+
+$0 ~ /[aeiouAEIOU]$/ {
+        v++;
+        }
+
+$0 ~ /[a-zA-Z^aeiouAEIOU]$/ {
+        c++;
+        }
+
+END{
+        print "Numarul de linii care se termina cu vocala: " v;
+        print "Numarul de linii care se termina cu consoana: " c;
+}
+
+L4-2. Afisati numarul liniei si elementul din mijlocul liniei de pe fiecare linie cu numar impar de elemente dintr-un fisier. 
+Elementele fisierului sunt separate de cate un spatiu. (Ex: Pentru o linie cu 7 elemente, se va afisa elementul de pe pozitia 4). 
+Nota: Impartirea in awk este implicit impartire intre numere float. Rezultatul se poate rotunji la intreg aplicand functia int, EX: int(5/2) = 2
+{
+        if (NF % 2 == 1)
+                print "Linia " NR "; elementul " $((NF+1)/2)
+} 
+
+L4-3. Calculati suma PID-urilor (process ID) proceselor care utilizeaza unul dintre editoarele vim, joe, emacs, nano sau pico. 
+Folositi ps -ef sau ps aux pentru a obtine o lista a tuturor proceselor din sistem.
+ps -ef | grep -E "([^ ][ ]*){7}(vim|joe|emacs|nano|pico)"
+
+L4-4. Afisati toate liniile dintr-un fisier care contin doar caractere non-alfanumerice (orice in afara de litere si cifre).
+grep -E "^[^0-9a-zA-Z]*$" example.txt
+
+L4-5. Afisati toate liniile care contin cel mult 5 vocale, nu neaparat consecutive, intre doua caractere ^ dintr-un fisier.
+Ex: linia "aei^, mai avem^" indeplineste conditia
+Ex: linia "abc^, prea multe vocale intre ^" are prea multe vocale intre cele doua caractere ^
+Ex: linia "^aici sunt prea multe vocale^dar aici nu^" indeplineste conditia pentru a doua pereche de caractere ^
+grep -E "\^([^aeiouAEIOU]*[aeiouAEIOU][^aeiouAEIOU]*){,5}\^" example.txt
+
+L4-6. Inversati campurile 2 si 3 dintr-un fisier dat in care campurile sunt separate de caracterul ":". (Ex. fisierul /etc/passwd)
+cat /etc/passwd | sed -E "s/(^[^:]*):([^:]*):([^:]*)(.*$)/\1:\3:\2\4/"
+sed -E "s/([^:]*):([^:]*):([^:]*)/\1:\3:\2/" /etc/passwd
+
+L4-7. Sa se stearga toate caracterele dupa ultimul spatiu de pe fiecare linie.
+sed -E "s/(.* )([^ ]*)/\1/" example.txt
+
+L4-8. Pentru fiecare fisier din directorul curent, afisati doar permisiunile user-ului si numele fiČierului.
+ls -la | grep -E "^-" | sed -E "s/^(.{3})(.*) (.*)$/\1 \3/"
+
+1. Display all the users in the system (from the /etc/passwd file) whose username starts with a vowel.
+Afisati toti utilizatorii din sistem (din /etc/passwd) al caror username incepe cu vocala.
+cat /etc/passwd | sed -E "s/:.*$//" | grep -E "^[aeiouAEIOU].*"
+
+5. Display all the files from the current folder that have read permissions for the owner, group and other.
+Afisati toate fisierele din directorul curent care au drepturi de citre pentru owner, grup si other.
+$1 ~ /^.r..r..r../ {
+        print $9
+        }
+
+6. Using the last command display how many times a user has logged in the system.
+Folosing comanda last, afisati de cate ori s-a logat fiecare user in sistem.
+$1 ~ /^[^ ].*$/ && $1 !~ /^wtmp$/{
+        a[$1]++;
+}
+
+END{
+        for (elemnt in a)
+
+                print elemnt " logged " a[elemnt] " times."
+}
+
+7. Display the number of lines in a file.
+Afisati numarul de linii dintr-un fisier.
+grep -E "" example.txt | wc -l
+grep -E -c ".*" example.txt
+
+10. Determine the number of duplicate lines in a file.
+Afisati numarul de linii duplicate dintr-un fisier.
+{
+        a[$0]++;
+}       
+
+END{
+        for (elem in a)
+                if (a[elem] > 1)
+                        print elem;
+}
+
+11. Display the name of all text files from the current directory.
+Afisati numele tuturor fisierelor de tip text din directorul curent.
+ls -la | grep -E "^-" | sed -E "s/(.*) ([^ ]*)/\2/"
+
+13. Count the number of lines ending in vowel and the number of lines ending in consonant.
+Numarati liniile care se termina cu vocala si numarul de linii care se termina cu consoana.
+BEGIN{
+        c = 0;
+        v = 0;
+}
+
+$0 ~ /[aeiouAEIOU]$/{
+        v++;
+}       
+
+$0 ~ /^[a-zA-Z^aeiouAEIOU]/{
+        c++;
+}       
+
+END{
+        print v " lines ending in v"
+        print c " lines starting with c"
+} 
+
+14. Display all the lines from a file that contain at least 3 lowercase letters (not necessarily consecutive) before the first apparition of the ^ character.
+Afisati toate liniile dintr-un fisier care contin cel putin 3 litere mici, nu neaparat consecutive, inainte de prima aparitie a caracterului ^.
+grep -E "^([^a-z\^]*[a-z][^a-z\^]*){3,}\^" example.txt 
