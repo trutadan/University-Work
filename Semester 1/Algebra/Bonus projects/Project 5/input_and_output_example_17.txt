@@ -1,0 +1,7 @@
+*the exact form of the input/output will be written in quotation marks: " "
+
+-input: 
+"1 2"
+
+-output:
+"The number's value should be an integer between 2 and 5!"

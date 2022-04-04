@@ -1,0 +1,7 @@
+*the exact form of the input/output will be written in quotation marks: " "
+
+-input: 
+"two 3"
+
+-output:
+"The given value must be a natural number(no extra spaces or any other characters)!"

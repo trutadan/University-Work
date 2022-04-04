@@ -1,0 +1,21 @@
+*the exact form of the input/output will be written in quotation marks: " "
+
+-input: 
+"5 4"
+
+-output:
+"1. the number of matrices A from M5,4(Z2) in reduced echelon form is 2.
+2. the matrices A from M5,4(Z2) in reduced echelon form are: 
+(1, 0, 0, 0)
+(0, 1, 0, 0)
+(0, 0, 1, 0)
+(0, 0, 0, 1)
+(0, 0, 0, 0)
+
+(0, 0, 0, 0)
+(0, 0, 0, 0)
+(0, 0, 0, 0)
+(0, 0, 0, 0)
+(0, 0, 0, 0)
+
+"
