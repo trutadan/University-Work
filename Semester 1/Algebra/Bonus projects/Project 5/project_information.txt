@@ -1,0 +1,17 @@
+What was the approach?
+All the rows possible, made up of values of 0 and 1 will be generated, based on the length entered. Then, all of these rows will be merged in order to obtain all possible binary matrices.
+Then, each matrix is going to be checked. First, if it is in the row echelon form, checking the 2 well-known properties:
+(1) the rows 1, . . . , r are non-zero and the rows r + 1, . . . ,m are zero;
+(2) 0 ≤ N(1) < N(2) < · · · < N(r) ,
+where N(i) denotes the number of zero elements from the beginning of the row i, ∀i ∈ {1, . . . , r}.
+Second, we need to see if the leading entry in each row is the only non-zero entry in its column.
+If the properties mentioned above are all checked, that means the matrix is in reduced row echelon form, so we print it in the output file.
+
+How to run the program?
+In the input file - "input.txt" should be present a string representing two numbers between 2 and 5, no additional spaces, newlines, or other characters. Otherwise, a suitable message will be displayed.
+The python program can be run now.
+In the output file - "output.txt" should now be displayed the output format mentioned in the pdf of the project, or the corresponding message if the input was not in the correct format.
+
+Remarks:
+-the input_and_output_example_x.txt files represent all the possible outputs that can be displayed by the program.
+-in order to run the application, numpy and itertools python libraries should be installed on the system.
