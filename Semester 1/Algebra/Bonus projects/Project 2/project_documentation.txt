@@ -1,0 +1,19 @@
+So we know that:
+-number of binary operation on a set of two elements is 16, but the number of  associative binary operation on a set of two elements is 8.
+-number of binary operation on a set of three elements is 19.683, but the number of associative binary operation on a set of three elements is 113. 
+-number of binary operation on a set of four elements is 4.294.967.296, but the number of associative binary operation on a set of four elements is 3492.
+As we can see, 4.294.967.296 is a big number, so the algorithm takes a while in order to compile the data when the input is 4.
+
+What was the approach?
+The problem has been solved in a brute-force classical way, I took all the possible tables for the given number of elements from the set and checked the associative property.
+Then I used the obvious method of just checking all identities of the form (a∗b)∗c=a∗(b∗c) and count and print only the ones which fit the property.
+For sure, for numbers bigger than 4(like 5,6,...), the search would take a very long time.
+
+How to run the program?
+In the input file - "input.txt" should be present a string representing a number between 1 and 4, no additional spaces, newlines, or other characters. Otherwise, a suitable message will be displayed.
+The python program can be run now.
+In the output file - "output.txt" should now be displayed the output format mentioned in the pdf of the project, or the corresponding message if the input was not in the correct format.
+
+Remarks:
+-the input_and_output_example_x.txt files represent all the possible outputs that can be displayed by the program.
+-in order to run the application, os and itertools python libraries should be installed on the system.

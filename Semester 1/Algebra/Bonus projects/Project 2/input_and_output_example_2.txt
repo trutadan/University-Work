@@ -1,0 +1,33 @@
+*the exact form of the input/output will be written in quotation marks: " "
+
+-input: "2"
+
+-output:
+"1. the number of associative operations on a set A = {a1, a2} is 8. 
+
+2. the operation tables of the associative operations on A = {a1, a2} are given by the matrices: 
+a1 a1 
+a1 a1 
+
+a1 a1 
+a1 a2 
+
+a1 a1 
+a2 a2 
+
+a1 a2 
+a1 a2 
+
+a1 a2 
+a2 a1 
+
+a1 a2 
+a2 a2 
+
+a2 a1 
+a1 a2 
+
+a2 a2 
+a2 a2 
+
+"
