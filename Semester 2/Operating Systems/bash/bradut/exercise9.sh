@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#Write a shell script that receives as command line arguments files. Display on the screen the frequency of the even numbers in each of the files.
+
 if [ $# -lt 1 ]; then
         echo "Not enough arguments."
         exit 1
