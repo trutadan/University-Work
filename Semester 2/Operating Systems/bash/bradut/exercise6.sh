@@ -1,5 +1,12 @@
 #!/bin/bash
 
+#Write a shell script that receives a filename followed by any number of strings as command line argumets. 
+#The file will contain directory names. 
+#The script will take all the strings that are a valide usernames in the current system and create a report 
+#that will show all the direcoties found both in the file given 
+#as the first argument and in the homedirs of each user received as argument. 
+#If you don't have permissions to access a user homedir display a coresponding message at the standard output.
+
 if [[ $# -lt 2 ]]; then
     echo Not enough arguments provided.
     exit 1
