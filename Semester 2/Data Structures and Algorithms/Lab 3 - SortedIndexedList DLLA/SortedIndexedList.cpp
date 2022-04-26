@@ -66,6 +66,7 @@ TComp SortedIndexedList::remove(int i) {
     DLLA& elements = this->elements;
     TComp removed_tcomp = NULL_TCOMP;
 
+    // remove the single existing element from the list
     if (this->length == 1) {
         removed_tcomp = elements[elements.head].information;
 
@@ -78,6 +79,7 @@ TComp SortedIndexedList::remove(int i) {
         return removed_tcomp;
     }
 
+    // remove the first element from the list
     if (i == 0) {
         removed_tcomp = elements[elements.head].information;
         int copy_new_head = elements[elements.head].next;
@@ -92,6 +94,7 @@ TComp SortedIndexedList::remove(int i) {
         return removed_tcomp;
     }
 
+    // remove the last element from the list
     if (i == this->length) {
         removed_tcomp = elements[elements.tail].information;
         int copy_new_tail = elements[elements.tail].previous;
@@ -106,12 +109,14 @@ TComp SortedIndexedList::remove(int i) {
         return removed_tcomp;
     }
 
+    // go to the node from the position we need to remove
     int pos;
     for (int node = elements.head; i >= 0; node = elements[node].next) {
         pos = node;
         i--;
     }
      
+    // remove the element between two existing elements
     removed_tcomp = elements[pos].information;
 
     elements[elements[pos].previous].next = elements[pos].next;
@@ -145,6 +150,7 @@ int SortedIndexedList::search(TComp e) const {
 void SortedIndexedList::add(TComp e) {
     DLLA& elements = this->elements;
 
+    // resize list
     if (elements.size == elements.capacity && elements.first_empty == -1) {
         elements.capacity *= 2;
         auto* aux = new DLLANode[elements.capacity];
@@ -157,12 +163,14 @@ void SortedIndexedList::add(TComp e) {
         elements.list = aux;
     }
 
+    // a new element has been added so the first_empty position should be modified
     if (elements.first_empty == -1) {
         elements.first_empty = elements.size;
         elements[elements.first_empty] = DLLANode(NULL_TCOMP, -1, -1);
         elements.size++;
     }
 
+    // the list is empty
     if (this->length == 0) {
         int copy_empty = elements.first_empty;
         
@@ -175,9 +183,10 @@ void SortedIndexedList::add(TComp e) {
         return;
     }
 
-    // place the new element in the first position
     int copy_empty = elements.first_empty;
     elements.first_empty = elements[elements.first_empty].next;
+	
+    // place the new element in the first position
     if (relation(e, elements[elements.head].information)) {
         elements[copy_empty] = DLLANode(e, -1, elements.head);
         
@@ -199,6 +208,7 @@ void SortedIndexedList::add(TComp e) {
         return;
     }
     
+    // find the position where the new element should be placed
     int after = elements.head;
     for (int node = elements.head; true; node = elements[node].next) 
         if (relation(elements[node].information, e) && elements[node].information != e)
@@ -206,6 +216,7 @@ void SortedIndexedList::add(TComp e) {
         else 
             break;
     
+    // place the new element between two existing elements
     elements[copy_empty] = DLLANode(e, after, elements[after].next);
     elements[elements[after].next].previous = copy_empty;
     elements[after].next = copy_empty;
