@@ -16,7 +16,7 @@ fi
 
 elements_found=$(find $1 2>/dev/null)
 if [ $? -ne 0 ]; then
-        echo Some files have been omitted omitted because you do not have the permission to access them.
+        echo Some files have been omitted because you do not have the permission to access them.
 fi
 
 for file in $elements_found; do
