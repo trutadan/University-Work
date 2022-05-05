@@ -162,7 +162,7 @@ void UI::run_program()
 			break;
 
 		case 5:
-			break;
+			return;
 
 		default:
 			std::cout << "Not a valid command!\n";
