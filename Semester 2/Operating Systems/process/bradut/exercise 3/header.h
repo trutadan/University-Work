@@ -1,0 +1,1 @@
+char* fifo_name = "./fifo_file";
