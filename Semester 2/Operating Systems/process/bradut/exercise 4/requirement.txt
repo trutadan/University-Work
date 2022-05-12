@@ -1,0 +1,14 @@
+Write 2 c programs, A and B. A will create 2 prcesses p1 and p2. p1 will
+have provided (by any means (necessary)) a file containing random text
+then it will read from the standard input (keyboard) a number (n).
+p1 will send the nth character from the file to p2 via pipe.
+p2 will write on the standard output (the console) the nature of that
+character (letter, digit, other) and will send it to B via fifo.
+B will display on the standard output the ascii code of that character.
+The source file must be compiled using gcc with -Wall -g options WITHOUT WARNINGS OR SYNTAX ERRORS!!!
+Memory leacks and zombie processes are not allowed.
+
+./A file_name
+->read the natural number
+
+./B
