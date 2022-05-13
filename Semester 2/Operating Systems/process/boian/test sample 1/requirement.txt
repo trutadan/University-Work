@@ -1,0 +1,9 @@
+Write a program A that receives two FIFO names as the first two command line 
+arguments, and an optional string as the third command line argument. If there 
+is no third argument, it reads from the first FIFO a string and writes its length 
+in the second FIFO. If there is a third command line argument, it writes it in the 
+first FIFO and reads its length from the second FIFO, then it displays the length 
+in the console. Write a second program B, that displays the length of every command 
+line argument it gets, creating two FIFOs and running two processes A.
+
+./B string1 string2 string3 ...
