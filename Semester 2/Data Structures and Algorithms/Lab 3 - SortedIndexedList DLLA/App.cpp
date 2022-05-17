@@ -10,7 +10,7 @@ int main(){
         std::cout << "Finished IL Tests!" << std::endl;
     }
 
-    _CrtDumpMemoryLeaks;
+    _CrtDumpMemoryLeaks();
     
     system("pause");
 }
