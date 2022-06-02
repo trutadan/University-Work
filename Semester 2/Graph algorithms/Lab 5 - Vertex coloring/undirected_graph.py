@@ -159,27 +159,32 @@ def generate_random_graph(number_of_vertices, number_of_edges):
 
 def find_vertex_coloring_with_minimum_colors_number_using_greedy(undirected_graph):
     vertices_number = undirected_graph.get_vertices_number()
+    if vertices_number < 1:
+        raise ValueError("The current graph has no vertices!")
 
     # an array with the color of each vertex
-    result = [-1] * vertices_number
+    result = dict()
+    for vertex in undirected_graph.vertices_iterator():
+        result[vertex] = -1
 
-    # an array with the available colors
-    available = [False] * vertices_number
+    # an dictionary to keep track of the unavailable/available colors
+    unavailable = dict()
+    for vertex in undirected_graph.vertices_iterator():
+        unavailable[vertex] = False
 
-    # the first color of the vertex
+    # the first color goes to the first vertex in the graph
     result[0] = 0
 
-    for vertex in range(1, vertices_number):
-
-        # make all the neighbor's vertices colors unavailable
+    for vertex in undirected_graph.vertices_iterator():
+        # make all the neighbor's vertices colors available
         for neighbor in undirected_graph.vertex_neighbors_iterator(vertex):
             if result[neighbor] != -1:
-                available[result[neighbor]] = True
+                unavailable[result[neighbor]] = True
 
         # search for the first available color
         color = 0
         while color < vertices_number:
-            if not available[color]:
+            if not unavailable[color]:
                 break
 
             color += 1
@@ -190,6 +195,6 @@ def find_vertex_coloring_with_minimum_colors_number_using_greedy(undirected_grap
         # reset and prepare the variables for the next iteration
         for neighbor in undirected_graph.vertex_neighbors_iterator(vertex):
             if result[neighbor] != -1:
-                available[result[neighbor]] = False
+                unavailable[result[neighbor]] = False
 
     return result
