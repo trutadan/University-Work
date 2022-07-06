@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#define LIMIT 10
+
+int x = 0;
+pthread_mutex_t mutex;
+pthread_cond_t cond;
+
+typedef struct {
+	int n;
+	int next;
+	int prev;
+	int index;
+} triplet;
+
+int turn = 0;
+void* threadFunction(void* arguments) {
+	triplet trp = *(triplet*)arguments;
+
+	while(1) {
+		pthread_mutex_lock(&mutex);
+		while(x < LIMIT && turn != trp.index)
+			pthread_cond_wait(&cond, &mutex);
+		
+		if (x >= LIMIT) {
+			pthread_cond_broadcast(&cond);
+			pthread_mutex_unlock(&mutex);
+			break;
+		}
+
+		x += trp.n;
+		printf("Thread %d added %d; now the number is %d\n", trp.index, trp.n, x);
+
+		if (x%2)
+			turn = trp.prev;
+
+		else 
+			turn = trp.next;
+
+		pthread_cond_broadcast(&cond);
+		pthread_mutex_unlock(&mutex);
+	}
+
+	free(arguments);
+	return 0;
+}
+
+int main(int argc, char* argv[]) {
+	if ((argc-1)%3 != 0 || argc < 4) {
+		printf("Not enough arguments provided!\n");
+		exit(0);
+	}
+
+	pthread_t* threads;
+	threads = malloc((argc-1)/3 * sizeof(pthread_t));
+
+	for(int index = 1; index < argc; index += 3) {
+		triplet* trp;
+		trp = malloc(sizeof(triplet));
+
+		trp->n = atoi(argv[index]);
+		trp->next = atoi(argv[index+1]);
+		trp->prev = atoi(argv[index+2]);
+		trp->index = (index-1)/3;
+
+		pthread_create(&threads[(index-1)/3], 0, &threadFunction, trp);
+	}
+
+	for(int index = 0; index < (argc-1)/3; index++)
+		pthread_join(threads[index], 0);
+
+	free(threads);
+
+	pthread_cond_destroy(&cond);
+	pthread_mutex_destroy(&mutex);
+
+	return 0;
+}

@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+int digits = 0;
+int letters = 0;
+
+pthread_mutex_t mutex;
+
+void* threadFunction(void* fileName) {
+	char* fName = (char*) fileName;
+	FILE* file = fopen(fName, "r");
+
+	if (file == NULL) {
+		printf("The file could not be opened!\n");
+		return 0;
+	}
+
+  	int local_letters = 0;
+ 	int local_digits = 0;
+
+	char character;
+	while (fscanf(file, "%c", &character) == 1) {
+		if (character <= '9' && character >= '0')
+			local_digits += 1;
+
+		else if ((character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z')) 
+			local_letters += 1;
+	}
+
+	fclose(file);
+
+  	pthread_mutex_lock(&mutex);
+  	letters += local_letters;
+  	digits += local_digits;
+  	pthread_mutex_unlock(&mutex);
+
+	return 0;
+}
+
+int main(int argc, char* argv[]) {
+	pthread_mutex_init(&mutex, 0);
+	pthread_t* threads = malloc((argc-1) * sizeof(pthread_t));
+
+	for(int index = 1; index < argc; index++)
+		pthread_create(&threads[index-1], 0, &threadFunction, argv[index]);
+
+	for(int index = 1; index < argc; index++)
+		pthread_join(threads[index-1], 0);
+
+	free(threads);
+	pthread_mutex_destroy(&mutex);
+
+	printf("Total of %d digits and %d letters.\n", digits, letters);
+
+	return 0;
+}
