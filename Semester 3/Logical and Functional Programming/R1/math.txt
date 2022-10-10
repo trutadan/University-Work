@@ -1,7 +1,0 @@
-1. a. Transform a list in a set.
-transformListIntoSet(l1l2...ln) = [] if n = 0,
-                                  [l1] reunited with transformListIntoSet(l2l3...ln) otherwise;
-                                  
-b. Determine the union of two sets. The sets are represented as lists.
-getReunionOfTwoSets(l1l2...ln, i1i2...im) = [l1l2...ln] if m = 0,
-                                            getReunionOfTwoSets(l1l2...ln, i2...im) reunited with [i1], otherwise
