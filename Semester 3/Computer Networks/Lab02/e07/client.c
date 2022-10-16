@@ -39,7 +39,12 @@ int main(int argc, char** argv) {
 
        uint16_t startingIndex;
        printf("Enter the starting index: ");
-       scanf("%hu", &startingIndex);   
+       scanf("%hu", &startingIndex);
+	
+       if (startingIndex < 0) {
+	      printf("The index must be greater or equal to 0!\n");
+              return 1;
+       }
        
        if (startingIndex > strlen(givenString) - 2) {
               printf("The index is too big for the given string!\n");
@@ -49,6 +54,11 @@ int main(int argc, char** argv) {
        uint16_t substringLength;
        printf("Enter the length of the substring: ");
        scanf("%hu", &substringLength);
+	
+       if (substringLength < 0) {
+	      printf("The length must be greater than 0!\n");
+              return 1;
+       }
 	
        if (strlen(givenString) - startingIndex - 1 < substringLength)
        		substringLength = strlen(givenString) - startingIndex - 1;
