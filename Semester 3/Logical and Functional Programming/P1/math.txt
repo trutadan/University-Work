@@ -1,9 +1,0 @@
-11. a. Write a predicate to substitute an element from a list with another element in the list.
-substituteElement(l1l2...ln, oldElement, newElement) = [] if n = 0,
-				           [newElement] ∪ substituteElement(l2l3...ln, oldElement, newElement) if l1 is equal to oldElement
-				           [oldElement] ∪ substituteElement(l2l3...ln, oldElement, newElement) otherwise
-
-b. Write a predicate to create the sublist (lm, …, ln) from the list (l1,…, lk).
-createSublist(l1l2...lk, m, n, pos) =  [] if pos > n,
-			[l1] ∪ createSublist(l1l2...lk, m, n, pos) if pos >= m and pos <= n
-			createSublist(l1l2...lk, m, n, pos) otherwise
