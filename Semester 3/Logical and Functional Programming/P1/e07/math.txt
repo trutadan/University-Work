@@ -1,0 +1,12 @@
+7. a. Write a predicate to compute the intersection of two sets.
+searchElementInSet(e, s1s2...sn) = true if n = 0,
+			false if e = s1,
+			searchElementInSet(e, s2s3...sn) otherwise.
+
+intersectSets(a1a2...am, b1b2...bn) = [] if m = 0
+			    a1 ∪ intersectSets(a2a3...am, b1b2...bn) if searchElementInSet(a1, b1b2...bn)
+			    intersectSets(a2a3...am, b1b2...bn) otherwise.
+
+b. Write a predicate to create a list (m, ..., n) of all integer numbers from the interval [m, n].
+createList(m, n) = [] if m > n
+	          m ∪ createList(m + 1, n) otherwise.
