@@ -46,9 +46,9 @@ int main(int argc, char* argv[]) {
 
     printf("Enter a string which represents a command you want server to execute: ");
     fgets(commandString, MAXCHAR, stdin);
-
-    cod = send(c, commandString, sizeof(commandString), 0);
-    if (cod != sizeof(commandString)) {
+    
+    cod = send(c, commandString, strlen(commandString) + 1, 0);
+    if (cod != strlen(commandString) + 1) {
         fprintf(stderr, "Error sending string!\n");
         return 1;
     }
