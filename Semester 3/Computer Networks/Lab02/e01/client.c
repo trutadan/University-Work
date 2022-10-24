@@ -7,7 +7,7 @@
 
 #include <WinSock2.h>
 
-#define max 128
+#define MAXCHAR 128
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
@@ -42,10 +42,10 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    char commandString[max];
+    char commandString[MAXCHAR];
 
     printf("Enter a string which represents a command you want server to execute: ");
-    fgets(commandString, max, stdin);
+    fgets(commandString, MAXCHAR, stdin);
 
     cod = send(c, commandString, sizeof(commandString), 0);
     if (cod != sizeof(commandString)) {
@@ -53,10 +53,11 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    char standardOutput[max];
+    char standardOutput[MAXCHAR];
     char eachCharacter;
     int32_t position = 0;
 
+    bool bufferSizeExceeded = false;
     do {
         cod = recv(c, &eachCharacter, 1, 0);
         if (cod != sizeof(eachCharacter)) {
@@ -64,8 +65,23 @@ int main(int argc, char* argv[]) {
             return 1;
         }
 
+        if (eachCharacter != '\0' && position == MAXCHAR - 1) {
+            bufferSizeExceeded = true;
+            break;
+        }
+
         standardOutput[position++] = eachCharacter;
-    } while (eachCharacter != 0); 
+    } while (eachCharacter != 0);
+
+    if (bufferSizeExceeded) {
+        standardOutput[position] = '\0';
+
+        do {
+            cod = recv(c, &eachCharacter, 1, 0);
+        } while (eachCharacter != 0);
+
+        printf("The maximum buffer size of the standard output has been exceeded! Only the first %d characters will be printed!\n", MAXCHAR);
+    }
 
     int32_t exitCode;
 
