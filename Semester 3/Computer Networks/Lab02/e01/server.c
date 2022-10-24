@@ -9,6 +9,8 @@
 #include <errno.h>
 #include <arpa/inet.h>
 
+#define MAXCHAR 128
+
 int c;
  
 void time_out(int semnal) {
@@ -37,27 +39,51 @@ void tratare() {
   signal(SIGALRM, time_out);
   alarm(10);
  
-  char command[128];
-  
-  cod = recv(c, command, sizeof(command), 0);      
-  if (cod != sizeof(command)) {
-    printf("Closed the connection with a client with an error! Error code %d.\n", -1);
-    exit(1);
-  }
+  char command[MAXCHAR], eachCharacter;
+  int32_t exitCode = 0, position = 0;
+   
+  do {
+    cod = recv(c, &eachCharacter, 1, 0);
+ 
+    if (cod == 1)
+      alarm(10);
       
-  alarm(0); 
-
-  int32_t exitCode;
+    else if (cod != 1) {
+      exitCode = -1;
+      break;
+    }
+    
+    if (position >= MAXCHAR) {
+      exitCode = -2;
+      break;
+    }
+    
+    command[position++] = eachCharacter;    
+  } while (eachCharacter != 0); 
+  
+  alarm(0);
+  
+  if (exitCode < 0) {
+	printf("Connection closed with an error for a client! Error code: %d\n", exitCode);
+	
+	exitCode = htonl(exitCode);
+  	send(c, &exitCode, sizeof(int32_t), 0);
+      
+  	close(c);
+	
+	exit(1);
+  }
+ 
   FILE* processPipe = popen(command, "r");
   while (1) {
-	char eachCharacter;
+  	eachCharacter;
 	fscanf(processPipe, "%c", &eachCharacter);
 	if (feof(processPipe)) {
 		eachCharacter = 0;
 		send(c, &eachCharacter, 1, 0);
 		
 		break;
-	} else 
+	} else
 		send(c, &eachCharacter, 1, 0);
   }
 
@@ -69,13 +95,8 @@ void tratare() {
   exitCode = ntohl(exitCode);
   if (exitCode >= 0)
 	printf("Connection successfully closed with a client!\n");
-  else {
-	printf("Connection closed with an error for a client!\n");
-	exit(1);
-  }
     
   exit(0);
-  
 }
  
              
