@@ -1,0 +1,27 @@
+2. a. Sort a list with keeping double valuesin resulted list. E.g.: [4, 2, 6, 2, 3, 4] --> [2, 2, 3, 4, 4, 6].
+
+getListLength(l1l2...ln) = 0 if n = 0,
+		  1 + getListLength(l2...ln) otherwise.
+
+appendElementToList(l1l2...ln, element) = [element] if n = 0,
+			          l1 ∪ appendElementToList(l2l3...ln, element) otherwise.
+
+splitListInTwoEqualSublists(a1a2...am, b1b2...bn) = stop if m >= n
+				        splitListInTwoEqualLists(b1 ∪ a1a2...am, b2b3...bn) otherwise.
+
+mergeTwoLists(a1a2...am, b1b2...bn) = a1a2...am if n = 0,
+			        b1b2...bn if m = 0,
+			        a1 ∪ mergeTwoLists(a2...am, b1b2...bn) if a1 < b1,
+			        b1 ∪ mergeTwoLists(a1a2...am, b2...bn) otherwise.
+
+mergeSort(l1l2...ln) = [] if n = 0,
+	               [l1] if n = 1,
+                	               merge(mergeSort(l1l2..l(n/2)), mergeSort(l(n/2)l(n/2+1)...ln)) otherwise.
+
+
+b. For a heterogeneous list, formed from integer numbers and list of numbers, write a predicate to sort every sublist, keeping the doubles.
+Eg.: [1, 2, [4, 1, 4], 3, 6, [7, 10, 1, 3, 9], 5, [1, 1, 1], 7] => [1, 2, [1, 4, 4], 3, 6, [1, 3, 7, 9, 10], 5, [1, 1, 1], 7].
+
+sortHeterogeneousSublists(l1l2...ln) = [] if n = 0,
+			    mergeSort(l1) ∪ sortHeterogeneousSublists(l2l3...ln) if l1 is a list,
+			    l1 ∪ sortHeterogeneousSublists(l2l3...ln) otherwise.

@@ -1,0 +1,89 @@
+% 2. a.
+
+% merge sort C implementation
+% if (begin >= end)
+% 	return;
+% mid = begin + (end - begin) / 2;
+% mergeSort(array, begin, mid);
+% mergeSort(array, mid + 1, end);
+% merge(array, begin, mid, end);
+
+% getListLength(L-list, S-integer)
+% flow model(i, o), (i, i)
+getListLength([], 0).
+
+getListLength([_|T], LEN):-
+    getListLength(T, NewLEN),
+    LEN is NewLEN + 1.
+
+
+% appendElementToList(L-list, E-integer, R-resulting list)
+% flow model(i, i, o), (i, i, i)
+appendElementToList([], E, [E]).
+
+appendElementToList([HI|TI], E, [HI|TR]):-
+    appendElementToList(TI, E, TR).
+
+
+% auxiliarSplitListInTwoEqualSublists(L-list, LC-list, LS-list, RS-list)
+% flow model(i, i, o, o)
+auxiliarSplitListInTwoEqualSublists(L, LC, LC, L) :-
+    getListLength(L, LenL),
+    getListLength(LC, LenLC),
+    LenDiff is LenL - LenLC,
+    abs(LenDiff, AbsLenDiff),
+    AbsLenDiff =< 1.
+auxiliarSplitListInTwoEqualSublists([H|T], LC, LS, RS) :-
+    appendElementToList(LC, H, RA),
+    auxiliarSplitListInTwoEqualSublists(T, RA, LS, RS).
+
+
+% splitListInTwoEqualSublists(L-list, LS-list, RS-list)
+% flow model(i, o, o), (i, i, i)
+splitListInTwoEqualSublists(L, LS, RS) :- 
+    auxiliarSplitListInTwoEqualSublists(L, [], LS, RS).
+
+
+% mergeTwoLists(L1-list, L2-list, RL-resulting list)
+% flow model(i, i, o), (i, i, i)
+mergeTwoLists(L, [], L).
+
+mergeTwoLists([], L, L).
+
+mergeTwoLists([H1|T1], [H2|T2], [H1|TR]):-
+    H1 < H2,
+    mergeTwoLists(T1, [H2|T2], TR),
+    !.
+
+mergeTwoLists([H1|T1], [H2|T2], [H2|TR]):-
+    H1 >= H2,
+    mergeTwoLists([H1|T1], T2, TR),
+    !.
+
+
+% mergeSort(L-list, S-sorted list)
+% flow model(i, o), (i, i)
+mergeSort([], []).
+
+mergeSort([E], [E]).
+
+mergeSort(L, ML):-
+    splitListInTwoEqualSublists(L, LS, RS),
+    mergeSort(LS, SLS),
+    mergeSort(RS, SRS), !,
+    mergeTwoLists(SLS, SRS, ML).
+
+
+% b.
+% sortHeterogeneousSublists(L-list, R-resulting list)
+% flow model(i, o), (i, i)
+sortHeterogeneousSublists([], []).
+
+sortHeterogeneousSublists([H|T], [SH|R]):-
+    is_list(H), !,
+    mergeSort(H, SH),
+    sortHeterogeneousSublists(T, R).
+
+sortHeterogeneousSublists([H|T], [H|R]):-
+    \+ is_list(H),
+    sortHeterogeneousSublists(T, R).
