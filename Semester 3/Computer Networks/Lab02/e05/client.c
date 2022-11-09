@@ -10,11 +10,10 @@
 typedef int SOCKET;
 #endif
 
-#define MAXCHAR 128
 #define PORT 4321
+#define MAXCHAR 128
 
-
-int main(int argc, char* argv[]) {
+int main(int argc, char** argv) {
     if (argc < 2) {
         printf("./<executable> <IPv4>\n");
         return 1;
@@ -26,10 +25,9 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
-    SOCKET c;
-    c = socket(AF_INET, SOCK_STREAM, 0);
-    if (c < 0) {
-        fprintf(stderr, "Error creating client socket...\n");
+    SOCKET socketDescriptor = socket(PF_INET, SOCK_STREAM, 0);
+    if (socketDescriptor < 0) {
+        fprintf(stderr, "Error creating client socket...\n\n");
         return 1;
     }
 
@@ -39,40 +37,40 @@ int main(int argc, char* argv[]) {
     server.sin_port = htons(PORT);
     server.sin_addr.s_addr = inet_addr(argv[1]);
 
-    int cod;
-    cod = connect(c, (struct sockaddr*)&server, sizeof(struct sockaddr_in));
-    if (cod < 0) {
+    int dataLength;
+    dataLength = connect(socketDescriptor, (struct sockaddr*)&server, sizeof(struct sockaddr_in));
+    if (dataLength < 0) {
         fprintf(stderr, "Error connecting to the server...\n");
         return 1;
     }
 
     printf("WARNING: timeout after 10 seconds of inactivity!\n");
-    
+
     char domainName[MAXCHAR];
-    printf("Enter the Domain Name: ");
+    printf("Enter the domain name: ");
     fgets(domainName, MAXCHAR, stdin);
 
-    cod = send(c, (char*)domainName, strlen(domainName) + 1, 0);
-    if (cod != strlen(domainName) + 1) {
+    dataLength = send(socketDescriptor, domainName, strlen(domainName) + 1, 0);
+    if (dataLength != strlen(domainName) + 1) {
         fprintf(stderr, "Error sending domain!\n");
         return 1;
     }
 
+    printf("Request response:\n");
     char eachCharacter;
     do {
-        cod = recv(c, &eachCharacter, 1, 0);
-
-        if (cod != 1) {
+        dataLength = recv(socketDescriptor, (char*)&eachCharacter, sizeof(char), MSG_WAITALL);
+        if (dataLength != sizeof(char)) {
             fprintf(stderr, "Error receiving character!\n");
             return 1;
         }
 
-        printf("%s", eachCharacter);
+        printf("%c", eachCharacter);
     } while (eachCharacter != 0);
 
-    printf("\nConnection ended...\n");
+    printf("\n\nConnection ended...\n");
 
     WSACleanup();
 
-    closesocket(c);
+    closesocket(socketDescriptor);
 }
