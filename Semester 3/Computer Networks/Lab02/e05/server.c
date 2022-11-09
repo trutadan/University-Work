@@ -69,7 +69,7 @@ void worker() {
     alarm(10);
 
     uint8_t errorCode = 0, position = 0;
-    char domainName[128], eachCharacter;
+    char domainName[MAXCHAR], eachCharacter;
     int dataLength;
     do {
         dataLength = recv(connectedSocket, &eachCharacter, sizeof(char), 0);
