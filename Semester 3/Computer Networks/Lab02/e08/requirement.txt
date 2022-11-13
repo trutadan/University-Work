@@ -1,0 +1,2 @@
+8.   Change the Python Example Concurrent Number Guess Bellow to transmit with each answer to a client – the number of total clients that are competing. 
+Also change the client to read the numbers from the standard input and launch a contest in the class during the lab
