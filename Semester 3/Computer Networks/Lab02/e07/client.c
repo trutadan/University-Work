@@ -1,4 +1,5 @@
 // linux implementation because we need "crypt" library
+// gcc -g -o client client.c -lcrypt
 
 #include <sys/socket.h>
 #include <netinet/in.h>
