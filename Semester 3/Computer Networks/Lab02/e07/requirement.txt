@@ -1,0 +1,5 @@
+7.   The client reads a username and a password from the standard input. It sends the username to the server. 
+The server uses the getpwent system call repeatedly to find the password information about the username. 
+If the entry for the username is found, the password field from the struct passwd is returned to the client. 
+The client recovers the salt of the password and checks the input password with the received encrypted version using the crypt system call. 
+If there is no user username, the server returns back to the client the empty string and closes the connection.
