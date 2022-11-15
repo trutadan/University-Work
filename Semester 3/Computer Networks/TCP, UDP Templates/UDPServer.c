@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
 
     char messageToSend[] = "Message sent from the server...";
 
-    dataLength = sendto(socketDescriptor, messageToSend, strlen(messageToReceive) + 1, 0, (struct sockaddr *)&from, socketLength);
+    dataLength = sendto(socketDescriptor, messageToSend, strlen(messageToSend) + 1, 0, (struct sockaddr *)&from, socketLength);
     if (dataLength < 0) {
         #ifdef WIN32
                 WSACleanup();
