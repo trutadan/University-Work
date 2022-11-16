@@ -31,7 +31,7 @@ if __name__ == '__main__':
                 
                 c_udpp = client_connection.recv(4)
                 c_udpp = struct.unpack('!I', c_udpp)[0]
-                clients[client_connection] = (addr[0], c_udpp)
+                clients[client_connection] = (client_address[0], c_udpp)
                 
                 send_clients(clients)
                 reading_sockets.append(client_connection)
