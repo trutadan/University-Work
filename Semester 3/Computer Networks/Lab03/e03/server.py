@@ -1,42 +1,67 @@
-import struct
 import socket
 import select
+import struct
+import sys
 
 
-def send_clients(clients):
-    send_data = ''
-    for info in clients.values():
-        send_data += info[0]+','+str(info[1])+';'
-    send_data = send_data[:-1]
-    for client in clients:
-        client.send(send_data.encode())
+def send_information_to_all_clients(clients_dictionary):
+    # ip_client0;port_client0|ip_client1;port_client1
+    client_information = ''
+    
+    for information in clients_dictionary.values():
+        client_information += information[0] + ';' + str(information[1]) + '|'
+        
+    client_information = client_information[:-1]
+    
+    for client in clients_dictionary:
+        client.send(client_information.encode())
 
 
-if __name__ == '__main__':
-    clients = dict() # key: tcp socket - used to send the list of clients ,
-                    # values: (udp_port - udp communication happens here, ip address - communication)
-    rdv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    rdv.bind(('127.0.0.1', 1234))
-    rdv.listen(7)
+def main():
+    if len(sys.argv) < 3:
+        print("executable <ip> <port>")
+        return
+    
+    # key - tcp socket
+    # value - a tuple consisting of udp port and ip address
+    all_clients_dictionary = dict()
+    
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind((sys.argv[1], int(sys.argv[2])))
+    server_socket.listen(7)
 
-    read_sock = [rdv]
+    print("TCP server successfully started working...")
+
+    all_available_reading_sockets = [server_socket]
+
     while True:
-        ready_read, _, _ = select.select(read_sock, [], [])
-        for s in ready_read:
-            if s is rdv:
-                # we have a new client connection
-                cs, addr = s.accept()
-                print('new client from addr: ', addr)
-                c_udpp = cs.recv(4)
-                c_udpp = struct.unpack('!I', c_udpp)[0]
-                clients[cs] = (addr[0], c_udpp)
-                send_clients(clients)
-                read_sock.append(cs)
-            else:
-                data = s.recv(512)
-                if not data or 'quit' in data.decode().lower():
-                    s.close()
-                    clients.pop(s)
-                    read_sock.remove(s)
-                    send_clients(clients)
+        ready_to_read_sockets, _, _ = select.select(all_available_reading_sockets, [], [])
+        for each_socket in ready_to_read_sockets:
+            if each_socket is server_socket:
+                # the tcp server is called, so we have a new client connection
 
+                client_socket, client_address = server_socket.accept()
+                print(f'Welcome to a new client, coming from the address {client_address}!')
+
+                client_port = client_socket.recv(4)
+                client_port = struct.unpack('!I', client_port)[0]
+
+                all_clients_dictionary[client_socket] = (client_address[0], client_port)
+                send_information_to_all_clients(all_clients_dictionary)
+
+                all_available_reading_sockets.append(client_socket)
+
+            else:
+                data_from_client = each_socket.recv(512).decode()
+                if not data_from_client or 'QUIT' in data_from_client.upper():
+                    each_socket.close()
+
+                    all_available_reading_sockets.remove(each_socket)
+                    all_clients_dictionary.pop(each_socket)
+
+                    send_information_to_all_clients(all_clients_dictionary)
+    
+    
+if __name__ == '__main__':
+    main()
+    
