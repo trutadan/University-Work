@@ -2,7 +2,7 @@
 checkListContainsElement([H|_], H):- !.
 checkListContainsElement([H|T], E):-
     H =\= E,
-	checkListContainsElement(T, E).
+    checkListContainsElement(T, E).
 
 getIntersectionOfSets(_, [], []).
 getIntersectionOfSets(S, [H|T], [H|R]):-
