@@ -3,5 +3,5 @@ replaceElementFromListWithAnotherElement([], _, _, []).
 replaceElementFromListWithAnotherElement([H|T], H, NE, [NE|R]):- !,
 	replaceElementFromListWithAnotherElement(T, H, NE, R).
 replaceElementFromListWithAnotherElement([H|T], E, NE, [H|R]):-
-  H =\= E, !,
+        H =\= E, !,
 	replaceElementFromListWithAnotherElement(T, E, NE, R).
