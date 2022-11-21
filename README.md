@@ -32,17 +32,17 @@ My university work.
   <li>Second Year
     <ul>
       
-    <li>First Semester :open_file_folder:
-      <ul>
-        <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%203/Advanced%20Programming%20Methods">Advanced Programming Methods</a></li>
-        <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%203/Computer%20Networks">Computer Networks</a></li>
-        <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%203/Databases">Databases</a></li>
-        <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%203/Logical%20and%20Functional%20Programming">Logical and Functional Programming</a></li>
-        <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%203/Probabilities%20and%20Statistics">Probabilities and Statistics</a></li>
-      </ul>
-    </li>
+      <li>First Semester :open_file_folder:
+        <ul>
+          <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%203/Advanced%20Programming%20Methods">Advanced Programming Methods</a></li>
+          <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%203/Computer%20Networks">Computer Networks</a></li>
+          <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%203/Databases">Databases</a></li>
+          <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%203/Logical%20and%20Functional%20Programming">Logical and Functional Programming</a></li>
+          <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%203/Probabilities%20and%20Statistics">Probabilities and Statistics</a></li>
+        </ul>
+      </li>
       
-  </ul>
+    </ul>
   </li>
-  
+
 </ul>
