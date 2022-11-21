@@ -6,8 +6,8 @@ getSuccesorOfNumber([N], 0, [NR]):-
 getSuccesorOfNumber([9|T], 1, [0|R]):-
     getSuccesorOfNumber(T, 1, R).
 getSuccesorOfNumber([H|T], 0, [TA|R]):-
-	  getSuccesorOfNumber(T, A, R),
-	  TA is A + H, !.
+    getSuccesorOfNumber(T, A, R),
+    TA is A + H, !.
 
 mainGetSuccesorOfNumber(L, R):-
     getSuccesorOfNumber(L, 0, R).
