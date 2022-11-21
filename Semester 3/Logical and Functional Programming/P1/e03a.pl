@@ -12,7 +12,7 @@ removeElementFromList([E|T], E, RT):-
     removeElementFromList(T, E, RT), !.
 removeElementFromList([H|T], E, [H|RT]):-
     H =\= E, 
-	removeElementFromList(T, E, RT).	
+    removeElementFromList(T, E, RT).	
 
 removeRepetitiveElementsFromList([], []).
 removeRepetitiveElementsFromList([H|T], [H|R]):-
