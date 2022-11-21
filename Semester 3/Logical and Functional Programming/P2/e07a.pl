@@ -14,7 +14,7 @@ getPositionsOfGivenElement([E|T], E, CP, [CP|R]):- !,
 getPositionsOfGivenElement([H|T], E, CP, R):-
     H =\= E, !,
     NewCP is CP + 1,
-	  getPositionsOfGivenElement(T, E, NewCP, R).
+    getPositionsOfGivenElement(T, E, NewCP, R).
 getPositionOfMaximalElement(L, R):-
     getMaximumValueOfList(L, M),
     getPositionsOfGivenElement(L, M, 1, R).
