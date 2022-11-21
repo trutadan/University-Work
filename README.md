@@ -15,7 +15,7 @@ My university work.
            <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%201/Fundamentals%20of%20Programming">Fundamentals of Programming</a></li>
         </ul>
       </li>
-
+      
     </ul>
   </li>
   
