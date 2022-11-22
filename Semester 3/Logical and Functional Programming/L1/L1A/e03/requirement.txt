@@ -1,0 +1,6 @@
+3.
+a) Write a function that inserts in a linear list a given atom A after the 2nd, 4th, 6th, ... element.
+b) Write a function to get from a given list the list of all atoms, on any level, but reverse order. 
+Example: (((A B) C) (D E)) ==> (E D C B A)
+c) Write a function that returns the greatest common divisor of all numbers in a nonlinear list.
+d) Write a function that determines the number of occurrences of a given atom in a nonlinear list.
