@@ -1,0 +1,3 @@
+A binary tree(1): (node no-subtrees list-subtree-1 list-subtree-2 ...)
+
+3. Return the number of levels of a tree of type (1).
