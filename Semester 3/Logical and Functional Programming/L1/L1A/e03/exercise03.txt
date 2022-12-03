@@ -1,0 +1,102 @@
+; a) Write a function that inserts in a linear list a given atom A after the 2nd, 4th, 6th, ... element.
+
+; insertGivenAtomAfterEvenPositions(l1l2...ln, element, currentPosition) = [] if n = 0,
+;                                                                        = [l1, e] if currentPosition % 2 == 0, 
+;                                                                        = [l1] otherwise;
+
+(DEFUN insertGivenAtomAfterEvenPositions(list element currentPosition)
+        (COND
+         ((null list) nil)
+         ((= (mod currentPosition 2) 0) (cons (car list) (cons element (insertGivenAtomAfterEvenPositions (cdr list) element (+ currentPosition 1)))))
+         (t (cons (car list) (insertGivenAtomAfterEvenPositions (cdr list) element (+ currentPosition 1))))
+         ) 
+)
+
+; mainInsertGivenAtomAfterEvenPositions(l1l2...ln, element) = insertGivenAtomAfterEvenPositions(l1l2...ln, element, 1);
+
+(DEFUN mainInsertGivenAtomAfterEvenPositions(list element)
+    (
+     insertGivenAtomAfterEvenPositions list element 1
+     )
+)
+
+(print (mainInsertGivenAtomAfterEvenPositions '(1 2 3 4 5 6 7 8 9) 1337))
+
+
+; b) Write a function to get from a given list the list of all atoms, on any level, but reverse order. 
+; Example: (((A B) C) (D E)) => (E D C B A)
+
+; appendAtomToList(element, l1l2...ln) = [element] if n = 0,
+;                                      = [l1] + appendAtomToList(element, l1l2...ln) otherwise;
+
+(DEFUN appendAtomToList(element list)
+       (COND
+        ((null list) element)
+        (t (cons (car list) (appendAtomToList element (cdr list))))
+        ) 
+)
+
+; reverseListOfAtoms(l1l2...ln) = [] if n = 0,
+;                               = reverseListOfAtoms(l2...ln) + l1 if l1 is atom,
+;                               = reverseListOfAtoms(l2...ln) + reverseListOfAtoms(l1) if l1 is a list;
+
+(DEFUN reverseListOfAtoms(list)
+        (COND
+         ((null list) nil)
+         ((listp (car list)) (appendAtomToList (reverseListOfAtoms (car list)) (reverseListOfAtoms (cdr list))))
+         (t (appendAtomToList (list (car list)) (reverseListOfAtoms (cdr list))))
+         )       
+)
+
+(print (reverseListOfAtoms '(((A B) C) (D E))))
+
+
+; c) Write a function that returns the greatest common divisor of all numbers in a nonlinear list.
+
+; getGCDOfTwoNumbers(firstNumber, secondNumber) = null if firstNumber is not a number and secondNumber is not a number,
+;                                               = firstNumber if secondNumber is not a number,
+;                                               = secondNumber if firstNumber is not a number,
+;                                               = firstNumber if secondNumber = 0,
+;                                               = getGCDOfTwoNumbers(secondNumber, firstNumber % secondNumber) otherwise;
+
+(DEFUN getGCDOfTwoNumbers(firstNumber secondNumber) 
+       (COND
+            ((and (not (numberp firstNumber)) (not (numberp secondNumber))) nil)
+            ((not (numberp secondNumber)) firstNumber)
+            ((not (numberp firstNumber)) secondNumber)
+            ((= secondNumber 0) firstNumber)
+            (t (getGCDOfTwoNumbers secondNumber (mod firstNumber secondNumber)))
+        )
+)
+
+; getGCDOfNonlinearList(l1l2...ln) = l1 if n = 1 and l1 is not a list,
+;                                  = getGCDOfTwoNumbers(getGCDOfNonlinearList(l1), getGCDOfNonlinearList(l2...ln)) if l1 is a list,
+;                                  = getGCDOfTwoNumbers(l1, getGCDOfNonlinearList(l2...ln)) otherwise;
+
+(DEFUN getGCDOfNonlinearList(list) 
+       (COND
+            ((and (atom (car list)) (null (cdr list))) (car list))
+            ((listp (car list)) (getGCDOfTwoNumbers (getGCDOfNonlinearList (car list)) (getGCDOfNonlinearList (cdr list))))
+            (t (getGCDOfTwoNumbers (car list) (getGCDOfNonlinearList (cdr list))))
+        )
+)
+
+(print (getGCDOfNonlinearList '(24 ( 20 (12 A B)) 72)))
+
+
+; d) Write a function that determines the number of occurrences of a given atom in a nonlinear list.
+; getNumberOfOccurences(l1l2...ln, element) = 0 if n = 0,
+;                                           = getNumberOfOccurences(l1) + getNumberOfOccurences(l2...ln) if l1 is list;
+;                                           = 1 + getNumberOfOccurences(l2...ln) if l1 is atom and l1 = element,
+;                                           = getNumberOfOccurences(l2...ln) otherwise;
+
+(DEFUN getNumberOfOccurences(list givenAtom)      
+       (COND
+                ((null list) 0)
+                ((and (atom (car list)) (= (car list) givenAtom)) (+ 1 (getNumberOfOccurences (cdr list) givenAtom)))
+                ((listp (car list)) (+ (getNumberOfOccurences (car list) givenAtom) (getNumberOfOccurences (cdr list) givenAtom)))
+                (t (getNumberOfOccurences (cdr list) givenAtom))
+        )       
+)
+
+(print (getNumberOfOccurences '(1 (3 (5 4 3) (5 3)) 3 3) 3))
