@@ -1,0 +1,46 @@
+% getLengthOfSet(L-list, Len-integer)
+% flow model(i, o), (i, i)
+getLengthOfSet([], 0).
+getLengthOfSet([_|T], L):-
+    getLengthOfSet(T, NewL),
+    L is NewL + 1.
+
+% getSumOfSet(L-list, Sum-integer)
+% flow model(i, o), (i, i)
+getSumOfSet([], 0).
+getSumOfSet([H|T], S):-
+      getSumOfSet(T, NewS),
+    S is NewS + H.
+
+% getAllSubsetsOfSet(L-list, R-list)
+% flow model(i, o)
+getAllSubsetsOfSet([], []).
+getAllSubsetsOfSet([H|T], [H|NT]):-
+    getAllSubsetsOfSet(T, NT).
+getAllSubsetsOfSet([_|T], NT):-
+    getAllSubsetsOfSet(T, NT).
+
+% checkCondition(L-list, N-integer)
+% flow model(i, i)
+checkCondition(L, N):-
+    getSumOfSet(L, S),
+    S mod N =:= 0.
+
+% solve(L-list, RL-list, N-integer)
+% flow model(i, i, i)
+solve(Set, Subset, N):-
+    getAllSubsetsOfSet(Set, Subset),
+    checkCondition(Subset, N).
+
+% findSubsetsWithSumDivisibleBySetLength(L-list, RL-list)
+% flow model(i, o)
+findSubsetsWithSumDivisibleBySetLength(Set, Subset):-
+    getLengthOfSet(Set, Length),
+    solve(Set, Subset, Length).
+
+% findSubsetsWithSumDivisibleBySetLength(L-list, RL-list)
+% flow model(i, o)
+findAllSubsetsWithSumDivisibleBySetLength(Set, Subset):-
+    findall(SubsetPartial, findSubsetsWithSumDivisibleBySetLength(Set, SubsetPartial), Subset).
+
+% run example: findAllSubsetsWithSumDivisibleBySetLength([1, 2, 3, 4, 5, 6], AllSubsets).
