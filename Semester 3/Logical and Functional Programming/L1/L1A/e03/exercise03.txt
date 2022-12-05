@@ -1,8 +1,8 @@
 ; a) Write a function that inserts in a linear list a given atom A after the 2nd, 4th, 6th, ... element.
 
 ; insertGivenAtomAfterEvenPositions(l1l2...ln, element, currentPosition) = [] if n = 0,
-;                                                                        = [l1, e] if currentPosition % 2 == 0, 
-;                                                                        = [l1] otherwise;
+;                                                                        = l1 + e + insertGivenAtomAfterEvenPositions(l2...ln, element, currentPosition+1) if currentPosition % 2 = 0, 
+;                                                                        = [l1] + insertGivenAtomAfterEvenPositions(l2...ln, element, currentPosition+1) otherwise;
 
 (DEFUN insertGivenAtomAfterEvenPositions(list element currentPosition)
         (COND
@@ -27,7 +27,7 @@
 ; Example: (((A B) C) (D E)) => (E D C B A)
 
 ; appendAtomToList(element, l1l2...ln) = [element] if n = 0,
-;                                      = [l1] + appendAtomToList(element, l1l2...ln) otherwise;
+;                                      = [l1] + appendAtomToList(element, l2...ln) otherwise;
 
 (DEFUN appendAtomToList(element list)
        (COND
