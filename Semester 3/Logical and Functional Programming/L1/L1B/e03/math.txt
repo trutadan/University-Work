@@ -1,0 +1,6 @@
+getNumberOfLevelsOfTree(t1..tn) = (1, t3..tn) if t2 = 0,
+                                = (depth + 1, restTree) where (depth, restTree) = getNumberOfLevelsOfTree(t3..tn) if t2 = 1,
+                                = (max(depth1, depth2) + 1, rest2)
+      					where (depth2, rest2) = getNumberOfLevelsOfTree(rest1)
+      					  and (depth1, rest1) = getNumberOfLevelsOfTree(t3..tn)
+              							otherwise;
