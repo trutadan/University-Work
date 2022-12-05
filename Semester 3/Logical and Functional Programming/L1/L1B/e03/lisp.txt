@@ -1,0 +1,14 @@
+(DEFUN getNumberOfLevelsOfTree(givenTree)
+      (COND
+        ((= (cadr givenTree) 0) (values 1 (cddr givenTree)))
+        ((= (cadr givenTree) 1) (multiple-value-bind (depthFound restOfTheTree) (getNumberOfLevelsOfTree (cddr givenTree)) (values (+ 1 depthFound) restOfTheTree)))
+        (t  (multiple-value-bind (leftChildDepthFound leftChildRestOfTheThree) 
+                (getNumberOfLevelsOfTree (cddr givenTree)) 
+                        (multiple-value-bind (rightChildDepthFound rightChildRestOfTheThree) 
+                                (getNumberOfLevelsOfTree leftChildRestOfTheThree) 
+                                                (values (+ 1 (max leftChildDepthFound rightChildDepthFound)) rightChildRestOfTheThree))))
+      )
+)
+
+
+(print (getNumberOfLevelsOfTree '(A 2 B 0 C 2 D 0 E 0)))
