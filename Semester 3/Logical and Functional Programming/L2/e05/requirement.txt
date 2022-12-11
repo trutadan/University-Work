@@ -1,1 +1,1 @@
-5. Write a function that computes the sum of even numbers and the decreasethe sum ofodd numbers, at any level of a list.
+5. Write a function that computes the sum of even numbers and then decreasethe sum of odd numbers, at any level of a list.
