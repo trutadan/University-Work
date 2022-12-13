@@ -70,4 +70,4 @@ end
 
 fprintf('The rejection region for T is (%.2f, %.2f).\n', t2, inf);
 fprintf('The value of the test statistic T is %.2f.\n', stats2.tstat);
-fprintf('The P-value of the test for diff. of means is %.6f.\n', p2);
+fprintf('The P-value of the test for diff. of means is %e.\n', p2);
