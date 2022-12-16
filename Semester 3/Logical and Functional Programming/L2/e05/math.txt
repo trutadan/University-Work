@@ -1,4 +1,5 @@
 ; differenceBetweenSumOfEvensAndSumOfOdds(list) = 0 if list is null,
 ;                                               = -list if list is number and list is odd,
 ;                                               = list if list is number and list is even,
-;                                               = +(mapcar(list)) otherwise;
+;                                               = differenceBetweenSumOfEvensAndSumOfOdds(l1) + ... differenceBetweenSumOfEvensAndSumOfOdds(ln), 
+;                                                                                                                   where list = l1l2...ln otherwise;
