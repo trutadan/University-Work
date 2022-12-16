@@ -1,0 +1,11 @@
+; 4. Write a function that returns the product of numeric atoms in a list, at any level.
+(DEFUN getSumOfNumericAtoms (x) 
+        (COND
+         ((null x) nil)
+         ((numberp x) x)
+         ((atom x) 1)
+         (t (apply #'* (mapcar #' getSumOfNumericAtoms x)))
+         )
+)
+
+(print(getSumOfNumericAtoms '(1 2 3 4 (-1 (2) -3))))
