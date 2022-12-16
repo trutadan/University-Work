@@ -1,0 +1,13 @@
+; 5. Write a function that computes the sum of even numbers and then decrease the sum ofodd numbers, at any level of a list.
+
+(DEFUN differenceBetweenSumOfEvensAndSumOfOdds (l)
+         (COND
+          ((null l) 0)
+          ((and (numberp l) (equal (mod l 2) 1)) (* l -1))
+          ((and (numberp l) (equal (mod l 2) 0)) l)
+          (t (apply #'+ (mapcar #'differenceBetweenSumOfEvensAndSumOfOdds l)))
+          )
+)
+
+; -1 -3 -5 -7 -9 +2 +4 +6 +8 = -25 +20 = -5
+(print (differenceBetweenSumOfEvensAndSumOfOdds '(())))
