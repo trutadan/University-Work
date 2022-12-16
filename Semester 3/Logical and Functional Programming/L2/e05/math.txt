@@ -1,0 +1,4 @@
+; differenceBetweenSumOfEvensAndSumOfOdds(list) = 0 if list is null,
+;                                               = -list if list is number and list is odd,
+;                                               = list if list is number and list is even,
+;                                               = +(mapcar(list)) otherwise;
