@@ -1,0 +1,11 @@
+; 12. Write a function that substitutes an element through another one at all levels of a given list.
+(DEFUN substituteElementWithList (l element se)
+       (COND
+        ((null l) nil)
+        ((and (atom l) (= l element)) se)
+        ((atom l) l)
+        (t (car (list (mapcar #' (lambda (l) (substituteElementWithList l element se)) l))))
+        )
+)
+
+(print (substituteElementWithList '(1 2 3 (1 2 (1))) '1 '100))
