@@ -1,0 +1,10 @@
+; 15. Write a function that reverses a list together with all its sublists elements, at any level.
+(DEFUN reverseList (l)
+           (COND
+            ((null l) nil)
+            ((atom l) (list l))
+            (t (mapcan #' reverseList (reverse l)))
+            )
+)
+
+(print(reverseList '(1 2 (3))))
