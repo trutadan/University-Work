@@ -40,6 +40,7 @@
 
 (print (checkMemberOfList '(1 2 3) 3))
 
+
 ; c) Write a function to determine the list of all sublists of a given list, on any level.
 ; A sublist is either the list itself, or any element that is a list, at any level. Example:
 ; (1 2 (3 (4 5) (6 7)) 8 (9 10)) => 5 sublists:
@@ -59,6 +60,7 @@
 )
 
 (print (mapGetAllSublistsOfGivenList '(1 2 (3 (4 5) (6 7)) 8 (9 10))))
+
 
 ; d) Write a function to transform a linear list into a set.
 
