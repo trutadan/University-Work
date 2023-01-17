@@ -1,0 +1,59 @@
+Network IP: 141.36.224.0
+Mask: 255.255.248.0 (/21) => 2048 ip addresses
+
+for N1, N2, N3, N4, N5 -> n devices + 1 for router + 1 network address + 1 broadcast address = n + 3
+for N12345 -> 5 routers + 1 network address + 1 broadcast address = 7; 2^3 = 8 <=> /29
+for N5w ->  2 routers + 1 network address + 1 broadcast address = 4; 2^2 = 4 <=> /30
+
+N1: 320 IP's
+Subnet address	Range of addresses	                  Useable IPs	                  Hosts	
+141.36.224.0/23	141.36.224.0 - 141.36.225.255	141.36.224.1 - 141.36.225.254	510
+Mask: 255.255.254.0	
+R1 -> 141.36.224.1
+DHCP Server -> 141.36.224.2
+
+N2: 416 IP's
+Subnet address	Range of addresses	                  Useable IPs	                  Hosts
+141.36.226.0/23	141.36.226.0 - 141.36.227.255	141.36.226.1 - 141.36.227.254	510
+Mask: 255.255.254.0	
+R2 -> 141.36.226.1
+Web Server -> 141.36.226.2
+
+N3: 160 IP's
+Subnet address	Range of addresses	                  Useable IPs	                  Hosts
+141.36.228.0/24	141.36.228.0 - 141.36.228.255	141.36.228.1 - 141.36.228.254	254
+Mask: 255.255.255.0	
+R3 -> 141.36.228.1
+DNS Server -> 141.36.228.2
+
+N4: 96 IP's
+Subnet address	Range of addresses	                  Useable IPs	                  Hosts
+141.36.229.0/25	141.36.229.0 - 141.36.229.127	141.36.229.1 - 141.36.229.126	126
+Mask: 255.255.255.128
+R4 -> 141.36.229.1
+
+N5: 32 IP's
+Subnet address	Range of addresses	                  Useable IPs	                  Hosts
+141.36.229.128/26	141.36.229.128 - 141.36.229.191	141.36.229.129 - 141.36.229.190	  62
+Mask: 255.255.255.192
+R5 -> 141.36.229.129
+
+N12345: 5 IP's
+Subnet address	Range of addresses	                  Useable IPs	                  Hosts
+141.36.229.192/29	141.36.229.192 - 141.36.229.199	141.36.229.193 - 141.36.229.198	6
+Mask: 255.255.255.248
+R1 -> 141.36.229.193
+R2 -> 141.36.229.194
+R3 -> 141.36.229.195
+R4 -> 141.36.229.196
+R5 -> 141.36.229.197
+
+N5w: 2 IP's
+Subnet address	Range of addresses	                  Useable IPs	                  Hosts
+141.36.229.200/30	141.36.229.200 - 141.36.229.203	141.36.229.201 - 141.36.229.202	2
+Mask: 255.255.255.252
+R1 -> 141.36.229.201
+Rw -> 141.36.229.202
+
+In the end: 512 + 512 + 256 + 128 + 64 + 8 + 4 = 1484 used < 2048 available
+
