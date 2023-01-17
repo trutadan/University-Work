@@ -1,91 +1,73 @@
-Network IP: 63.180.96.0
-Mask: 255.255.240.0 (/20)
+Network IP: 17.216.188.0 
+Mask : 255.255.252.0 (/22)
 
 N1, N2, N3, N4, N5 -> n devices + 1 for router + 1 network address + 1 broadcast address = n + 3
+N123 -> 3 routers + 1 network address + 1 broadcast address = 5; 2^3 <=> /29
 N5w -> 2 routers + 1 network address + 1 broadcast address = 4 = 2^2 <=> /30
-N12, N23, N13, N34, N45, N35  -> 2 routers + 1 network address + 1 broadcast address = 4 = 2^2 <=> /30
+N34 -> 2 routers + 1 network address + 1 broadcast address = 4 = 2^2 <=> /30
+N45 -> 2 routers + 1 network address + 1 broadcast address = 4 = 2^2 <=> /30
 
-N1: 768 IP's
-Subnet address	Range of addresses	                  Useable IPs	                  Hosts
-63.180.96.0/22	63.180.96.0 - 63.180.99.255	63.180.96.1 - 63.180.99.254	1022
-Mask: 255.255.252.0
-R1 -> 63.180.96.1
-DHCP Server -> 63.180.96.2
-
-N2: 832 IP's
-Subnet address	Range of addresses	                  Useable IPs	                  Hosts
-63.180.100.0/22	63.180.100.0 - 63.180.103.255	63.180.100.1 - 63.180.103.254	1022
-Mask: 255.255.252.0
-R2 -> 63.180.100.1
-WEB Server -> 63.180.100.2
-
-N3: 320 IP's
-Subnet address	Range of addresses	                  Useable IPs	                  Hosts
-63.180.104.0/23	63.180.104.0 - 63.180.105.255	63.180.104.1 - 63.180.105.254	510
-Mask: 255.255.254.0
-R3 -> 63.180.104.1
-DNS Server -> 63.180.104.2
-
-N4: 192 IP's
-Subnet address	Range of addresses	                  Useable IPs	                  Hosts
-63.180.106.0/24	63.180.106.0 - 63.180.106.255	63.180.106.1 - 63.180.106.254	254
+N1: 224 IP's
+Subnet address	Range of addresses	                Useable IPs	                  Hosts
+17.216.188.0/24	17.216.188.0 - 17.216.188.255	17.216.188.1 - 17.216.188.254	  254
 Mask: 255.255.255.0
-R4 -> 63.180.106.1
+R1 -> 17.216.188.1
+DHCP Server -> 17.216.188.2
 
-N5: 64 IP's
+N2: 208 IP's
+Subnet address	Range of addresses	                Useable IPs	                  Hosts
+17.216.189.0/24	17.216.189.0 - 17.216.189.255	17.216.189.1 - 17.216.189.254	  254
+Mask: 255.255.255.0
+R2 -> 17.216.189.1
+WEB Server -> 17.216.189.2
+
+N3: 48 IP's
+Subnet address	Range of addresses	                  Useable IPs	                    Hosts
+17.216.190.128/26	17.216.190.128 - 17.216.190.191  17.216.190.129 - 17.216.190.190  62
+Mask: 255.255.255.192
+R3 -> 17.216.190.129
+DNS Server -> 17.216.190.130
+
+N4: 64 IP's
 Subnet address	Range of addresses	                  Useable IPs	                  Hosts
-63.180.107.0/25	63.180.107.0 - 63.180.107.127	63.180.107.1 - 63.180.107.126	126
+17.216.190.0/25	17.216.190.0 - 17.216.190.127	  17.216.190.1 - 17.216.190.126	  126
 Mask: 255.255.255.128
-R5 -> 63.180.107.1
+R4 -> 17.216.190.1
+
+N5: 16 IP's
+Subnet address	Range of addresses	                  Useable IPs	                     Hosts
+17.216.190.192/27	17.216.190.192 - 17.216.190.223	  17.216.190.193 - 17.216.190.222   30
+Mask: 255.255.255.224
+R5 -> 17.216.190.193
 
 N5w: 2 IP's
-Subnet address	Range of addresses	                  Useable IPs	                  Hosts
-63.180.107.128/30	63.180.107.128 - 63.180.107.131	63.180.107.129 - 63.180.107.130	2
-Mask: p
-R5 -> 63.180.107.129
-Rw -> 63.180.107.130
-
-N12: 2 IP's
-Subnet address	Range of addresses	                  Useable IPs	                  Hosts
-63.180.107.132/30	63.180.107.132 - 63.180.107.135	63.180.107.133 - 63.180.107.134	2
+Subnet address	Range of addresses	                  Useable IPs	                    Hosts
+17.216.190.232/30	17.216.190.232 - 17.216.190.235	  17.216.190.233 - 17.216.190.234  2
 Mask: 255.255.255.252
-R1 -> 63.180.107.133
-R2 -> 63.180.107.134
+R5 -> 17.216.190.233
+Rw -> 17.216.190.234
 
-N23: 2 IP's
-Subnet address	Range of addresses	                  Useable IPs	                  Hosts
-63.180.107.136/30	63.180.107.136 - 63.180.107.139	63.180.107.137 - 63.180.107.138	2
-Mask: 255.255.255.252
-R2 -> 63.180.107.137
-R3 -> 63.180.107.138
-
-N13: 2 IP's
-Subnet address	Range of addresses	                  Useable IPs	                  Hosts
-63.180.107.140/30	63.180.107.140 - 63.180.107.143	63.180.107.141 - 63.180.107.142	2
-Mask: 255.255.255.252
-R1 -> 63.180.107.141
-R3 -> 63.180.107.142
+N123: 3 IP's
+Subnet address	Range of addresses	                  Useable IPs	                    Hosts
+17.216.190.224/29	17.216.190.224 - 17.216.190.231	  17.216.190.225 - 17.216.190.230  6
+Mask: 255.255.255.248
+R1 -> 17.216.190.225
+R2 -> 17.216.190.226
+R3 -> 17.216.190.227
 
 N34: 2 IP's
-Subnet address	Range of addresses	                  Useable IPs	                  Hosts
-63.180.107.144/30	63.180.107.144 - 63.180.107.147	63.180.107.145 - 63.180.107.146	2
+Subnet address	Range of addresses	                  Useable IPs	                    Hosts
+17.216.190.236/30	17.216.190.236 - 17.216.190.239	  17.216.190.237 - 17.216.190.238  2
 Mask: 255.255.255.252
-R3 -> 63.180.107.145
-R4 -> 63.180.107.146
+R3 -> 17.216.190.237
+R4 -> 17.216.190.238
 
 N45: 2 IP's
-Subnet address	Range of addresses	                  Useable IPs	                  Hosts
-63.180.107.148/30	63.180.107.148 - 63.180.107.151	63.180.107.149 - 63.180.107.150	2
+Subnet address	Range of addresses	                  Useable IPs	                    Hosts
+17.216.190.240/30	17.216.190.240 - 17.216.190.243	  17.216.190.241 - 17.216.190.242  2
 Mask: 255.255.255.252
-R4 -> 63.180.107.149
-R5 -> 63.180.107.150
-
-N35: 2 IP's
-Subnet address	Range of addresses	                  Useable IPs	                  Hosts
-63.180.107.152/30	63.180.107.152 - 63.180.107.155	63.180.107.153 - 63.180.107.154	2
-Mask: 255.255.255.252
-R3 -> 63.180.107.153
-R5 -> 63.180.107.154
+R4 -> 17.216.190.241
+R5 -> 17.216.190.242
 
 
-In the end: 1024 + 1024 + 512 + 256 + 128 + 4 x 7 = 2972 used < 4096 available
+In the end: 256 + 256 + 128 + 64 + 32 + 8 + 4 + 4 + 4 = 756 used < 1024 available
