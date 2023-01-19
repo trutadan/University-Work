@@ -1,0 +1,51 @@
+; 5. Write a Lisp program to determine the number of sublists at any
+; level of a given list, where the last atom (at any level) is nonnumeric.
+; The list processing will be done using a MAP function. For example,
+; the list (A (B 2) (1 C 4) (D 1 (6 F)) ((G 4) 6) F) has 2 such
+; sublists: (6 F), (D 1 (6 F))
+
+
+; getLength(l1l2...ln) = 0 if n = 0,
+;                      = 1 + getLength(l2...ln) otherwise;
+
+(DEFUN getLength(l)
+       (COND
+        ((null l) 0)
+        (t (+ 1 (getLength (cdr l))))
+       )
+)
+
+; getLastElementOfList(l1l2...ln) = null if n = 0,
+;                                 = l1 if n = 1,
+;                                 = getLastElementOfList(l2...ln) otherwise;
+
+(DEFUN getLastElementOfList (l)
+       (COND
+        ((null l) nil)
+        ((equal (getLength l) 1) (car l))
+        (t (getLastElementOfList (cdr l)))
+       )
+)
+
+; checkIfLastElementOfListIsNonnumeric(l1l2..ln) = true if getLastElementOfList(l1l2...ln) is not a number,
+;                                                = false otherwise;
+
+(DEFUN checkIfLastElementOfListIsNonnumeric(l)
+       (COND
+        ((not (numberp (getLastElementOfList l))) t)
+        (t nil)
+       )
+)
+; countSublistsWithLastElementAtom(l) = 0 if l is atom,
+;                                     = 1 + sum(countSublistsWithLastElementAtom(l)) if l is list and checkIfLastElementOfListIsNonnumeric(l) is true,
+;                                     = sum(countSublistsWithLastElementAtom(l)) otherwise;
+
+(DEFUN countSublistsWithLast(l)
+       (COND
+        ((atom l) 0)
+        ((and (listp l) (checkIfLastElementOfListIsNonnumeric l)) (+ 1 (apply #'+ (mapcar #' countSublistsWithLast l))))
+        (t (apply #'+ (mapcar #' countSublistsWithLast l)))
+       )
+)
+
+(print (countSublistsWithLast '(A (B 2) (1 C 4) (D 1 (6 F)) ((G 4) 6) F)))

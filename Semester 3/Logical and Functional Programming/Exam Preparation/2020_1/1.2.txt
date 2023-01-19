@@ -1,0 +1,23 @@
+% 1.2 Let L be a numerical list and consider the following PROLOG definition 
+% for the predicate f(list, integer), with the flow model (i, o). 
+% f([], 0).
+% f([H|T], S):-
+% 		f(T, S1),
+% 		S1 < H, !,
+% 		S is H.
+% f([_|T], S):-
+% 		f(T, S1), 
+% 		S is S1.
+% Give a solution to avoid the recursive call f(T, S1) in both clauses 
+% without redefining the predicate. Justify the answer.
+
+f([], 0).
+f([H|T], S):-
+    f(T, S1),
+    auxiliarFunction(H, S, S1).
+
+auxiliarFunction(H, S, S1):-
+    S1 < H, !,
+    S is H.
+auxiliarFunction(_, S, S1):-
+    S is S1.

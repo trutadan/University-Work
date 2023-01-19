@@ -1,0 +1,22 @@
+; 1.1 Consider the following function definition in LISP 
+(DEFUN Fct(F L) 
+    (COND 
+     ((NULL L) NIL) 
+     ((FUNCALL F (CAR L)) (CONS (FUNCALL F (CAR L)) (Fct F (CDR L)))) 
+     (T NIL)
+    )
+)
+; Give a solution to avoid the double call (FUNCALL F (CAR L)). 
+; You will not toe SET, SETQ, SETF. Justify the answer.
+
+(DEFUN Fct(F L) 
+    (COND 
+     ((NULL L) NIL)
+     (t (lambda (x) (COND
+                     ((x) (CONS (x) (Fct F (CDR L)))) 
+                     (T NIL)
+                    )
+        )
+     )
+    )
+)

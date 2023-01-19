@@ -1,0 +1,24 @@
+; 5. Write a Lisp function to return a nonlinear with all occurrences
+; of a certain element e removed. For example, if the list is:
+; (1 (2 A (3 A)) (A)) and e is A => (1 (2 (3)) NIL);
+; (1 (2 (3))) and e is A => (1 (2 (3)))
+
+; removeAllAppearancesOfGivenElement(l, e) = () if l is empty,
+;                                          = () if l is atom and l = e,
+;                                          = l if l is atom,
+;                                          = removeAllAppearancesOfGivenElement(l1, e) U removeAllAppearancesOfGivenElement(l2, e) U ... U removeAllAppearancesOfGivenElement(ln, e) where l=l1l2...ln otherwise;
+
+(DEFUN removeAllAppearancesOfGivenElement (l e)
+        (COND
+         ((null l) nil)
+         ((and (atom l) (equal l e)) nil)
+         ((atom l) (list l))
+         (t (list (mapcan #' (lambda (l) (removeAllAppearancesOfGivenElement l e)) l)))
+        )
+)
+
+(DEFUN mainRemoveAllAppearancesOfGivenElement (l e)
+        (car (removeAllAppearancesOfGivenElement l e))
+)
+       
+(print (mainRemoveAllAppearancesOfGivenElement '(1 (2 A (3 A)) (A)) 'A))

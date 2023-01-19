@@ -1,0 +1,29 @@
+; 4. Se considera o lista neliniara. Sa se scrie o functie Lisp
+; care sa aiba ca rezultat lista initiala in care atomii de
+; pe nivelul k au fost inlocuiti cu 0 (nivelul superficial
+; se considera 1). Exemplu: pentru lista (a (1 (2 b)) (c (d)))
+; a) k = 2 => (a (0 (2 b)) (0 (d)))
+; b) k = 1 => (0 (1 (2 b)) (c (d)))
+; c) k = 3 => lista nu se modifica
+
+; swapAtomsOnGivenLevelWith0(l, cl, k) = {} if l is empty,
+;                                      = {0} if l is atom and cl = k,
+;                                      = {l} if l is atom,
+;                                      = swapAtomsOnGivenLevelWith0(l1) U swapAtomsOnGivenLevelWith0(l2) U ... U swapAtomsOnGivenLevelWith0(ln) where l = l1l2...ln otherwise;
+
+(DEFUN swapAtomsOnGivenLevelWith0 (l cl k)
+           (COND
+            ((null l) nil)
+            ((and (atom l) (equal cl k)) 0)
+            ((atom l) l)
+            (t (mapcar #' (lambda (x) (swapAtomsOnGivenLevelWith0 x (+ cl 1) k)) l))
+           )       
+)
+
+(DEFUN mainSwapAtomsOnGivenLevelWith0 (l k)
+       (swapAtomsOnGivenLevelWith0 l 0 k)
+)
+
+(print (mainSwapAtomsOnGivenLevelWith0 '(a (1 (2 b)) (c (d))) 2))
+(print (mainSwapAtomsOnGivenLevelWith0 '(a (1 (2 b)) (c (d))) 1))
+(print (mainSwapAtomsOnGivenLevelWith0 '(a (1 (2 b)) (c (d))) 3))

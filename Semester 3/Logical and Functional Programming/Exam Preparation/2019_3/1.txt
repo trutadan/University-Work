@@ -1,0 +1,15 @@
+% 1. The variable L is initialized by (SET 'L '(T NIL T)). 
+% In order to apply a logic disjunction between elements of L, 
+% we execute (APPLY 'OR L). What is the result of evaluating 
+% this form? Justify your answer and give a solution for 
+% such a situation. 
+
+The OR is a special operator, not a function, so it cannot be used with the APPLY function.
+The solution of the issue:
+(SET 'L '(T NIL T))
+(REDUCE (LAMBDA (x y) (OR x y)) L)
+
+Use a lambda function that mimics the result of the or operator on two arguments.
+REDUCE is a function that applies a binary function to the elements of a list, from left to right. 
+The lambda function applies to the first two elements of the list, then to the result and the next element, 
+and so on, until it reaches the end of the list.

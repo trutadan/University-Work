@@ -1,0 +1,23 @@
+; 1. Fie urmatoarea definitie de functie in LISP
+(DEFUN F(L) 
+       (COND
+        ((ATOM L) -1) 
+        ((> (F (CAR L)) 0) (+ (CAR L) (F (CAR L)) (F (CDR L))))
+        (T (F (CDR L)))
+       )
+)
+
+; Dati o soluție pentru a evita dublul apel recursiv
+; (F (CAR L)). Nu se vor folosi SET, SETQ, SETF.
+
+(DEFUN F(L)
+       (COND
+        ((ATOM L) -1)
+        (t (lambda (x) (COND
+                        ((> x 0) (+ (CAR L) x (F (CDR L))))
+                        (t (F (CDR L)))
+                       ) (F (CAR L))
+           ) 
+        )
+       )
+)

@@ -1,0 +1,55 @@
+; 5. Write a Lisp program to determine the number of sublists at any 
+; level of a given list, having an odd number of nonnumeric atoms on 
+; even levels — the superficial level of the list is considered 1. 
+; The list processing will be done using a MAP function. For example, 
+; the (A (B 2) (1 C 4) (1 (6 F)) (((G) 4) 6)) has 3 such sublists: 
+; the list, (1 (6 F)) and ((G) 4). 
+
+; computeNumberOfNonnumericAtoms(l1l2...ln) = 0 if n = 0,
+;                                           = 1 + computeNumberOfNonnumericAtoms(l2...ln) if l1 is atom and l1 is not number,
+;                                           = computeNumberOfNonnumericAtoms(l2...ln) otherwise;
+(DEFUN computeNumberOfNonnumericAtoms (l)
+           (COND
+            ((null l) 0)
+            ((and (atom (car l)) (not (numberp (car l)))) (+ 1 (computeNumberOfNonnumericAtoms (cdr l))))
+            (t (computeNumberOfNonnumericAtoms (cdr l)))
+           )
+)
+
+; checkEvenNumber(n) = true if n is even,
+;                    = false otherwise
+(DEFUN checkEvenNumber (n)
+       (COND
+        ((equal (mod n 2) 0) t)
+        (t nil)
+       )
+)
+
+; checkOddNumberOfNonnumericAtoms(l1l2...ln) = checkEvenNumber(computeNumberOfNonnumericAtoms(l1l2...ln))
+(DEFUN checkOddNumberOfNonnumericAtoms (l)
+   (let (
+         (result (computeNumberOfNonnumericAtoms l))
+         )
+           (COND
+            ((not (checkEvenNumber result)) t)
+            (t nil)
+           )
+   )
+)
+
+; countNumberOfSublistsWithOddNumberOfNonnumericAtomsOnEvenLevels(l, level) = 0 if l is atom,
+;                                                                           = 1 + sum(countNumberOfSublistsWithOddNumberOfNonnumericAtomsOnEvenLevels(l)) if checkOddNumberOfNonnumericAtoms(l) and level is even, 
+;                                                                           = sum(countNumberOfSublistsWithOddNumberOfNonnumericAtomsOnEvenLevels(l)) otherwise;
+(DEFUN countNumberOfSublistsWithOddNumberOfNonnumericAtomsOnEvenLevels (l level)
+       (COND
+        ((atom l) 0)
+        ((and (checkOddNumberOfNonnumericAtoms l) (checkEvenNumber level)) (+ 1 (apply #'+ (mapcar #' (lambda (x) (countNumberOfSublistsWithOddNumberOfNonnumericAtomsOnEvenLevels x (+ level 1))) l))))
+        (t (apply #'+ (mapcar #' (lambda (x) (countNumberOfSublistsWithOddNumberOfNonnumericAtomsOnEvenLevels x (+ level 1))) l)))
+       )
+)
+
+(DEFUN mainCountNumberOfSublistsWithOddNumberOfNonnumericAtomsOnEvenLevels (l)
+           (countNumberOfSublistsWithOddNumberOfNonnumericAtomsOnEvenLevels l 0)
+)
+
+(print (mainCountNumberOfSublistsWithOddNumberOfNonnumericAtomsOnEvenLevels '(A (B 2) (1 C 4) (1 (6 F)) (((G) 4) 6))))

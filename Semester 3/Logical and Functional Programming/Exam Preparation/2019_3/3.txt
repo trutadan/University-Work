@@ -1,0 +1,34 @@
+% 3. Write a Prolog program to generate the list of subsets 
+% of even length from a given list of integer numbers. 
+% Explain the proposed algorithm. For example, for the list [2,3,4], 
+% the result is [[],[2,3],[2,4],[3,4]) (not necessarily in this order). 
+
+% generateSubsets(l1l2...ln) = {} if n = 0,
+%                            = {l1} U generateSubsets(l2...ln) if n > 0,
+%                            generateSubsets(l2...ln)
+generateSubsets([], []).
+generateSubsets([H|T], [H|R]):-
+    generateSubsets(T, R).
+generateSubsets([_|T], R):-
+    generateSubsets(T, R).
+
+% getLengthOfSubset(l1l2...ln) = 0 if n = 0,
+%                              = 1 + getLengthOfSubset(l2...ln) otherwise;
+getLengthOfSubset([], 0).
+getLengthOfSubset([_|T], N):-
+    getLengthOfSubset(T, NewN),
+    N is NewN + 1.
+
+% checkEvenLength(l1l2...ln) = true if getLengthOfSubset(l1l2...ln) is even,
+%                            = false otherwise;
+checkEvenLength(Subset):-
+    getLengthOfSubset(Subset, Length),
+    Length mod 2 =:= 0.
+
+% generateSubsetsOfEvenLength(l1l2...ln) = every subset <- generateSubsets(l1l2...ln), for which checkEvenLength(subset) is true.
+generateSubsetsOfEvenLength(L, Subset):-
+    generateSubsets(L, Subset),
+    checkEvenLength(Subset).
+
+findAllSubsetsOfEvenLength(L, R):-
+    findall(Reach, generateSubsetsOfEvenLength(L, Reach), R).

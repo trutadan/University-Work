@@ -1,0 +1,45 @@
+% 3. Write a Prolog program to generate the list of 
+% subsets of N element from a list. Explain the
+% proposed algorithm. For example, for the list 
+% L=[2, 3, 4] and N=2 the result is 
+% [[2, 3], [2, 4], [3, 4]].
+
+% flow model (i, o)
+% generateSubsets(l1l2...ln) = () if n = 0,
+%                            = {l1} U generateSubsets(l2...ln),
+%                              generateSubsets(l2...ln) otherwise;
+
+generateSubsets([], []).
+generateSubsets([H|R], [H|T]):-
+	generateSubsets(R, T).
+generateSubsets([_|T], R):-
+    generateSubsets(T, R).
+
+% flow model (i, o)
+% getLength(l1l2...ln) = 0 if n = 0,
+%                      = 1 + getLength(l2...ln) otherwise;
+
+getLength([], 0).
+getLength([_|T], R):-
+    getLength(T, Ra),
+    R is Ra + 1.
+
+% flow model (i, i)
+% checkCondition(l1l2...ln, N) = true if n = N,
+%                              = false otherwise;
+
+checkCondition(L, N):-
+    getLength(L, Length),
+    Length =:= N.
+
+% flow model (i, i, o)
+% generateSubsetsOfLengthN(l1l2...ln, N) = subset for any subset <- generateSubsets(l1l2...ln) with 
+%                                                          checkCondition(l1l2...ln, N) = true;
+
+generateSubsetsOfLengthN(L, N, Subset):-
+    generateSubsets(L, Subset), 
+    checkCondition(Subset, N).
+
+% flow model (i, i, o)
+findAllSubsetsOfLengthN(L, N, R):-
+    findall(Ri, generateSubsetsOfLengthN(L, N, Ri), R).

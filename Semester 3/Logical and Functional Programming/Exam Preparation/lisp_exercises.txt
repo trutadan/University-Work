@@ -1,0 +1,162 @@
+; C. Se dă o listă neliniară și se cere înlocuirea valorilor numerice impare situate pe un nivel par, cu numărul natural succesor.
+;    Nivelul superficial se consideră 1. Se va folosi o funcție MAP.
+;    Exemplu pentru lista (1 s 4 (3 f (7))) va rezulta (1 s 4 (4 f (7))).
+
+; swapNumericalValuesOnEvenLevelsWithSuccessor(l, clevel) = () if n = 0, 
+;                                                         = l + 1 if l is number if clevel % 2 = 0 and l is odd,
+;                                                         = l if l is an atom, 
+;                                                         = swapNumericalValuesOnEvenLevelsWithSuccessor(l1, clevel + 1) U swapNumericalValuesOnEvenLevelsWithSuccessor(l2, clevel + 1) U .... 
+;                                                                                        U swapNumericalValuesOnEvenLevelsWithSuccessor(ln, clevel + 1) where l=l1l2...ln otherwise;
+
+(DEFUN swapNumericalValuesOnEvenLevelsWithSuccessor(l c)
+        (COND
+         ((null l) nil)
+         ((and (numberp l) (and (equal (mod c 2) 0) (equal (mod l 2) 1))) (+ l 1))
+         ((atom l) l)
+         (t (mapcar #' (lambda (l) (swapNumericalValuesOnEvenLevelsWithSuccessor l (+ c 1))) l))
+        )
+)
+
+(DEFUN mainSwapNumericalValuesOnEvenLevelsWithSuccessor(l)
+         (swapNumericalValuesOnEvenLevelsWithSuccessor l 0)
+)
+
+(print (mainSwapNumericalValuesOnEvenLevelsWithSuccessor '(1 s 4 (3 f (7)))))
+
+
+
+; C. Un arbore n-ar se reprezintă în LISP astfel ( nod subarbore1 subarbore2 .....)
+; Se cere să se înlocuiască nodurile de pe nivelurile impare din arbore cu o valoare e dată. Nivelul rădăcinii se consideră a fi
+; 0. Se va folosi o funcție MAP.
+; Exemplu pentru arborele (a (b (g)) (c (d (e)) (f))) şi e=h => (a (h (g)) (h (d (h)) (h)))
+
+; swapNodesOnOddLevelsWithGivenValue(t, c, e) = () if t is empty, 
+;                                                                             = {e} if t is number and c is odd,
+;                                                                             = {t} if t is atom,
+;                                                                             = swapNodesOnOddLevelsWithGivenValue(t1, c+1, e) U swapNodesOnOddLevelsWithGivenValue(t2, c+1, e) U ... U swapNodesOnOddLevelsWithGivenValue(tn, c+1, e) where t=t1t2...tn otherwise;
+
+(DEFUN swapNodesOnOddLevelsWithGivenValue(tree c e)
+        (COND
+         ((null tree) nil)
+         ((and (atom tree) (equal 1 (mod c 2))) e)
+         ((atom tree) tree)
+         (t (mapcar #' (lambda (tree) (swapNodesOnOddLevelsWithGivenValue tree (+ c 1) e)) tree))
+        )
+)
+
+(DEFUN mainSwapNodesOnOddLevelsWithGivenValue(tree e)
+        (swapNodesOnOddLevelsWithGivenValue tree 1 e)
+)
+
+(print (mainSwapNodesOnOddLevelsWithGivenValue '(a (b (g)) (c (d (e)) (f))) 'h))
+
+
+
+; C. Se consideră o listă neliniară. Să se scrie o funcţie LISP care să aibă ca rezultat
+;    lista iniţială in care atomii de pe nivelul k au fost inlocuiti cu 0 
+;    (nivelul superficial se consideră 1). Se va folosi o funcție MAP.
+
+; Exemplu pentru lista (a (1 (2 b)) (c (d)))
+; a) k=2 => (a (0 (2 b)) (0 (d))) 
+; b) k=1 => (0 (1 (2 b)) (c (d))) 
+; c) k=4 => lista nu se modifică
+
+; swapAtomsFromLevelKWith0(l, c, k) = () if l is empty,
+;                                   = 0 if l is atom and c=k, 
+;                                   = l if l is atom,
+;                                   = swapAtomsFromLevelKWith0(l1, c+1, k) U swapAtomsFromLevelKWith0(l2, c+1, k) U ... U swapAtomsFromLevelKWith0(ln, c+1, k) where l=l1l2...ln otherwise;
+
+(DEFUN swapAtomsFromLevelKWith0(l c k)
+        (COND
+         ((null l) nil)
+         ((and (atom l) (equal c k)) 0)
+         ((atom l) l)
+         (t (mapcar #' (lambda (l) (swapAtomsFromLevelKWith0 l (+ c 1) k)) l))
+        )
+)
+
+(DEFUN mainSwapAtomsFromLevelKWith0(l k)
+        (swapAtomsFromLevelKWith0 l 0 k)
+)
+
+(print (mainSwapAtomsFromLevelKWith0 '(a (1 (2 b)) (c (d))) 4))
+
+
+
+; C. Să se substituie valorile numerice cu o valoare e dată, la orice nivel al unei liste neliniare.
+;    Se va folosi o funcție MAP.
+; Exemplu, pentru lista (1 d (2 f (3))), e=0 rezultă lista (0 d (0 f (0))).
+
+; substituteNumericalValuesWith0(l, e) = () if l is empty,
+;                                      = 0 if l number,
+;                                      = e if l atom,
+;                                      = substituteNumericalValuesWith0(l1, e) U substituteNumericalValuesWith0(l2, e) U ... U substituteNumericalValuesWith0(ln, e) where l = l1l2...ln otherwise;
+
+(DEFUN substituteNumericalValuesWith0(l e)
+        (COND
+         ((null l) nil)
+         ((numberp l) e)
+         ((atom l) l)
+         (t (mapcar #' (lambda (l) (substituteNumericalValuesWith0 l e)) l))
+        )
+)
+
+(print (substituteNumericalValuesWith0 '(1 d (2 f (3))) 0))
+
+
+
+; C. Se consideră o listă neliniară. Să se scrie o funcţie LISP care să aibă ca rezultat lista 
+; iniţială din care au fost eliminate toate apariţiile unui element e. Se va folosi o funcție MAP.
+
+; Exemplu a) dacă lista este (1 (2 A (3 A)) (A)) şi e este A => (1 (2 (3)) NIL)
+;         b) dacă lista este (1 (2 (3))) şi e este A => (1 (2 (3)))
+
+; removeAllAppearancesOfGivenElement(l, e) = () if l is empty,
+;                                          = () if l is atom and l = e,
+;                                          = l if l is atom,
+;                                          = removeAllAppearancesOfGivenElement(l1, e) U removeAllAppearancesOfGivenElement(l2, e) U ... U removeAllAppearancesOfGivenElement(ln, e) where l=l1l2...ln otherwise;
+
+(DEFUN removeAllAppearancesOfGivenElement (l e)
+        (COND
+         ((null l) nil)
+         ((and (atom l) (equal l e)) nil)
+         ((atom l) (list l))
+         (t (list (mapcan #' (lambda (l) (removeAllAppearancesOfGivenElement l e)) l)))
+        )
+)
+
+(DEFUN mainRemoveAllAppearancesOfGivenElement (l e)
+        (car (removeAllAppearancesOfGivenElement l e))
+)
+       
+(print (mainRemoveAllAppearancesOfGivenElement '(1 (2 A (3 A)) (A)) 'A))
+
+
+
+; C. Se consideră o listă neliniară. Să se scrie o funcţie LISP care să aibă ca rezultat
+;  lista iniţială din care au fost eliminați toți atomii numerici pari situați pe un nivel impar.
+;  Nivelul superficial se consideră a fi 1. Se va folosi o funcție MAP.
+
+; Exemplu a) dacă lista este (1 (2 A (4 A)) (6)) => (1 (2 A (A)) (6))
+;         b) dacă lista este (1 (2 (C))) => (1 (2 (C)))
+
+; removeEvenNumbersOnOddLevels(l, c) = () if l is empty,
+;                                    = () if l is even number and c is odd,
+;                                    = l if l is atom,
+;                                    = removeEvenNumbersOnOddLevels(l1, c+1) U removeEvenNumbersOnOddLevels(l2, c+1) U ... U removeEvenNumbersOnOddLevels(ln, c+1) if l=l1l2...ln otherwise;
+
+(DEFUN removeEvenNumbersOnOddLevels(l c)
+        (COND
+         ((null l) nil)
+         ((and (numberp l) (and (equal (mod l 2) 0) (equal (mod c 2) 1))) nil)
+         ((atom l) (list l))
+         (t (list (mapcan #' (lambda (l) (removeEvenNumbersOnOddLevels l (+ c 1))) l)))
+        )
+)
+
+(DEFUN mainRemoveEvenNumbersOnOddLevels(l)
+       (car (removeEvenNumbersOnOddLevels l 0))
+)
+
+(print (mainRemoveEvenNumbersOnOddLevels '(1 (2 A (4 A)) (6))))
+(print (mainRemoveEvenNumbersOnOddLevels '(1 (2 (C)))))

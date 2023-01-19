@@ -1,0 +1,21 @@
+% 1. Consider the following Prolog predicate definition with the flow model (i,o). 
+% Modify it in order to avoid the recursive call f(T,S) in both clauses. 
+% f([], -1). 
+% f([H|T], S):- 
+% 		f(T, S1),
+% 		S1 > 0, !,
+% 		S is S1+H. 
+% f([_|T], S):-
+% 		f(T, S1), 
+% 		S is S1.
+
+f([], -1).
+f([H|T], S):-
+	f(T, S1),
+	auxiliarFunction([H|T], S, S1).
+
+auxiliarFunction([H|_], S, S1):-
+	S1 > 0, !,
+	S is S1+H.
+auxiliarFunction(_, S, S1):-
+	S is S1.

@@ -1,0 +1,19 @@
+% 1. We define in Prolog the following predicate with
+% the flow model (i, o). Explain the logical 
+% error in the following sequence, and correct it:
+% f([], 0).
+% f([H|T], S):-
+%    f(T, S1),
+%    S1 is S-H.
+
+% The logical error in the above sequence is that the predicate f
+% is attempting to subtract the head H of the input list from the 
+% output variable S before the value of S1 has been calculated. 
+% This means that the value of S is not initialized when the 
+% subtraction is attempted, resulting in a variable error.
+
+% correction: 
+f([], 0).
+f([H|T], S):-
+    f(T, S1),
+    S is S1-H.

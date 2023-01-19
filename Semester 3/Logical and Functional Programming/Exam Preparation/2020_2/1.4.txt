@@ -1,0 +1,10 @@
+% 1.4 Consider the PROLOG predicate f(list, integer) with the flow model (i, 0). 
+f([], 0).
+f([H|T], S):-
+    f(T, S1),
+    S1 is S-H.
+% Give the result of the evaluation f([1,2,3,4,5,6,7,8], S)? Justify the answer.
+
+% Error because arguments are not sufficiently instantiated.
+% Due to the recursion of the call f(T, S1), the S1 will have the value 0, then it will be 
+% assigned the value of S-H, H is known but the value of S has not been mapped yet.

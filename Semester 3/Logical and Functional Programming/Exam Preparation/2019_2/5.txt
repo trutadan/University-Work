@@ -1,0 +1,66 @@
+; 5. Write a Lisp program to determine the number of sublists at any level of a given list, 
+; where the maximal numeric atom on all odd levels is even — the superficial level 
+; of the list is considered 1. The list processing will be done using a MAP function.
+; For example, the list (A (B 2) (1 C 4) (1 (6 F)) (((G) 4) 6)) has 4 such sublists: 
+; the list, (B 2), (1 C 4), ((G) 4) and (((G) 4) 6). 
+
+; getMaximumValue(a, b) = null if a and b are not numbers,
+;                       = a if b is not a number,
+;                       = b if a is not a number,
+;                       = a if a > b,
+;                       = b otherwise;
+(DEFUN getMaximumValue(a b)
+           (COND
+            ((and (not (numberp a)) (not (numberp b))) nil)
+            ((not (numberp a)) b)
+            ((not (numberp b)) a)
+            ((> a b) a)
+            (t b)
+           )
+)
+
+; getMaximumValueOfList(l1l2...ln) = null if n = 0,
+;                                  = getMaximumValue(l1, getMaximumValueOfList(l2...ln)) otherwise;
+(DEFUN getMaximumValueOfList(l)
+           (COND
+            ((null l) 0)
+            (t (getMaximumValue (car l) (getMaximumValueOfList (cdr l))))
+           )
+)
+
+; checkIfNumberIsEven(n) = true if n is even,
+;                        = false otherwise;
+(DEFUN checkIfNumberIsEven(n)
+    (COND
+     ((equal (mod n 2) 0) t)
+     (t nil)
+    )
+)
+       
+; checkIfMaximalNumericAtomIsEven(l1l2...ln) = true if getMaximumValueOfList(l) is number and is even,
+;                                            = false otherwise;     
+(DEFUN checkIfMaximalNumericAtomIsEven(l)
+           (lambda (x) 
+                   (COND
+                    ((and (numberp x) (checkIfNumberIsEven x)) t)
+                    (t nil)
+                   ) getMaximumValueOfList(l)
+           )
+)
+              
+; countSublistsWhereMaximalNumberOnOddLevelEven(l, level) = 0 if l is atom,
+;                                                         = 1 + sum(countSublistsWhereMaximalNumberOnOddLevelEven(l, level + 1)) if level is odd and checkIfMaximalNumericAtomIsEven(l) is true,
+;                                                         = sum(countSublistsWhereMaximalNumberOnOddLevelEven(l, level + 1)) otherwise;
+(DEFUN countSublistsWhereMaximalNumberOnOddLevelEven(l level)
+           (COND
+            ((atom l) 0)
+            ((and (not (checkIfNumberIsEven level)) (checkIfMaximalNumericAtomIsEven l)) (+ 1 (apply #'+ (mapcar #' (lambda (x) (countSublistsWhereMaximalNumberOnOddLevelEven x (+ level 1))) l))))
+            (t (apply #'+ (mapcar #' (lambda (x) (countSublistsWhereMaximalNumberOnOddLevelEven x (+ level 1))) l)))
+           )
+)
+
+(DEFUN mainCountSublistsWhereMaximalNumberOnOddLevelEven (l)
+           (countSublistsWhereMaximalNumberOnOddLevelEven l 0)
+)
+       
+(print (mainCountSublistsWhereMaximalNumberOnOddLevelEven '(A (B 2) (1 C 4) (1 (6 F)) (((G) 4) 6))))

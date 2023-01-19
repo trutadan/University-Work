@@ -1,0 +1,52 @@
+% 3. Pentru o valoare N data, sa se genereze lista permutarilor
+% cu elementele N, N+1, ..., 2*N-1 avand proprietatea ca 
+% valoarea absoluta a diferentei dintre doua valori consecutive
+% din permutare este <= 2. Explicati algoritmul propus.
+
+% generateListWithElements(i, n) = {n} if i = n,
+%                                = {i} U generateListWithElements(i+1, n) otherwise;
+generateListWithElements(I, N, [N]):- 
+    I =:= N, !.
+generateListWithElements(I, N, [I|R]):-
+    NewI is I + 1,
+    generateListWithElements(NewI, N, R).
+
+% insertElementInList(l1l2...ln, e) = {e} U l1l2...ln,
+%                                   {l1} U insertElementInList(l2...ln, e);
+insertElementInList(L, E, [E|L]).
+insertElementInList([H|T], E, [H|L]):-
+    insertElementInList(T, E, L).
+
+% generatePermutations(l1l2...ln) = {} if n = 0,
+%                                 = insertElementInList(l1, generatePermutations(l2...ln)) otherwise;
+generatePermutations([], []).
+generatePermutations([H|T], R):-
+    generatePermutations(T, P),
+    insertElementInList(P, H, R).
+
+% getAbsoluteDifference(a, b) = a - b if a > b,
+%                             = b - a otherwise;
+getAbsoluteDifference(A, B, AD):-
+    A > B, !,
+    AD is A - B.
+getAbsoluteDifference(A, B, AD):-
+    AD is B - A.
+
+% checkCondition(l1l2...ln) = true if n < 2,
+%                           = fals , n >= 2 si abs(l1-l2)<2
+% 							conditie(l2,...,ln), n >= 2 si getAbsoluteDifference(l1, l2) <= 2
+checkCondition([_]):- !.
+checkCondition([H1, H2|T]):-
+    getAbsoluteDifference(H1, H2, AD),
+    AD =< 2,
+    checkCondition([H2|T]).
+
+% generatePermutationsForGivenNWithGivenProperty(l1l2...ln) = each permutation <- generatePermutations(l1l2...ln) with checkCondition(l1l2...ln) true;
+generatePermutationsWithGivenProperty(L, Permutation):-
+    generatePermutations(L, Permutation),
+    checkCondition(Permutation).
+
+findAllPermutationsForGivenNWithGivenProperty(N, R):-
+    RR is N*2-1,
+    generateListWithElements(N, RR, List),
+    findall(Permutation, generatePermutationsWithGivenProperty(List, Permutation), R).

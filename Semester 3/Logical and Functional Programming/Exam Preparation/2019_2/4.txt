@@ -1,0 +1,40 @@
+; 4. Give two recursive implementations for the following
+; requirement: Replace all even numerical values in a 
+; given nonlinear list with their natural successor. For example,
+; for the list (1 s 4 (2 f (7))) the result is (1 s 5 (3 f (7))).
+
+; replaceEvenNumbersWithNaturalItsSuccesor(l1l2...ln) = {} if n = 0,
+;                                                     = {l1 + 1} if l1 is even number,
+;                                                     = {l1} if l1 is atom,
+;                                                     = replaceEvenNumbersWithNaturalItsSuccesor(l1) U replaceEvenNumbersWithNaturalItsSuccesor(l2) + ... replaceEvenNumbersWithNaturalItsSuccesor(ln) otherwise;
+(DEFUN replaceEvenNumbersWithNaturalItsSuccesorWithMap (l)
+	(COND
+     ((null l) nil)
+     ((and (numberp l) (equal (mod l 2) 0)) (list (+ l 1)))
+     ((atom l) (list l))
+     (t (list (mapcan #' replaceEvenNumbersWithNaturalItsSuccesorWithMap l)))
+    )
+)
+
+(DEFUN mainReplaceEvenNumbersWithNaturalItsSuccesorWithMap (l)
+    (car (replaceEvenNumbersWithNaturalItsSuccesorWithMap l))
+)
+
+(print (mainReplaceEvenNumbersWithNaturalItsSuccesorWithMap '(1 s 4 (2 f (7)))))
+
+
+; replaceEvenNumbersWithNaturalItsSuccesor(l1l2...ln) = {} if n = 0,
+;                                                     = {l1 + 1} U replaceEvenNumbersWithNaturalItsSuccesor(l2...ln) if l1 is even number,
+;                                                     = {l1} U replaceEvenNumbersWithNaturalItsSuccesor(l2...ln) if l1 is atom,
+;                                                     = replaceEvenNumbersWithNaturalItsSuccesor(l1) U replaceEvenNumbersWithNaturalItsSuccesor(l2...ln) otherwise;
+
+(DEFUN replaceEvenNumbersWithNaturalItsSuccesor (l)
+           (COND
+            ((null l) nil)
+            ((and (numberp (car l)) (equal (mod (car l) 2) 0)) (cons (+ (car l) 1) (replaceEvenNumbersWithNaturalItsSuccesor (cdr l))))
+            ((atom (car l)) (cons (car l) (replaceEvenNumbersWithNaturalItsSuccesor (cdr l))))
+            (t (cons (replaceEvenNumbersWithNaturalItsSuccesor (car l)) (replaceEvenNumbersWithNaturalItsSuccesor (cdr l))))
+           )
+)
+
+(print (replaceEvenNumbersWithNaturalItsSuccesor '(1 s 4 (2 f (7)))))

@@ -1,0 +1,25 @@
+; 4. Write a Lisp program and deduce the complexity for the 
+; following requirement. Given a linear numerical list, generate 
+; a new list with every N-th element removed. For example, for 
+; the list (1 2 3 4 5) and N=2 the result is (1 3 5). 
+
+; removeEveryNthElement(l1l2...ln, cp, N) = {} if n = 0,
+;                                         = {l1} U removeEveryNthElement(l2...ln, cp+1, N) if cp % N != 0,
+;                                         = removeEveryNthElement(l2...ln, cp+1, N) otherwise;
+
+(DEFUN removeEveryNthElement (l cp N)
+           (COND
+            ((null l) nil)
+            ((not (equal (mod cp N) 0)) (cons (car l) (removeEveryNthElement (cdr l) (+ cp 1) N)))
+            (t (removeEveryNthElement (cdr l) (+ cp 1) N))
+           )
+)
+       
+(DEFUN mainRemoveEveryNthElement (l N)
+           (removeEveryNthElement l 1 N)
+)
+       
+(print (mainRemoveEveryNthElement '(1 2 3 4 5) 2))
+
+; This function iterates through the entire input list once, and performs a constant 
+; amount of work on each element(O(1)), so the time complexity is O(n).

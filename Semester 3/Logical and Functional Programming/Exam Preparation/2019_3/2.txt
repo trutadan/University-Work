@@ -1,0 +1,21 @@
+% 2. Given a list of integer numbers and a value N, write a 
+% Prolog program to remove from the list the elements from 
+% the positions N, 4*N, .... Explain the proposed algorithm. 
+% For example, for the list L=[1,2,3,4,5,6,7,8] and N=2 the result 
+% is [1,3,5,6,7]. 
+
+% removeElementsFromListOnGivenPositions(l1l2...ln, cp, N) = {} if n = 0,
+%                                                          = {l1} U removeElementsFromListOnGivenPositions(l2...ln, cp+1, N) if N != cp,
+%                                                          = removeElementsFromListOnGivenPositions(l2...ln, cp+1, N*4) otherwise;
+removeElementsFromListOnGivenPositions([], _, _, []).
+removeElementsFromListOnGivenPositions([H|T], CP, N, [H|R]):-
+    N =\= CP, !,
+    NewCP is CP + 1,
+    removeElementsFromListOnGivenPositions(T, NewCP, N, R).
+removeElementsFromListOnGivenPositions([_|T], CP, N, R):-
+    NewCP is CP + 1,
+    NewN is N * 4,
+    removeElementsFromListOnGivenPositions(T, NewCP, NewN, R).
+
+mainRemoveElementsFromListOnGivenPositions(L, N, R):-
+    removeElementsFromListOnGivenPositions(L, 1, N, R).

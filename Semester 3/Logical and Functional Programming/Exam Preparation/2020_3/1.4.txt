@@ -1,0 +1,44 @@
+% 1.4 Consider the PROLOG predicates p(integer), q(integer), r(integer) 
+% with the flow model (o) and the predicate s. 
+p(1). 
+q(1). 
+r(1). 
+p(2). 
+q(2). 
+r(2). 
+s:-!, 
+    p(X), 
+    q(Y), 
+    r(Z), 
+    write(X,Y,Z), nl. 
+% Give the result of the following goal: s. Justify the answer.
+
+% The predicate p(X) will unify with the first fact p(1) 
+% the predicate q(Y) will unify with the first fact q(1) 
+% the predicate r(Z) will unify with the first fact r(1) 
+% => 1 1 1
+
+% the predicate r(Z) will unify with the second fact r(2) 
+% => 1 1 2
+
+% the predicate q(Y) will unify with the second fact q(2)
+% the predicate r(Z) will unify with the first fact r(1) 
+% => 1 2 1
+
+% the predicate r(Z) will unify with the second fact r(2) 
+% => 1 2 2
+
+% The predicate p(X) will unify with the second fact p(2) 
+% the predicate q(Y) will unify with the first fact q(1) 
+% the predicate r(Z) will unify with the first fact r(1) 
+% => 2 1 1
+
+% the predicate r(Z) will unify with the second fact r(2) 
+% => 2 1 2
+
+% the predicate q(Y) will unify with the second fact q(2)
+% the predicate r(Z) will unify with the first fact r(1) 
+% => 2 2 1
+
+% the predicate r(Z) will unify with the second fact r(2) 
+% => 2 2 2

@@ -1,0 +1,23 @@
+% 2. Se da o lista formata din numere intregi. Sa se scrie un
+% program PROLOG care adauga in lista dupa al 3-lea element, al 5-lea, 
+% al 9-lea, al 17-lea... un element dat e. Explicati algoritmul propus.
+% Exemplu: pentru lista L = [1,2,3,4,5,6,7,8,9,10] si e = 11
+% ==> [1,2,3,11,4,5,11,6,7,8,9,11,10]
+
+% insertElementOnGivenPositions(l1l2...ln, cp, step, N, e) = {} if n = 0,
+%                                                          = {l1, e} U insertElementOnGivenPositions(l2...ln, cp+1, step*2, N+step, e) if cp = N,
+%                                                          = {l1} U insertElementOnGivenPositions(l2...ln, cp+1, step, N, e) otherwise;
+
+insertElementOnGivenPositions([], _, _, _, _, []).
+insertElementOnGivenPositions([H|T], CP, S, N, E, [H, E|R]):-
+    CP =:= N, !,
+    NewCP is CP + 1,
+    NewStep is S * 2,
+    NewN is N + S,
+    insertElementOnGivenPositions(T, NewCP, NewStep, NewN, E, R).
+insertElementOnGivenPositions([H|T], CP, S, N, E, [H|R]):-
+    NewCP is CP + 1,
+    insertElementOnGivenPositions(T, NewCP, S, N, E, R).
+
+mainInsertElementOnGivenPositions(L, E, R):-
+    insertElementOnGivenPositions(L, 1, 2, 3, E, R).

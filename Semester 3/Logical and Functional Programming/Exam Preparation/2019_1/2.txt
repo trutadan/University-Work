@@ -1,0 +1,22 @@
+% 2. Write a Prolog program that, given a list of integer
+% numbers and lists of integer numbers, computes the
+% list in rversed order (each sublist is reversed). 
+% Explain the proposed algorithm. For example, for
+% [1, [2, 4, 3], 5, [6, 7]] the result is
+% [[7, 6], 5, [3, 4, 2], 1].
+
+% math model
+% reverseOrderOfList(l1l2...ln) = () if n = 0,
+%                               = reverseOrderOfList(l2...ln) U reverseOrderOfList(l1) if l1 is a list,
+%                               = reverseOrderOfList(l2...ln) U {l1} otherwise;
+
+% flow model (i, o), (i, i)
+reverseOrderOfList([], []).
+reverseOrderOfList([H|T], R):-
+    is_list(H), !,
+    reverseOrderOfList(H, R1),
+    reverseOrderOfList(T, R2),
+    append(R2, [R1], R).
+reverseOrderOfList([H|T], R):-
+    reverseOrderOfList(T, R1),
+    append(R1, [H], R).

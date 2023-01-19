@@ -1,0 +1,21 @@
+% 2. Give two Prolog implementations to transform a list of numbers into a set 
+% (i.e. remove all duplicates) and explain each implementation.
+
+% listContainsElement(l1l2...ln, e) = false if n = 0,
+%                                   = true if l1 = e,
+%                                   = listContainsElement(l2...ln, e) otherwise;
+listContainsElement([], _):- false.
+listContainsElement([H|_], H):- !.
+listContainsElement([H|T], E):-
+    E =\= H,
+    listContainsElement(T, E).
+
+% transformListToSet(l1l2...ln) = {} if n = 0,
+%                               = {l1} U transformListToSet(l2...ln) if listContainsElement(l2...ln, l1) is true,
+%                               = transformListToSet(l2...ln) otherwise;
+transformListToSet([], []).
+transformListToSet([H|T], [H|R]):-
+    \+ listContainsElement(T, H), !,
+    transformListToSet(T, R).
+transformListToSet([_|T], R):-
+    transformListToSet(T, R).

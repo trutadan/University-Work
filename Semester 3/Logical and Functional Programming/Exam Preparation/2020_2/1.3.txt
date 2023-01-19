@@ -1,0 +1,15 @@
+; 1.3 The LISP function G is defined by 
+(DEFUN G(L) (LIST (CAR L) (CAR L))) 
+; In order to rename the function G we execute 
+(SETQ Q 'G) 
+; followed by 
+(SETQ P Q)
+; What is the result of evaluating the form 
+(print (FUNCALL P '(A B C)))
+; Jusfify the answer.
+
+; The first SETQ statement assigns the symbol G to the variable Q. 
+; The second SETQ statement assigns the value of Q (which is G) to the variable P. 
+
+; (FUNCALL P '(A B C)) is equivalent to (G '(A B C)).
+; -> the result = (list A A) = (A A)
