@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="193.0" prefWidth="224.0" spacing="20.0" style="-fx-background-color: #DDC3A5;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="GUI.ListController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <ListView fx:id="statementsListView" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #E0A96D;"/>
+    <ButtonBar prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+            <Button fx:id="selectButton" mnemonicParsing="false" style="-fx-background-color: #201E20; -fx-text-fill: #FFFFFF;" text="Select" />
+            <Button fx:id="exitButton" minWidth="17.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #201E20; -fx-text-fill: #FFFFFF;" text="Exit" />
+        </buttons>
+    </ButtonBar>
+</VBox>
