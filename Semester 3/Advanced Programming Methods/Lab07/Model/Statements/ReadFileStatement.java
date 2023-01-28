@@ -26,7 +26,7 @@ public class ReadFileStatement implements iStatement{
     }
 
     public ProgramState execute(ProgramState state) throws MyException {
-        if (state.getFileTable().isDefined(this.variableName))
+        if (state.getSymbolsTable().isDefined(this.variableName))
             throw new MyException(this.variableName + " is not contained in the symbols table!");
 
         Value value = state.getSymbolsTable().lookUp(this.variableName);
