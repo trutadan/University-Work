@@ -35,6 +35,12 @@ My university work.
           <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%203/Probabilities%20and%20Statistics">Probabilities and Statistics🎲</a></li>
         </ul>
       </li>
+      <li>Second Semester 📂
+        <ul>
+          <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%204/Systems%20for%20Design%20and%20Implementation">Systems for Design and Implementation</a></li>
+          <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%204/Web%20Programming">Web Programming</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
