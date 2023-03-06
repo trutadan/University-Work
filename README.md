@@ -37,6 +37,7 @@ My university work.
       </li>
       <li>Second Semester 📂
         <ul>
+          <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%204/Artificial%20Intelligence">Artificial Intelligence</a></li>
           <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%204/Systems%20for%20Design%20and%20Implementation">Systems for Design and Implementation</a></li>
           <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%204/Web%20Programming">Web Programming</a></li>
         </ul>
