@@ -1,0 +1,5 @@
+Consider the Bertrand paradox. For each of the three cases generate a sample of 100 elements (chords) 
+and compute the ratio of the chords bigger than the side of the equilateral triangle inscribed in the circle.
+The circle radius is equal with 1 and the set of chords will contain the cartesian coordinates of the edges of the chords. 
+The origin of the coordinate system is in the origin of the circle.
+Draw using matplotlib each set of chords for each case respectively.
