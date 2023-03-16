@@ -1,0 +1,3 @@
+Write a web page which shows 6 circles with the same center (i.e. the center of the screen), 
+but increasing radiuses so that each circle contains the previous one and so on. 
+Each circle should be colored (i.e. the inner part of the circle) with a different color.

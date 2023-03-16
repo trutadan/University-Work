@@ -1,0 +1,50 @@
+.container { 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+}
+
+div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    transition: transform 0.25s ease-in-out;
+}
+  
+div#top-left-div {
+    background-color: #F16A20;
+}
+
+div#top-right-div {
+    background-color: #B1D877;
+}
+
+div#bottom-left-div {
+    background-color: #8CDCDA;
+}
+
+div#bottom-right-div {
+    background-color: #4D4D4D;
+}
+
+.container:hover div#top-left-div {
+    transform: translate(-950px, -450px);
+} 
+
+.container:hover div#top-right-div {
+    transform: translate(700px, -450px);
+}
+
+.container:hover div#bottom-left-div {
+    transform: translate(700px, 210px);
+}
+
+.container:hover div#bottom-right-div {
+    transform: translate(-950px, 210px);
+}
