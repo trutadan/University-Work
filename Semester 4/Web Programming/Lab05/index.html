@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Menu Dropdown</title>
+  </head>
+  <body>
+
+    <nav>
+        <a class="dropdown-toggle" href="#">Menu</a>
+        <ul class="dropdown">
+          <li>Option 1</li>
+          <li>Option 2</li>
+          <li>Option 3</li>
+        </ul>
+    </nav>
+
+    <script type="text/javascript">
+      $(function () {
+        $(".dropdown-toggle").click(function (e) {
+          e.preventDefault();
+          $(this).next(".dropdown").slideToggle();
+          $(this).next(".dropdown").find("li").css("list-style", "none");
+        });
+      });
+    </script>    
+        
+  </body>
+</html>
