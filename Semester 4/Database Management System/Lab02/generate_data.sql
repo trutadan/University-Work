@@ -9,3 +9,4 @@ EXEC generateRandomDataForTable 'RapBands', 10
 
 EXEC generateRandomDataForTable 'RapBandAlbums', 20
 
+EXEC generateRandomDataForTable 'RapBandAlbums', 40
