@@ -49,3 +49,18 @@ create table RapBandAlbums (
 	FOREIGN KEY(bandID)
 		REFERENCES RapBands(bandID)
 )
+
+
+create table Rappers (
+	rapperID int IDENTITY(1,1) NOT NULL,
+	bandID int,
+	fullName varchar(30),
+	stageName varchar(30),
+	dateOfBirth date,
+	birthPlace varchar(30),
+
+	PRIMARY KEY (rapperID),
+
+	FOREIGN KEY(bandID)
+		REFERENCES RapBands(bandID)
+)
