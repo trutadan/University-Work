@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Guest Book</title>
+
+    <style>
+      body {
+        text-align: center;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 100px;
+      }
+
+      ul {
+        list-style: none;
+      }
+      button {
+        margin-bottom: 10px;
+        width: 275px;
+        height: 50px;
+        background-color: #641e41;
+        font-size: 25px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script>
+      const getCookie = (name) =>
+        document.cookie.match("(^|;)\\s*" + name + "\\s*=\\s*([^;]+)")?.pop() ||
+        "";
+
+      const userID = getCookie("userID");
+
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          const userRole = xhr.responseText.trim();
+          if (userRole === "admin") {
+            document.querySelector("#updateBtn").style.display = "inline-block";
+            document.querySelector("#deleteBtn").style.display = "inline-block";
+          }
+        }
+      };
+
+      xhr.open("POST", "get_user_role.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.send("userID=" + userID);
+    </script>
+
+    <h1>Guest Book</h1>
+    <ul>
+      <li>
+        <button onclick="window.location = `add.html`">Add</button>
+      </li>
+      <li>
+        <button
+          id="updateBtn"
+          style="display: none"
+          onclick="window.location = `update.html`"
+        >
+          Update
+        </button>
+      </li>
+      <li>
+        <button
+          id="deleteBtn"
+          style="display: none"
+          onclick="window.location = `delete.html`"
+        >
+          Delete
+        </button>
+      </li>
+      <li>
+        <button onclick="window.location = `view_all.html`">View</button>
+      </li>
+      <li>
+        <button onclick="window.location = `view_grouped.html`">
+          View by email/author
+        </button>
+      </li>
+      <li>
+        <button onclick="window.location = `login.html`">Login</button>
+      </li>
+    </ul>
+  </body>
+</html>
