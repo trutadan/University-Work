@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1 id="greeting"></h1>
+
+    <br><hr><br>
+
+    <h3>Your powers</h3>
+    <input type="text" name="power" id="power">
+    <button onclick="editPowers()">Edit</button>
+
+    <br><hr><br>
+
+    <h3>Superheroes with Power</h3>
+    <input type="text" name="superheroesWithPower" id="superheroesWithPower">
+    <button onclick="displaySuperheroesWithPower()">Get</button>
+    <div id="superheroesList"></div>
+
+    <br><hr><br>
+
+    <h3>Teams with Power</h3>
+    <input type="text" name="teamsWithPower" id="teamsWithPower">
+    <button onclick="displayTeamsWithPower()">Get</button>
+    <div id="teamsList"></div>
+
+    <br><hr><br>
+
+    <h4>Name</h4>
+    <input type="text" name="newSuperheroName" id="newSuperheroName">
+    <h4>Powers</h4>
+    <input type="text" name="newSuperheroPowers" id="newSuperheroPowers">
+    <br><br>
+    <button onclick="addSuperhero()">Add</button>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: 'getName.php',
+                type: 'GET',
+                success: function(response) {
+                    if (response !== '') {
+                        $('#greeting').text('Hello, ' + response + '!');
+                        getUserPowers(response);
+                    } else {
+                        window.location.href = 'login.html';
+                    }
+                }
+            });
+        });
+
+        function getUserPowers(userName) {
+            $.ajax({
+                url: 'getUserPowers.php',
+                type: 'GET',
+                data: { name: userName },
+                success: function(response) {
+                    $('#power').val(response);
+                }
+            });
+        }
+
+        function editPowers() {
+            var newPowers = $('#power').val();
+            $.ajax({
+                url: 'updatePowers.php',
+                type: 'POST',
+                data: { powers: newPowers },
+                success: function(response) {
+                    alert('Powers updated!');
+                }
+            });
+        }
+
+        function displaySuperheroesWithPower() {
+            var power = $('#superheroesWithPower').val();
+            $.ajax({
+                url: 'getSuperheroesWithPower.php',
+                type: 'GET',
+                data: { power: power },
+                success: function(response) {
+                    $('#superheroesList').html(response);
+                }
+            });
+        }
+
+        function displayTeamsWithPower() {
+            var power = $('#teamsWithPower').val();
+            $.ajax({
+                url: 'getTeamsWithPower.php',
+                type: 'GET',
+                data: { power: power },
+                success: function(response) {
+                    $('#teamsList').html(response);
+                }
+            });
+        }
+
+        function addSuperhero() {
+            var superheroName = $('#newSuperheroName').val();
+            var superheroPowers = $('#newSuperheroPowers').val();
+            $.ajax({
+                url: 'addSuperhero.php',
+                type: 'POST',
+                data: { name: superheroName, powers: superheroPowers },
+                success: function(response) {
+                    alert('Superhero added!');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
