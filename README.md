@@ -45,6 +45,23 @@ My university work.
       </li>
     </ul>
   </li>
+    <li>Third Year
+    <ul>
+      <li>First Semester 📂
+        <ul>
+          <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%205/Computer%20Vision%20and%20Deep%20Learning">Computer Vision and Deep Learning</a></li>
+          <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%205/Formal%20Languages%20and%20Compiler%20Design">Formal Languages and Compiler Design</a></li>
+          <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%205/Mobile%20Applications/">Mobile Applications</a></li>
+          <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%205/Parallel%20and%20distributed%20programming">Parallel and distributed programming</a></li>
+        </ul>
+      </li>
+      <li>Second Semester 📂
+        <ul>
+          -
+        </ul>
+      </li>
+    </ul>
+  </li>
 </ul>
 
 ## Statistics ##
