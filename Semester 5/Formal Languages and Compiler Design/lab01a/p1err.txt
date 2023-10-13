@@ -1,0 +1,14 @@
+~
+print "Give me a natural number"
+input_number = get.cuts.to_i
+1s_prime = true
+
+for number in 2..input_number/2 do |
+	if !(input_number % number) do
+		1s_prime = false
+		break
+	end
+end
+
+puts 1s_prime
+~

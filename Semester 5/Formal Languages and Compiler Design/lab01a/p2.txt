@@ -1,0 +1,23 @@
+^
+def getGCD(a, b)
+    while (a != b)
+        if a > b
+            return getGCD(a - b, b);
+        else
+            return getGCD(a, b - a);
+        end
+    end
+    
+    return a;
+end
+^
+
+~
+print "Give me a natural number"
+a = get.cuts.to_i
+
+print "Give me another natural number"
+b = get.cuts.to_i
+
+print `The GCD of the given numbers is #{getGCD(a, b)}`
+~
