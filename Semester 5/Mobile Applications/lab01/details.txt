@@ -1,0 +1,158 @@
+FitLog
+
+DISCLAIMER: For the next assignments, if it is mandatory to implement only one model and its CRUD actions, the focus will be moved towards the “Exercise” model. Although FitLog offers a comprehensive set of features, the attention will be solely on the exercise library management aspect. If in the future, for other lab assignments, more complicated tasks involving more than one model will be required, other aspects already described in the presentation of the application will be chosen and implemented according to needs.
+
+1.	Short description
+FitLog is your workout companion, designed to help you stay motivated and organized on your fitness journey. Whether you're a seasoned athlete or just starting out, this user-friendly mobile app has everything you need to plan, track, and analyze your workouts without the need for any technical expertise.
+
+You have the option to provide a workout description and track your progress throughout the entire duration of your workout. This app also lets you add and remove exercises effortlessly in your workout session. You can either choose from a wide range of pre-existing exercises or create your own. Each exercise can have multiple sets, giving you the flexibility to customize your workout.
+
+The sets come with various categories, such as warm-up, failure, rest-pause, or drop sets. You can add, remove, and modify them as needed. What's more, you can easily keep track of your lifting history for each exercise, helping you visualize your progress over time.
+
+For every set, you can input the weight and the number of repetitions completed. Once you've finished a set, simply mark it as completed. The app will keep a record of your achievements, helping you stay motivated and on track.
+
+Once your workout is complete, you can save it to your account for future reference. It's just like having a personal trainer in your pocket, making it easier than ever to achieve your fitness goals.
+
+2.	Domain details
+Workout:
+●	Title: The title of the workout for easy reference and identification.
+●	Description: A brief description or notes about the workout's purpose or specific goals.
+●	Volume: In fitness, volume is typically calculated as the total amount of weight lifted during a workout. It can be computed by summing up the products of weight and repetitions for all sets within the workout.
+●	Start Datetime: Timestamp indicating when the workout session started.
+●	End Datetime: Timestamp indicating when the workout session ended.
+
+Exercise:
+●	Workout ID: A reference to the workout the exercise belongs to.
+●	Name: The name of the exercise, such as "Bench Press" or "Squats."
+●	Description: A brief description of the exercise's form, technique, or any specific instructions.
+●	Category: Categorization of the exercise, such as "Strength," "Cardio," or "Flexibility."
+●	Primary Muscles: The primary muscles or muscle groups primarily targeted by the exercise. For example, for "Bench Press," the primary muscles might include the pectoralis major and triceps.
+●	Secondary Muscles: Any secondary muscles or muscle groups that are also engaged during the exercise. For "Bench Press," secondary muscles could include the anterior deltoids and serratus anterior.
+●	Equipment: The equipment used for the exercise, such as "Barbell," "Dumbbell," "Cable Machine," or any other relevant equipment.
+●	Image: An optional image representative for the exercise.
+
+Set:
+●	Exercise ID: A reference to the exercise the set belongs to.
+●	Order: Indicates the sequential order of the set within the workout. It's a numerical value that represents the position of the set in the workout, with the first set having an order of 1, the second set having an order of 2, and so on.
+●	Weight: The weight used for this set (in kilograms).
+●	Repetitions: The number of repetitions performed for this set.
+●	Category: Categorization of the set, such as "Warm-up," "Failure," "Drop," or "Rest-Pause."
+●	RPE (Rate of Perceived Exertion): This field allows users to rate how challenging the set felt on a scale from 1 to 10, providing insight into the perceived intensity of the exercise.
+
+3.	Possible operations
+Workout:
+●	Create:
+	○	To create a new workout, the user opens the app and navigates to the "Create Workout" section.
+	○	The user enters a title and description for the workout.
+	○	The start datetime is automatically set for the workout session.
+	○	The user can start adding or modifying exercises and sets.
+	○	The user clicks the "Finish" button to save the new workout to their account. The end datetime of the workout is automatically set. The corresponding exercises and sets are saved as well.
+
+●	Read:
+	○	To view a workout, the user can access their list of workouts from the app's dashboard.
+	○	The user sees a list of their saved workouts, displaying titles and the date.
+	○	By clicking on a workout, the user can access the full details, including the description, exercises, and sets.
+
+●	Update:
+	○	To update an existing workout, the user selects the workout they wish to modify.
+	○	The user can edit the title, description, exercises, sets, and optionally, the start and end datetimes of the workout.
+	○	After making changes, the user clicks the "Update" button to save the updated information.
+
+●	Delete:
+	○	To delete a workout, the user selects the workout they want to remove from their account.
+	○	The user clicks a "Delete" or "Remove" button associated with the chosen workout.
+	○	A confirmation prompt appears to ensure the user's intention.
+	○	If confirmed, the workout is deleted and removed from the user's account, along with the corresponding exercises and sets.
+
+
+Exercise:
+●	Create:
+	○	To create a new exercise, the user can access the "Create Exercise" section within the exercise library.
+	○	The user enters the exercise name, and selects a category.
+	○	Optionally, the user can specify the primary and secondary muscles involved.
+	○	The user may also provide an optional image for reference.
+	○	Clicking the "Create" button saves the new exercise to the library.
+	○	When adding an exercise to a workout, the user can select an already existing exercise from the exercise library. He can add a description to it, being specific to the current workout.
+
+●	Read:
+	○	To view exercises, the user can access the exercise library from the app's exercise database.
+	○	The user sees a list of pre-existing exercises, including their names and categories.
+	○	The user can also see the exercises from workouts.
+	○	By clicking on an exercise, the user can access the detailed information.
+
+●	Update:
+	○	To update an existing exercise, the user selects the exercise they wish to modify from the exercise library.
+	○	The user can edit the exercise name, category, primary and secondary muscles, and the image.
+	○	After making changes, the user clicks the "Update" button to save the updated exercise information.
+	○	The user can also modify the description for the exercises specific to a workout, and it is saved as soon as the workout is saved.
+
+●	Delete:
+	○	To delete an exercise, the user selects the exercise they want to remove from the workout.
+	○	The user clicks a "Delete" or "Remove" button associated with the chosen exercise.
+	○	A confirmation prompt appears to ensure the user's intention.
+	○	If confirmed, the exercise is deleted from the workout.
+	○	The same process applies to the exercises from the library.
+
+
+Set:
+●	Create:
+	○	To create a new set within a workout, the user accesses the workout details, the exercise and then the sets section.
+	○	The user presses on the “Add” button and a new set is added with initial empty fields.
+	○	The user can specify the order, weight, repetitions, category, and optionally, the RPE.
+	○	When the user toggles the “Create” button, they either activate or deactivate the set within the exercise. The user can toggle the button at any time.
+	○	Only the toggled sets are being saved to the workout.
+
+●	Read:
+	○	To view sets within a workout, the user navigates to the workout details and exercise section.
+	○	The user sees a list of sets within the exercise, displaying order, weight, repetitions, category, and RPE.
+
+●	Update:
+	○	To update an existing set within a workout, the user goes to the set they wish to modify.
+	○	The user can edit the order, weight, repetitions, category, and RPE for the set.
+	○	After making changes, the user toggles the "Create" button if it is not already checked. If it already is toggled, the information is saved automatically.
+
+●	Delete:
+	○	To delete a set within a specific exercise in a workout, the user selects the set they want to remove.
+	○	The user clicks a "Delete" or "Remove" button associated with the chosen set.
+	○	A confirmation prompt appears to ensure the user's intention.
+	○	If confirmed, the set is deleted from the workout.
+
+4.	Persistence details
+Persistence is a crucial aspect of our application, and we've implemented a dual approach by connecting to both a local database and a server. Whether users are adding, updating, or deleting entities, we ensure that these changes are stored on both the server and the local database.
+
+●	Online Mode: When users are online, the application fetches entity data directly from the server, ensuring that updates are reflected immediately.
+
+●	Offline Mode: In the event that a user is offline, the application seamlessly switches to temporary data from the local database, guaranteeing uninterrupted functionality and data access.
+
+5.	Offline user capabilities
+The FitLog app ensures that user interactions are captured and stored locally even when the device is offline. Pending changes are later synchronized with the server when the device reconnects to the internet, ensuring data consistency across devices and platforms.
+
+1.	Offline Create Scenario: The user wants to create a new workout while offline.
+The user opens the app, but there is no internet connection.
+They navigate to the "Create Workout" section.
+The app allows them to enter a title and description for the workout even without an internet connection.
+The start datetime is set automatically as usual.
+The user adds or modifies exercises and sets, and all changes are stored locally on the device in a pending state.
+When the user clicks the "Finish" button, the workout is saved locally with a pending status, and the end datetime is set.
+A message or notification is displayed indicating that the workout has been saved locally but not yet synchronized with the server due to the lack of an internet connection.
+
+2.	Offline Read Scenario: The user wants to view details of a workout they have previously created while offline.
+The user opens the app, but there is no internet connection.
+They access their list of workouts from the app's dashboard.
+The app displays the list of saved workouts with titles and dates, as these details are stored locally.
+When the user clicks on a workout to view its details, the app retrieves and displays the locally stored description, exercises, and sets, allowing the user to access all the information they need even without an internet connection.
+
+3.	Offline Update Scenario: The user wants to make changes to an existing workout while offline.
+The user opens the app without an internet connection and selects the workout they wish to modify.
+They edit the title, description, exercises, sets, and may optionally adjust the start and end datetimes of the workout.
+All changes are saved locally in a pending state.
+When the user clicks the "Update" button, the app updates the locally stored workout information and marks it as pending.
+A notification or message informs the user that the changes have been saved locally but not yet synchronized with the server due to the lack of an internet connection.
+
+4.	Offline Delete Scenario: The user wants to delete a workout while offline.
+The user opens the app, but there is no internet connection.
+They select the workout they want to remove from their account.
+The app allows the user to initiate the deletion process, and the request is saved locally with a pending status.
+A confirmation prompt appears to ensure the user's intention.
+If confirmed, the workout is marked for deletion locally.
+A notification informs the user that the workout has been scheduled for deletion but is pending synchronization with the server.
