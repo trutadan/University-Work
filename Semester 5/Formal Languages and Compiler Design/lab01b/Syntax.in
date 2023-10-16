@@ -1,14 +1,14 @@
-<program> ::= start <compound_statement>
+<program> ::= start <statement_list> stop
 <statement> ::= <declaration>|<assignment_statement>|<if_statement>|<while_statement>|<return_statement>|<for_statement>|<iostmt>
 
-<statement_list> ::= <statement>|<statement>; <statement_list>
+<statement_list> ::= <statement>;|<statement>; <statement_list>
 <compound_statement> ::= do <statement_list> end
 
 <expression> ::= <expression>+<term>|<expression>-<term>|<term>
 <term> ::= <term>*<factor>|<term>/<factor>|<factor>
 <factor> ::= (<expression>)|identifier|const
 
-<iostmt> ::= gets(<identifier>)|puts(<identifier>)|puts(<const>)
+<iostmt> ::= gets()|puts(<identifier>)|puts(<const>)
 
 <simple_type> ::= int|string|char|bool
 <array_declaration> ::= array<<simple_type>> <identifier>
