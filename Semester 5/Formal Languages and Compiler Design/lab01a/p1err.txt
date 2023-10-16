@@ -1,10 +1,15 @@
 start
 puts("Give me a natural number");
-int input_number = to_i(cuts(gets()));
-bool 1s_prime = true;
+int input_number;
+input_number = to_i(cuts(gets()));
 
-for number in 2..input_number/2 do ~
-	if !(input_number % number) do
+bool 1s_prime;
+1s_prime = true;
+
+int number;
+number = 2;
+while number < input_number/2 do ~
+	if !(input_number % number)
 		1s_prime = false;
 		break;
 	end
