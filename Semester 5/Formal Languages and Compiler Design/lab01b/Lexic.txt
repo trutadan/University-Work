@@ -40,4 +40,4 @@ c.constants
 	<character_constant> ::= '<letter>'|'<digit>'
 
 3.string
-	<string_constant> ::= "<string>"
+	<string_constant> ::= "<string>"|""
