@@ -1,23 +1,25 @@
-^
-def getGCD(a, b)
-    while (a != b)
-        if a > b
-            return getGCD(a - b, b);
-        else
-            return getGCD(a, b - a);
-        end
-    end
-    
-    return a;
+start
+puts("Give me a natural number");
+int a;
+a = to_i(cuts(gets()));
+
+puts("Give me another natural number");
+int b;
+b = to_i(cuts(gets()));
+
+if a < b
+    int aux;
+    aux = a;
+    a = b;
+    b = aux;
 end
-^
 
-~
-print "Give me a natural number"
-a = get.cuts.to_i
+while b != 0 do
+    int aux;
+    aux = b;
+    b = a % b;
+    a = aux;
+end
 
-print "Give me another natural number"
-b = get.cuts.to_i
-
-print `The GCD of the given numbers is #{getGCD(a, b)}`
-~
+puts(`The GCD of the given numbers is #{a}`);
+stop
