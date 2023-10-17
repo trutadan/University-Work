@@ -11,7 +11,7 @@ a.Special symbols, representing:
 - reserved words:
 	array bool int char 
 	elif if else do end 
-	gets puts cuts
+	gets puts cuts to_i
 	nil and break not or for false true while in
 
 b.identifiers
@@ -41,3 +41,6 @@ c.constants
 
 3.string
 	<string_constant> ::= "<string>"|""
+
+4.bool
+	<bool_constant> ::= true|false
