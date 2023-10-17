@@ -3,11 +3,7 @@ array<int> arr;
 arr = [3, 1, 10, 4, -6, 12, 4, 2, -4];
 
 int max;
-if array.length != 0
-	max = array[0];
-else
-	max = nil;
-end;
+max = array[0];
 
 for number in array do
 	if number > max
