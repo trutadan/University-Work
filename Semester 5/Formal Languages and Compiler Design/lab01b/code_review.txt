@@ -1,0 +1,12 @@
+Code review for Dragoș Vintilă
+
+Syntax.in:
+<statement_list> ::= <statement> ; | <statement> ; <statement_list> ; -> there will be cases that would end up in 2 semicolons instead of 1 at the end of statement lists
+
+Lexic.txt:
+<const_int> -> numbers can start with 0? (depends on his vision)
+
+p2.txt:
+sum = (a + b); -> the syntax provided does not explicitly include parentheses in the definition of expressions, <expression> ::= <comparator> | <comparator> <third_order_operator> <expression> | ( <expression> ) I think would be more suitable
+
+Everything else seems right for me...
