@@ -11,10 +11,9 @@
 <iostmt> ::= gets()|puts(<identifier>)|puts(<const>)
 <inputmodstmt> ::= cuts(<identifier>)|cuts(<string_constant>)|to_i(<identifier>)|to_i(<string_constant>)
 
-<simple_type> ::= int|string|char|bool
-<array_declaration> ::= array<<simple_type>> <identifier>
-<array_access> ::= <identifier> [<expression>]
-<declaration> ::= <simple_type> <identifier> | <array_declaration>
+<simple_type> ::= int|string|char|bool|array
+<array_access> ::= <identifier>[<expression>]
+<declaration> ::= <simple_type> <identifier>
 
 <relation> ::= <|<=|==|!=|>=|>
 <condition> ::= <expression><relation><expression>
