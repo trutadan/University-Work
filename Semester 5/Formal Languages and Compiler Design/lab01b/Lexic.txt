@@ -1,12 +1,12 @@
 a.Special symbols, representing:
 
 - operators:
-	a) relational: + - * /
+	a) relational: + - * / %
 	b) arithmetic: < <= == != >= >
 	c) assignment: =
 
 - separators:
-	[ ] { } ( ) : ; space , newline
+	[ ] { } ( ) , : ; space newline tab 
 
 - reserved words:
 	array bool int char 
