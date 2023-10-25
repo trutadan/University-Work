@@ -15,7 +15,7 @@ bool 1s_prime;
 int number;
 number = 2;
 while number < input_number/2 do ~
-	if !(input_number % number)
+	if (input_number % number == 0)
 		1s_prime = false;
 		break;
 	end;
