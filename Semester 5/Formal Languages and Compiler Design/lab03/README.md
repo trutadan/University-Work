@@ -10,6 +10,6 @@ Deliverables: input, output, source code, documentation
 
 
 Details:
-ST.out should give information about the data structure used in representation
-If there exists an error the program should give a description and the location (line and token)
+ST.out should give information about the data structure used in representation;
+If there exists an error the program should give a description and the location (line and token).
 
