@@ -146,9 +146,10 @@ public class LexicalAnalyzer {
             }
         }
 
-        if (!currentToken.isEmpty())
+        if (!currentToken.isEmpty()) {
             tokens.add(currentToken.toString());
-
+        }
+        
         return tokens;
     }
 
