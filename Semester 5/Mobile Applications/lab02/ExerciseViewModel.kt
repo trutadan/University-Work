@@ -1,118 +1,149 @@
 package com.example.lab01.data
 
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.example.lab01.R
 
 class ExerciseViewModel : ViewModel() {
-    fun getExerciseById(exerciseId: Int): Exercise? {
-        val exercisesList = exercises.value
-        return exercisesList.find { it.id == exerciseId }
-    }
-
-    val exercises: MutableState<List<Exercise>> = mutableStateOf(
+    private val _exercises = mutableStateOf(
         listOf(
             Exercise(
                 id = 1,
                 name = "Bench Press",
                 description = "A compound exercise for building upper body strength.",
                 category = "Strength",
-                primaryMuscles = listOf("Pectoralis Major", "Triceps"),
-                secondaryMuscles = listOf("Anterior Deltoids", "Serratus Anterior"),
+                primaryMuscle = "Pectoralis Major",
+                secondaryMuscles = listOf("Anterior Deltoids", "Triceps"),
                 equipment = listOf("Barbell", "Bench"),
-                image = R.drawable.ic_launcher_foreground
+                image = ""
             ),
             Exercise(
                 id = 2,
                 name = "Squats",
                 description = "A fundamental lower body exercise for building leg strength.",
                 category = "Strength",
-                primaryMuscles = listOf("Quadriceps", "Glutes"),
-                secondaryMuscles = listOf("Hamstrings", "Calves"),
+                primaryMuscle = "Quadriceps",
+                secondaryMuscles = listOf("Glutes", "Hamstrings"),
                 equipment = listOf("Barbell", "Squat Rack"),
-                image = R.drawable.ic_launcher_foreground
+                image = ""
             ),
             Exercise(
                 id = 3,
                 name = "Running",
                 description = "An effective cardiovascular exercise for improving endurance.",
                 category = "Cardio",
-                primaryMuscles = listOf("Cardiovascular System"),
+                primaryMuscle = "Cardiovascular System",
                 secondaryMuscles = emptyList(),
                 equipment = listOf("Running Shoes"),
-                image = R.drawable.ic_launcher_foreground
+                image = ""
             ),
             Exercise(
                 id = 4,
                 name = "Deadlift",
                 description = "A compound exercise for developing overall strength and power.",
                 category = "Strength",
-                primaryMuscles = listOf("Erector Spinae", "Glutes"),
-                secondaryMuscles = listOf("Hamstrings", "Quadriceps"),
+                primaryMuscle = "Erector Spinae",
+                secondaryMuscles = listOf("Glutes", "Hamstrings", "Quadriceps"),
                 equipment = listOf("Barbell"),
-                image = R.drawable.ic_launcher_foreground
+                image = ""
             ),
             Exercise(
                 id = 5,
                 name = "Push-Ups",
                 description = "A bodyweight exercise for building chest and tricep strength.",
                 category = "Strength",
-                primaryMuscles = listOf("Pectoralis Major", "Triceps"),
-                secondaryMuscles = listOf("Deltoids", "Serratus Anterior"),
+                primaryMuscle = "Pectoralis Major",
+                secondaryMuscles = listOf("Triceps", "Deltoids", "Serratus Anterior"),
                 equipment = emptyList(),
-                image = R.drawable.ic_launcher_foreground
+                image = ""
             ),
             Exercise(
                 id = 6,
                 name = "Yoga",
                 description = "A practice for improving flexibility, balance, and relaxation.",
                 category = "Flexibility",
-                primaryMuscles = emptyList(),
+                primaryMuscle = "",
                 secondaryMuscles = emptyList(),
                 equipment = emptyList(),
-                image = R.drawable.ic_launcher_foreground
+                image = ""
             ),
             Exercise(
                 id = 7,
                 name = "Cycling",
                 description = "A great cardiovascular exercise that's easy on the joints.",
                 category = "Cardio",
-                primaryMuscles = listOf("Quadriceps", "Hamstrings"),
-                secondaryMuscles = listOf("Calves", "Glutes"),
+                primaryMuscle = "Quadriceps",
+                secondaryMuscles = listOf("Hamstrings", "Calves", "Glutes"),
                 equipment = listOf("Bicycle"),
-                image = R.drawable.ic_launcher_foreground
+                image = ""
             ),
             Exercise(
                 id = 8,
                 name = "Dumbbell Rows",
                 description = "An exercise for developing upper back and arm strength.",
                 category = "Strength",
-                primaryMuscles = listOf("Latissimus Dorsi", "Biceps"),
-                secondaryMuscles = listOf("Rhomboids", "Traps"),
+                primaryMuscle = "Latissimus Dorsi",
+                secondaryMuscles = listOf("Rhomboids", "Traps", "Biceps"),
                 equipment = listOf("Dumbbell", "Bench"),
-                image = R.drawable.ic_launcher_foreground
+                image = ""
             ),
             Exercise(
                 id = 9,
                 name = "Jumping Jacks",
                 description = "A simple and effective cardio exercise for all fitness levels.",
                 category = "Cardio",
-                primaryMuscles = emptyList(),
+                primaryMuscle = "",
                 secondaryMuscles = emptyList(),
                 equipment = emptyList(),
-                image = R.drawable.ic_launcher_foreground
+                image = ""
             ),
             Exercise(
                 id = 10,
                 name = "Plank",
                 description = "A core-strengthening exercise for building stability and endurance.",
                 category = "Strength",
-                primaryMuscles = listOf("Core"),
+                primaryMuscle = "Core",
                 secondaryMuscles = emptyList(),
                 equipment = emptyList(),
-                image = R.drawable.ic_launcher_foreground
+                image = ""
             )
         )
     )
+
+    val exercises: State<List<Exercise>> = _exercises
+
+    fun getExerciseById(exerciseId: Int): Exercise? {
+        val exercisesList = exercises.value
+        return exercisesList.find { it.id == exerciseId }
+    }
+
+    fun deleteExercise(exerciseId: Int) {
+        val currentExercises = exercises.value.toMutableList()
+        val exerciseToDelete = currentExercises.find { it.id == exerciseId }
+
+        exerciseToDelete?.let {
+            currentExercises.remove(it)
+            _exercises.value = currentExercises
+        }
+    }
+
+    fun updateExercise(updatedExercise: Exercise) {
+        val updatedList = exercises.value.toMutableList()
+        val index = updatedList.indexOfFirst { it.id == updatedExercise.id }
+
+        if (index != -1) {
+            updatedList[index] = updatedExercise
+            _exercises.value = updatedList
+        }
+    }
+
+    fun addExercise(newExercise: Exercise) {
+        newExercise.id = generateUniqueId()
+        _exercises.value = exercises.value + newExercise
+    }
+
+    private fun generateUniqueId(): Int {
+        val maxId = exercises.value.maxByOrNull { it.id }?.id ?: 0
+        return maxId + 1
+    }
 }

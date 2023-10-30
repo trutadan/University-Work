@@ -70,36 +70,7 @@ fun GenericTopNavigationBar(navController: NavHostController, titleContent: Stri
 }
 
 @Composable
-fun CreateExerciseNavigationBar(navController: NavHostController, modifier: Modifier = Modifier) {
-    Surface(
-        color = Color.Black,
-        modifier = modifier
-            .fillMaxWidth()
-            .height(30.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxSize(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Spacer(modifier = Modifier.weight(1f))
-
-            FilledTonalButton(
-                onClick = { navController.navigate("exerciseCreate") },
-            ) {
-                Text(
-                    text = "New exercise",
-                    color = Color.Black,
-                )
-            }
-
-            Spacer(modifier = Modifier.weight(1f))
-        }
-    }
-}
-
-@Composable
-fun ExerciseModificationTopNavigationBar(navController: NavHostController, titleContent: String, modifier: Modifier = Modifier) {
+fun ExerciseModificationTopNavigationBar(navController: NavHostController, titleContent: String, onSaveClick: () -> Unit, modifier: Modifier = Modifier) {
     Surface(
         color = Color.Black,
         modifier = modifier
@@ -136,8 +107,37 @@ fun ExerciseModificationTopNavigationBar(navController: NavHostController, title
                 text = "Save",
                 color = Color.Cyan,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(10.dp).clickable { }
+                modifier = Modifier.padding(10.dp).clickable { onSaveClick() }
             )
+        }
+    }
+}
+
+@Composable
+fun CreateExerciseNavigationBar(navController: NavHostController, modifier: Modifier = Modifier) {
+    Surface(
+        color = Color.Black,
+        modifier = modifier
+            .fillMaxWidth()
+            .height(30.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Spacer(modifier = Modifier.weight(1f))
+
+            FilledTonalButton(
+                onClick = { navController.navigate("exerciseCreate") },
+            ) {
+                Text(
+                    text = "New exercise",
+                    color = Color.Black,
+                )
+            }
+
+            Spacer(modifier = Modifier.weight(1f))
         }
     }
 }

@@ -36,22 +36,22 @@ class MainActivity : ComponentActivity() {
 fun AppNavigation(navController: NavHostController, exerciseViewModel: ExerciseViewModel) {
     NavHost(navController = navController, startDestination = "exerciseList") {
         composable("exerciseList") {
-            ExerciseList(exerciseViewModel, navController)
+            ExerciseList(navController, exerciseViewModel.exercises.value)
         }
         composable("exerciseDetail/{exerciseId}",
             arguments = listOf(navArgument("exerciseId") { type = NavType.IntType })
         ) { backStackEntry ->
             val exerciseId = backStackEntry.arguments?.getInt("exerciseId")
-            exerciseId?.let { ExerciseDetail(it, navController, exerciseViewModel) }
+            exerciseId?.let { ExerciseDetail(it, navController, exerciseViewModel::getExerciseById, exerciseViewModel::deleteExercise) }
         }
         composable("exerciseCreate") {
-            ExerciseCreate(navController, {})
+            ExerciseCreate(navController, exerciseViewModel::addExercise)
         }
         composable("exerciseUpdate/{exerciseId}",
             arguments = listOf(navArgument("exerciseId") { type = NavType.IntType })
         ) { backStackEntry ->
             val exerciseId = backStackEntry.arguments?.getInt("exerciseId")
-            exerciseId?.let { ExerciseUpdate(it) }
+            exerciseId?.let { ExerciseUpdate(it, navController, exerciseViewModel::getExerciseById, exerciseViewModel::updateExercise) }
         }
     }
 }
