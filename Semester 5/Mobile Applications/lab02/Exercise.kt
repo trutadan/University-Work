@@ -8,8 +8,8 @@ data class Exercise(
     val name: String,
     val description: String,
     val category: String,
-    val primaryMuscle: String,
+    val primaryMuscles: List<String>,
     val secondaryMuscles: List<String>,
     val equipment: List<String>,
-    val image: String
+    val image: Int
 )

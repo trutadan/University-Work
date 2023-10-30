@@ -45,13 +45,13 @@ fun AppNavigation(navController: NavHostController, exerciseViewModel: ExerciseV
             exerciseId?.let { ExerciseDetail(it, navController, exerciseViewModel) }
         }
         composable("exerciseCreate") {
-            ExerciseCreate(navController, exerciseViewModel)
+            ExerciseCreate(navController, {})
         }
         composable("exerciseUpdate/{exerciseId}",
             arguments = listOf(navArgument("exerciseId") { type = NavType.IntType })
         ) { backStackEntry ->
             val exerciseId = backStackEntry.arguments?.getInt("exerciseId")
-            exerciseId?.let { ExerciseUpdate(it, navController, exerciseViewModel) }
+            exerciseId?.let { ExerciseUpdate(it) }
         }
     }
 }
