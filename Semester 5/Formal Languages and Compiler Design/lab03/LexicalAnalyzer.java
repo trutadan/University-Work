@@ -18,7 +18,7 @@ public class LexicalAnalyzer {
             List.of("+", "-", "*", "/", "%", "<=", ">=", "==", "!=", "<", ">", "=")
     );
     private final ArrayList<String> reservedWords = new ArrayList<>(
-            List.of("array", "bool", "int", "char", "nil",
+            List.of("array", "bool", "int", "char", "nil", "string",
                     "elif", "if", "else" ,"do", "end", "for", "while", "break",
                     "gets", "puts", "cuts", "to_i", "start", "stop",
                     "and", "not", "or", "false", "true", "in")
@@ -146,10 +146,9 @@ public class LexicalAnalyzer {
             }
         }
 
-        if (!currentToken.isEmpty()) {
+        if (!currentToken.isEmpty())
             tokens.add(currentToken.toString());
-        }
-        
+
         return tokens;
     }
 

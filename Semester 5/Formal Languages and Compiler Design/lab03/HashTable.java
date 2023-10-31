@@ -94,9 +94,9 @@ public class HashTable {
 
         for (ArrayList<String> row : table) {
             stringRepresentation.append("  [");
-            for (int i = 0; i < row.size(); i++) {
-                stringRepresentation.append(row.get(i));
-                if (i < row.size() - 1) {
+            for (int index = 0; index < row.size(); index++) {
+                stringRepresentation.append(row.get(index));
+                if (index < row.size() - 1) {
                     stringRepresentation.append(", ");
                 }
             }

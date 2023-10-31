@@ -62,7 +62,7 @@ SymbolTable: {
   []
   []
   ["Give me another natural number"]
-  [string]
+  []
   []
   []
   []
