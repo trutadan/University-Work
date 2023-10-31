@@ -188,14 +188,13 @@ public class LexicalAnalyzer {
     }
 
     private void codify(String token, Integer category) {
-        Pair<String, Integer> tokenAndCategory = new Pair<>(token, category);
         Pair<Integer, Integer> positionInSymbolTable = new Pair<>(-1, -1);
 
         if (category == 0 || category == 1) {
             positionInSymbolTable = this.symbolTable.add(token);
         }
 
-        this.programInternalForm.add(tokenAndCategory, positionInSymbolTable);
+        this.programInternalForm.add(token, positionInSymbolTable);
     }
 
     public void scan() {
