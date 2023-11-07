@@ -12,8 +12,16 @@ public class ProgramInternalForm {
         return this.array;
     }
 
-    public void add(String token, Pair<Integer, Integer> symbolTablePosition) {
-        Pair<String, Pair<Integer, Integer>> pair = new Pair<>(token, symbolTablePosition);
+    public void add(String token, Integer category, Pair<Integer, Integer> symbolTablePosition) {
+        Pair<String, Pair<Integer, Integer>> pair;
+        
+        if (category == 0)
+            pair = new Pair<>("const", symbolTablePosition);
+        else if (category == 1)
+            pair = new Pair<>("id", symbolTablePosition);
+        else 
+            pair = new Pair<>(token, symbolTablePosition);
+        
         this.array.add(pair);
     }
 
