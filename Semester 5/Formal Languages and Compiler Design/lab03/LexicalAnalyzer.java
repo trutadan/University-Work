@@ -193,7 +193,7 @@ public class LexicalAnalyzer {
             positionInSymbolTable = this.symbolTable.add(token);
         }
 
-        this.programInternalForm.add(token, positionInSymbolTable);
+        this.programInternalForm.add(token, category, positionInSymbolTable);
     }
 
     public void scan() {
