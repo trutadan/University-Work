@@ -15,7 +15,7 @@ public class TokenScanner {
         this.initializeIntegerConstantFiniteAutomata();
     }
 
-    private Set<Character> generateAlphabetRange(char start, char end) {
+    private Set<Character> generateAlphabetRange(Character start, Character end) {
         Set<Character> alphabetRange = new HashSet<>();
         for (char character = start; character <= end; character++) {
             alphabetRange.add(character);
@@ -40,7 +40,7 @@ public class TokenScanner {
         return generateAlphabetRange('1', '9');
     }
 
-    public List<Transition> generateTransitionsList(Set<Character> set, String sourceState, String destinationState) {
+    private List<Transition> generateTransitionsList(Set<Character> set, String sourceState, String destinationState) {
         List<Transition> transitions = new ArrayList<>();
 
         for (Character element : set) {
@@ -50,13 +50,13 @@ public class TokenScanner {
         return transitions;
     }
 
-    public Set<Character> concatenateSets(Set<Character> set1, Set<Character> set2) {
+    private Set<Character> concatenateSets(Set<Character> set1, Set<Character> set2) {
         Set<Character> concatenatedSet = new HashSet<>(set1);
         concatenatedSet.addAll(set2);
         return concatenatedSet;
     }
 
-    public static List<Transition> concatenateTransitionsLists(List<Transition> list1, List<Transition> list2) {
+    private List<Transition> concatenateTransitionsLists(List<Transition> list1, List<Transition> list2) {
         List<Transition> concatenatedList = new ArrayList<>();
         concatenatedList.addAll(list1);
         concatenatedList.addAll(list2);
