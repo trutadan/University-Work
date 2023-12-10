@@ -5,15 +5,15 @@ import 'exercise_model.dart';
 import 'exercise_repository.dart';
 
 class ExerciseViewModel extends ChangeNotifier {
-  final ExerciseRepository _repository = ExerciseRepository();
+  final ExerciseRepository _repository;
   final Logger _logger = Logger();
   List<Exercise> _exercises = [];
 
-  List<Exercise> get exercises => _exercises;
-
-  ExerciseViewModel() {
+  ExerciseViewModel(this._repository){
     loadExercises();
   }
+
+  List<Exercise> get exercises => _exercises;
 
   Future<void> loadExercises() async {
     try {
@@ -23,7 +23,6 @@ class ExerciseViewModel extends ChangeNotifier {
       _logger.d("Exercises loaded successfully: ${_exercises.length} exercises");
     } catch (e) {
       _logger.e("Error loading exercises in view model: $e");
-      rethrow;
     }
   }
 
@@ -36,7 +35,6 @@ class ExerciseViewModel extends ChangeNotifier {
       _logger.d("Exercise added successfully: $exercise");
     } catch (e) {
       _logger.e("Error adding exercise in view model: $e");
-      rethrow;
     }
   }
 
@@ -48,7 +46,6 @@ class ExerciseViewModel extends ChangeNotifier {
       _logger.d("Exercise updated successfully: $exercise");
     } catch (e) {
       _logger.e("Error updating exercise in view model: $e");
-      rethrow;
     }
   }
 
@@ -60,7 +57,6 @@ class ExerciseViewModel extends ChangeNotifier {
       _logger.d("Exercise deleted successfully with ID: $id");
     } catch (e) {
       _logger.e("Error deleting exercise in view model: $e");
-      rethrow;
     }
   }
 
@@ -70,7 +66,8 @@ class ExerciseViewModel extends ChangeNotifier {
       return await _repository.getExerciseById(id);
     } catch (e) {
       _logger.e("Error getting exercise by id in view model: $e");
-      rethrow;
     }
+
+    return null;
   }
 }

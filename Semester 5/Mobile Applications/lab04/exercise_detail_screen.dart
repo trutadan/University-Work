@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:logger/logger.dart'; // Add this import
+import 'package:logger/logger.dart';
 import 'exercise_model.dart';
 import 'exercise_view_model.dart';
 import 'navigation_bars.dart';
@@ -21,7 +21,7 @@ class ExerciseDetailScreen extends StatelessWidget {
 
 class ExerciseDetailBody extends StatelessWidget {
   final int exerciseId;
-  final Logger _logger = Logger(); // Add this line
+  final Logger _logger = Logger();
 
   ExerciseDetailBody({Key? key, required this.exerciseId}) : super(key: key);
 
@@ -32,11 +32,11 @@ class ExerciseDetailBody extends StatelessWidget {
     return FutureBuilder<Exercise?>(
       future: viewModel.getExerciseById(exerciseId),
       builder: (context, snapshot) {
-        _logger.d('Exercise Detail Body - Building FutureBuilder'); // Add this line
+        _logger.d('Exercise Detail Body - Building FutureBuilder');
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         } else if (snapshot.hasError || snapshot.data == null) {
-          _logger.e('Error loading exercise: ${snapshot.error}'); // Add this line
+          _logger.e('Error loading exercise: ${snapshot.error}');
           return const Text('Error loading exercise!');
         } else {
           Exercise exercise = snapshot.data!;
@@ -48,11 +48,11 @@ class ExerciseDetailBody extends StatelessWidget {
                 ExerciseDetailCard(exercise: exercise),
                 ActionButtons(
                   onDeleteClick: () {
-                    _logger.d('Delete button clicked'); // Add this line
+                    _logger.d('Delete button clicked');
                     showDeleteConfirmationDialog(context, viewModel);
                   },
                   onUpdateClick: () {
-                    _logger.d('Update button clicked'); // Add this line
+                    _logger.d('Update button clicked');
                     Navigator.pushNamed(
                       context,
                       '/exerciseUpdate',
@@ -69,7 +69,7 @@ class ExerciseDetailBody extends StatelessWidget {
   }
 
   void showDeleteConfirmationDialog(BuildContext context, ExerciseViewModel viewModel) {
-    _logger.d('Showing delete confirmation dialog'); // Add this line
+    _logger.d('Showing delete confirmation dialog');
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -78,7 +78,7 @@ class ExerciseDetailBody extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              _logger.d('Delete cancelled'); // Add this line
+              _logger.d('Delete cancelled');
               Navigator.of(context).pop();
             },
             child: const Text('No'),
@@ -86,7 +86,7 @@ class ExerciseDetailBody extends StatelessWidget {
 
           TextButton(
             onPressed: () {
-              _logger.d('Delete confirmed'); // Add this line
+              _logger.d('Delete confirmed');
               viewModel.deleteExercise(exerciseId);
               Navigator.of(context).pop();
               Navigator.of(context).pop();
@@ -101,7 +101,7 @@ class ExerciseDetailBody extends StatelessWidget {
 
 class ExerciseDetailCard extends StatelessWidget {
   final Exercise exercise;
-  final Logger _logger = Logger(); // Add this line
+  final Logger _logger = Logger();
 
   ExerciseDetailCard({Key? key, required this.exercise}) : super(key: key);
 
@@ -163,7 +163,7 @@ class ExerciseDetailCard extends StatelessWidget {
 
 class ExerciseImage extends StatelessWidget {
   final String? imageUrl;
-  final Logger _logger = Logger(); // Add this line
+  final Logger _logger = Logger();
 
   ExerciseImage({Key? key, required this.imageUrl}) : super(key: key);
 
@@ -191,7 +191,7 @@ class ExerciseImage extends StatelessWidget {
 class ActionButtons extends StatelessWidget {
   final VoidCallback onDeleteClick;
   final VoidCallback onUpdateClick;
-  final Logger _logger = Logger(); // Add this line
+  final Logger _logger = Logger();
 
   ActionButtons({
     Key? key,
