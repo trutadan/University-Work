@@ -14,6 +14,8 @@ Only the created element is sent to the server. The id is managed by the server.
 
 
 Update operation:
+
+
 The server element is reused. 
 Eg. the element is not deleted and then a new one is added. 
 The id should remain the same.
