@@ -1,5 +1,5 @@
 from grammar import Grammar
-from recursive_descentant import RecursiveDescendant
+from recursive_descendant import RecursiveDescendant
 
 if __name__ == '__main__':
     filename = "gtest.txt"
