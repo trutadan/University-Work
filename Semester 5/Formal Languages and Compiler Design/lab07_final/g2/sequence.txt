@@ -1,0 +1,1 @@
+int id ; input id ; list id ; int id = const ; int id ; for ( id = const ; id < id ; id = id + const ) { input id [ id ] ; } ; for ( id = const ; id < id ; id = id + const ) { id = id + id [ id ] ; } ; id = id / id ; print id ;

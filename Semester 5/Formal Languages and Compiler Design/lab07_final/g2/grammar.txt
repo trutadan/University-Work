@@ -1,0 +1,24 @@
+#Non-terminals
+<statement_list> <statement> <declaration> <data_type> <input> <reference> <assignment> <expression> <comparator> <term> <factor> <list_access> <print> <second_order_operator> <for> <third_order_operator> <first_order_operator>
+#Terminals
+int id ; input list = const [ ] + / print for ( ) { } <
+#Productions
+<statement_list> ::= <statement> ; <statement_list> | <statement> ;
+<statement> ::= <declaration> | <input> | <assignment> | <for> | <print>
+<declaration> ::= <data_type> id = <expression> | <data_type> id
+<data_type> ::= int | list
+<input> ::= input <reference>
+<reference> ::= id | <list_access>
+<assignment> ::= <reference> = <expression>
+<expression> ::= <comparator> | <comparator> <third_order_operator> <expression>
+<comparator> ::= <term> | <term> <second_order_operator> <comparator>
+<second_order_operator> ::= +
+<term> ::= <factor> | <factor> <first_order_operator> <term>
+<factor> ::= const | <reference>
+<list_access> ::= id [ <expression> ]
+<for> ::= for ( <assignment> ; <expression> ; <assignment> ) { <statement_list> }
+<third_order_operator> ::= <
+<first_order_operator> ::= /
+<print> ::= print <expression>
+#StartSymbol
+<statement_list>
