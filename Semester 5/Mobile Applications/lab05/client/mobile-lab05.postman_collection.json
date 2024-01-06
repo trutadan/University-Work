@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "4a705f1a-ab42-46a1-9089-58f1f1062996",
+		"name": "mobile-lab05",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26123842"
+	},
+	"item": [
+		{
+			"name": "exercises",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/exercises",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"exercises"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exercise\":\r\n        {\r\n            \"name\":\"d\",\r\n            \"description\":\"f\",\r\n            \"category\":\"g\",\r\n            \"primaryMuscle\":\"g\",\r\n            \"secondaryMuscles\":\"r\",\r\n            \"equipment\":\"t\",\r\n            \"image\":\"/data/user/0/com.example.lab04/cache/a76d76c8-d613-40a1-ac12-0652b091094c/1000000033.jpg\"\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/exercises",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"exercises"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Updated Squat\",\r\n  \"description\": \"A compound exercise that targets the muscles of the lower body.\",\r\n  \"category\": \"Strength Training\",\r\n  \"primaryMuscle\": \"Quadriceps\",\r\n  \"secondaryMuscles\": \"Hamstrings, Glutes\",\r\n  \"equipment\": \"Barbell, Power Rack\",\r\n  \"image\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/exercises/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"exercises",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/exercises/82",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"exercises",
+								"82"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/check_connection",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"check_connection"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
