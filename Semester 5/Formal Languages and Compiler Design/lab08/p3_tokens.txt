@@ -1,0 +1,59 @@
+Line 1 - reserved word: start
+Line 2 - reserved word: array
+Line 2 - identifier: arr
+Line 2 - separator: ;
+Line 3 - identifier: arr
+Line 3 - operator: =
+Line 3 - separator: [
+Line 3 - integer constant: 3
+Line 3 - separator: ,
+Line 3 - integer constant: 1
+Line 3 - separator: ,
+Line 3 - integer constant: 10
+Line 3 - separator: ,
+Line 3 - integer constant: 4
+Line 3 - separator: ,
+Line 3 - integer constant: -6
+Line 3 - separator: ,
+Line 3 - integer constant: 12
+Line 3 - separator: ,
+Line 3 - integer constant: 4
+Line 3 - separator: ,
+Line 3 - integer constant: 2
+Line 3 - separator: ,
+Line 3 - integer constant: -4
+Line 3 - separator: ]
+Line 3 - separator: ;
+Line 4 - reserved word: int
+Line 4 - identifier: max
+Line 4 - separator: ;
+Line 5 - identifier: max
+Line 5 - operator: =
+Line 5 - reserved word: array
+Line 5 - separator: [
+Line 5 - integer constant: 0
+Line 5 - separator: ]
+Line 5 - separator: ;
+Line 6 - reserved word: for
+Line 6 - identifier: number
+Line 6 - reserved word: in
+Line 6 - reserved word: array
+Line 6 - reserved word: do
+Line 7 - reserved word: if
+Line 7 - identifier: number
+Line 7 - operator: >
+Line 7 - identifier: max
+Line 8 - identifier: max
+Line 8 - operator: =
+Line 8 - identifier: number
+Line 8 - separator: ;
+Line 9 - reserved word: end
+Line 9 - separator: ;
+Line 10 - reserved word: end
+Line 10 - separator: ;
+Line 11 - reserved word: puts
+Line 11 - separator: (
+Line 11 - identifier: max
+Line 11 - separator: )
+Line 11 - separator: ;
+Line 12 - reserved word: stop

@@ -1,0 +1,34 @@
+start
+puts("Give me a natural number");
+string input_string;
+gets(input_string);
+
+string input_string_without_newline;
+input_string_without_newline = cuts(input_string);
+
+int a;
+a = to_i(input_string_without_newline);
+
+puts("Give me another natural number");
+gets(input_string);
+input_string_without_newline = cuts(input_string);
+
+int b;
+b = to_i(input_string_without_newline);
+
+if a < b
+    int aux;
+    aux = a;
+    a = b;
+    b = aux;
+end;
+
+while b != 0 do
+    int aux;
+    aux = b;
+    b = a % b;
+    a = aux;
+end;
+
+puts(a);
+stop

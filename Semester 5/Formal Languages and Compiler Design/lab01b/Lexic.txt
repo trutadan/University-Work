@@ -9,10 +9,10 @@ a.Special symbols, representing:
 	[ ] { } ( ) , : ; space newline tab 
 
 - reserved words:
-	array bool int char 
+	array bool int char string
 	elif if else do end 
-	gets puts cuts to_i start stop
-	nil and break or for false true while in
+	gets puts cuts to_i start stop return
+	nil and break or for while in
 
 b.identifiers
 - a sequence of letters, digits or character "_", such that the first character is a letter or the character "_"; 

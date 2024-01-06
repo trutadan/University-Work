@@ -1,0 +1,114 @@
+Line 1 - reserved word: start
+Line 2 - reserved word: puts
+Line 2 - separator: (
+Line 2 - string constant: "Give me a natural number"
+Line 2 - separator: )
+Line 2 - separator: ;
+Line 3 - reserved word: string
+Line 3 - identifier: input_string
+Line 3 - separator: ;
+Line 4 - identifier: input_string
+Line 4 - operator: =
+Line 4 - reserved word: gets
+Line 4 - separator: (
+Line 4 - separator: )
+Line 4 - separator: ;
+Line 5 - reserved word: string
+Line 5 - identifier: input_string_without_newline
+Line 5 - separator: ;
+Line 6 - identifier: input_string_without_newline
+Line 6 - operator: =
+Line 6 - reserved word: cuts
+Line 6 - separator: (
+Line 6 - identifier: input_string
+Line 6 - separator: )
+Line 6 - separator: ;
+Line 7 - reserved word: int
+Line 7 - identifier: a
+Line 7 - separator: ;
+Line 8 - identifier: a
+Line 8 - operator: =
+Line 8 - reserved word: to_i
+Line 8 - separator: (
+Line 8 - identifier: input_string_without_newline
+Line 8 - separator: )
+Line 8 - separator: ;
+Line 9 - reserved word: puts
+Line 9 - separator: (
+Line 9 - string constant: "Give me another natural number"
+Line 9 - separator: )
+Line 9 - separator: ;
+Line 10 - identifier: input_string
+Line 10 - operator: =
+Line 10 - reserved word: gets
+Line 10 - separator: (
+Line 10 - separator: )
+Line 10 - separator: ;
+Line 11 - identifier: input_string_without_newline
+Line 11 - operator: =
+Line 11 - reserved word: cuts
+Line 11 - separator: (
+Line 11 - identifier: input_string
+Line 11 - separator: )
+Line 11 - separator: ;
+Line 12 - reserved word: int
+Line 12 - identifier: b
+Line 12 - separator: ;
+Line 13 - identifier: b
+Line 13 - operator: =
+Line 13 - reserved word: to_i
+Line 13 - separator: (
+Line 13 - identifier: input_string_without_newline
+Line 13 - separator: )
+Line 13 - separator: ;
+Line 14 - reserved word: if
+Line 14 - identifier: a
+Line 14 - operator: <
+Line 14 - identifier: b
+Line 15 - reserved word: int
+Line 15 - identifier: aux
+Line 15 - separator: ;
+Line 16 - identifier: aux
+Line 16 - operator: =
+Line 16 - identifier: a
+Line 16 - separator: ;
+Line 17 - identifier: a
+Line 17 - operator: =
+Line 17 - identifier: b
+Line 17 - separator: ;
+Line 18 - identifier: b
+Line 18 - operator: =
+Line 18 - identifier: aux
+Line 18 - separator: ;
+Line 19 - reserved word: end
+Line 19 - separator: ;
+Line 20 - reserved word: while
+Line 20 - identifier: b
+Line 20 - operator: !=
+Line 20 - integer constant: 0
+Line 20 - reserved word: do
+Line 21 - reserved word: int
+Line 21 - identifier: aux
+Line 21 - separator: ;
+Line 22 - identifier: aux
+Line 22 - operator: =
+Line 22 - identifier: b
+Line 22 - separator: ;
+Line 23 - identifier: b
+Line 23 - operator: =
+Line 23 - identifier: a
+Line 23 - operator: %
+Line 23 - identifier: b
+Line 23 - separator: ;
+Line 24 - identifier: a
+Line 24 - operator: =
+Line 24 - identifier: aux
+Line 24 - separator: ;
+Line 25 - reserved word: end
+Line 25 - separator: ;
+Line 26 - reserved word: puts
+Line 26 - separator: (
+Line 26 - identifier: a
+Line 26 - separator: )
+Line 26 - separator: ;
+Line 27 - reserved word: stop

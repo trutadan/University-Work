@@ -1,25 +1,30 @@
 <program> ::= start <statement_list> stop
-<statement> ::= <declaration>|<assignment_statement>|<if_statement>|<while_statement>|<return_statement>|<for_statement>|<iostmt>|<inputmodstmt>
-
 <statement_list> ::= <statement>;|<statement>; <statement_list>
+<statement> ::= <declaration_statement>|<assignment_statement>|<if_statement>|<while_statement>|<return_statement>|<for_statement>|<break_statement>|<io_statement>|<imod_statement>
+
+<declaration_statement> ::= <data_type> <identifier>
+<data_type> ::= int|string|char|bool|array
+
+<assignment_statement> ::= <identifier> = <expression>|<identifier> = <imod_statement>|<identifier> = <array_access>|<identifier> = [<array_values>]|<array_access> = <expression>
+<array_values> ::= <const>|<array_values>, <const>
+<expression> ::= <expression>+<term>|<expression>-<term>|<term>
+<term> ::= <term>*<factor>|<term>/<factor>|<term>%<factor>|<factor>
+<factor> ::= (<expression>)|<identifier>|<const>
+<array_access> ::= <identifier>[<expression>]
+
+<if_statement> ::= if <condition> <statement> elif <condition> <statement> else <statement> end|if <condition> <statement> else <statement> end|if <condition> <statement> end
+<condition> ::= <expression><relation><expression>
+<relation> ::= <|<=|==|!=|>=|>
+
+<while_statement> ::= while <condition> <compound_statement>
 <compound_statement> ::= do <statement_list> end
 
-<expression> ::= <expression>+<term>|<expression>-<term>|<term>
-<term> ::= <term>*<factor>|<term>/<factor>|<factor>
-<factor> ::= (<expression>)|identifier|const
-
-<iostmt> ::= gets()|puts(<identifier>)|puts(<const>)
-<inputmodstmt> ::= cuts(<identifier>)|cuts(<string_constant>)|to_i(<identifier>)|to_i(<string_constant>)
-
-<simple_type> ::= int|string|char|bool|array
-<array_access> ::= <identifier>[<expression>]
-<declaration> ::= <simple_type> <identifier>
-
-<relation> ::= <|<=|==|!=|>=|>
-<condition> ::= <expression><relation><expression>
-
-<assignment_statement> ::= <identifier> = <expression>|<list_access> = <expression>
-<if_statement> ::= if <condition> <statement> elif <condition> <statement> else <statement> end|if <condition> <statement> else <statement> end|if <condition> <statement> end
-<while_statement> ::= while <condition> do <statement> end
 <return_statement> ::= return <expression>
+
 <for_statement> ::= for <identifier> in <expression> <compound_statement>
+
+<break_statement> ::= break
+
+<io_statement> ::= gets(<identifier>)|puts(<identifier>)|puts(<const>)
+
+<imod_statement> ::= cuts(<identifier>)|cuts(<string_constant>)|to_i(<identifier>)|to_i(<string_constant>)

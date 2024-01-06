@@ -1,0 +1,15 @@
+start
+array arr;
+arr = [3, 1, 10, 4, -6, 12, 4, 2, -4];
+
+int max;
+max = arr[0];
+
+for number in arr do
+	if number > max
+		max = number;
+	end;
+end;
+
+puts(max);
+stop

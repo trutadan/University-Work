@@ -1,0 +1,79 @@
+%{ 	 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "y.tab.h"
+int currentLine = 1;
+%}
+
+BOOL_CONST	true|false
+INT_CONST	0|[+|-]?[1-9][0-9]*
+CHAR_CONST	[\'][a-zA-Z0-9][\']
+STRING_CONST	[\"][a-zA-Z0-9 ]*[\"]
+IDENTIFIER	[a-zA-Z_][a-zA-Z0-9_]*
+
+%%
+
+"array" 	{printf("Line %d - reserved word: %s\n", currentLine, yytext); return ARRAY;}
+"bool" 		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return BOOL;}
+"string" 	{printf("Line %d - reserved word: %s\n", currentLine, yytext); return STRING;}
+"int" 		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return INT;}
+"char"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return CHAR;}
+"if"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return IF;}
+"elif"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return ELIF;}
+"else"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return ELSE;}
+"do"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return DO;}
+"end"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return END;}
+"gets"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return GETS;}
+"puts"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return PUTS;}
+"cuts"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return CUTS;}
+"to_i"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return TO_I;}
+"start"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return START;}
+"stop"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return STOP;}
+"nil"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return NIL;}
+"and"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return AND;}
+"break"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return BREAK;}
+"or"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return OR;}
+"for"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return FOR;}
+"while"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return WHILE;}
+"in"		{printf("Line %d - reserved word: %s\n", currentLine, yytext); return IN;}
+
+"+"		{printf("Line %d - operator %s\n", currentLine, yytext); return plus;}
+"-"		{printf("Line %d - operator %s\n", currentLine, yytext); return minus;}
+"*"		{printf("Line %d - operator %s\n", currentLine, yytext); return mul;}
+"/"		{printf("Line %d - operator %s\n", currentLine, yytext); return divs;}
+"%"		{printf("Line %d - operator %s\n", currentLine, yytext); return mod;}
+"<="		{printf("Line %d - operator %s\n", currentLine, yytext); return lessOrEqual;}
+">="		{printf("Line %d - operator %s\n", currentLine, yytext); return moreOrEqual;}
+"<"		{printf("Line %d - operator %s\n", currentLine, yytext); return less;}
+">"		{printf("Line %d - operator %s\n", currentLine, yytext); return more;}
+"=="		{printf("Line %d - operator %s\n", currentLine, yytext); return equal;}
+"!="		{printf("Line %d - operator %s\n", currentLine, yytext); return different;}
+"="		{printf("Line %d - operator %s\n", currentLine, yytext); return eq;}
+
+"{"		{printf("Line %d - separator %s\n", currentLine, yytext); return leftCurlyBracket;}
+"}"		{printf("Line %d - separator %s\n", currentLine, yytext); return rightCurlyBracket;}
+"("		{printf("Line %d - separator %s\n", currentLine, yytext); return leftRoundBracket;}
+")"		{printf("Line %d - separator %s\n", currentLine, yytext); return rightRoundBracket;}
+"["		{printf("Line %d - separator %s\n", currentLine, yytext); return leftSquareBracket;}
+"]"		{printf("Line %d - separator %s\n", currentLine, yytext); return rightSquareBracket;}
+":"		{printf("Line %d - separator %s\n", currentLine, yytext); return colon;}
+";"		{printf("Line %d - separator %s\n", currentLine, yytext); return semicolon;}
+","		{printf("Line %d - separator %s\n", currentLine, yytext); return comma;}
+
+{BOOL_CONST}	{printf("Line %d - boolean constant: %s\n", currentLine, yytext); return BOOL_CONST;}
+{INT_CONST}    	{printf("Line %d - integer constant: %s\n", currentLine, yytext); return INT_CONST;}
+{CHAR_CONST}   	{printf("Line %d - character constant: %s\n", currentLine, yytext); return CHAR_CONST;}
+{STRING_CONST} 	{printf("Line %d - string constant: %s\n", currentLine, yytext); return STRING_CONST;}
+{IDENTIFIER}   	{printf("Line %d - identifier: %s\n", currentLine, yytext); return IDENTIFIER;}
+
+[ \t]+		{/* Ignore whitespaces */}
+[\n]+		{currentLine++;}
+
+[0-9][a-zA-Z0-9_]*					{printf("@ Line %d - illegal identifier: %s @\n", currentLine, yytext);}
+[+|-]0|[+|-]?0[0-9]+					{printf("@ Line %d - illegal integer constant: %s @\n", currentLine, yytext);}
+[\'][a-zA-Z0-9 ]{2}[\']|[\'][a-zA-Z0-9 ]{2,}[\']	{printf("@ Line %d - illegal character constant: %s @\n", currentLine, yytext);}
+[\"][a-zA-Z0-9_]+|[a-zA-Z0-9_]+[\"]			{printf("@ Line %d - illegal string constant: %s @\n", currentLine, yytext);}
+. 							{printf("@ Line %d - unrecognized token: %s @\n", currentLine, yytext);}
+
+%%

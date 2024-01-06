@@ -24,6 +24,7 @@ tab
 newline
 array 
 bool 
+string
 int 
 char 
 elif 
@@ -40,9 +41,8 @@ in
 break 
 or 
 for 
-false 
-true 
 while 
 to_i
 start
 stop
+return

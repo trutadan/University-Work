@@ -1,0 +1,25 @@
+start
+puts("Give me a natural number");
+string input_string;
+gets(input_string);
+
+string input_string_without_newline;
+input_string_without_newline = cuts(input_string);
+
+int input_number;
+input_number = to_i(input_string_without_newline);
+
+bool 1s_prime;
+1s_prime = true;
+
+int number;
+number = 2;
+while number < input_number/2 do ~
+	if (input_number % number == 0)
+		1s_prime = false;
+		break;
+	end;
+end;
+
+puts(is_prime);
+stop

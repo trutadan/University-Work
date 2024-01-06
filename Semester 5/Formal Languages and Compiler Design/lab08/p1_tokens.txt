@@ -1,0 +1,80 @@
+Line 1 - reserved word: start
+Line 2 - reserved word: puts
+Line 2 - separator: (
+Line 2 - string constant: "Give me a natural number"
+Line 2 - separator: )
+Line 2 - separator: ;
+Line 3 - reserved word: string
+Line 3 - identifier: input_string
+Line 3 - separator: ;
+Line 4 - identifier: input_string
+Line 4 - operator: =
+Line 4 - reserved word: gets
+Line 4 - separator: (
+Line 4 - separator: )
+Line 4 - separator: ;
+Line 5 - reserved word: string
+Line 5 - identifier: input_string_without_newline
+Line 5 - separator: ;
+Line 6 - identifier: input_string_without_newline
+Line 6 - operator: =
+Line 6 - reserved word: cuts
+Line 6 - separator: (
+Line 6 - identifier: input_string
+Line 6 - separator: )
+Line 6 - separator: ;
+Line 7 - reserved word: int
+Line 7 - identifier: input_number
+Line 7 - separator: ;
+Line 8 - identifier: input_number
+Line 8 - operator: =
+Line 8 - reserved word: to_i
+Line 8 - separator: (
+Line 8 - identifier: input_string_without_newline
+Line 8 - separator: )
+Line 8 - separator: ;
+Line 9 - reserved word: bool
+Line 9 - identifier: is_prime
+Line 9 - separator: ;
+Line 10 - identifier: is_prime
+Line 10 - operator: =
+Line 10 - boolean constant: true
+Line 10 - separator: ;
+Line 11 - reserved word: int
+Line 11 - identifier: number
+Line 11 - separator: ;
+Line 12 - identifier: number
+Line 12 - operator: =
+Line 12 - integer constant: 2
+Line 12 - separator: ;
+Line 13 - reserved word: while
+Line 13 - identifier: number
+Line 13 - operator: <
+Line 13 - identifier: input_number
+Line 13 - operator: /
+Line 13 - integer constant: 2
+Line 13 - reserved word: do
+Line 14 - reserved word: if
+Line 14 - separator: (
+Line 14 - identifier: input_number
+Line 14 - operator: %
+Line 14 - identifier: number
+Line 14 - operator: ==
+Line 14 - integer constant: 0
+Line 14 - separator: )
+Line 15 - identifier: is_prime
+Line 15 - operator: =
+Line 15 - boolean constant: false
+Line 15 - separator: ;
+Line 16 - reserved word: break
+Line 16 - separator: ;
+Line 17 - reserved word: end
+Line 17 - separator: ;
+Line 18 - reserved word: end
+Line 18 - separator: ;
+Line 19 - reserved word: puts
+Line 19 - separator: (
+Line 19 - identifier: is_prime
+Line 19 - separator: )
+Line 19 - separator: ;
+Line 20 - reserved word: stop

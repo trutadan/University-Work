@@ -1,0 +1,8 @@
+The environment variable on Windows:
+name: MPJ_HOME
+value: c:\mpj
+
+Configuration options:
+vm: -jar $MPJ_HOME$\lib\starter.jar -np 6
+environment variable: MPJ_HOME=C:\mpj
+
