@@ -57,7 +57,8 @@ My university work.
       </li>
       <li>Second Semester 📂
         <ul>
-          -
+          <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%205/Computer%20Vision%20and%20Deep%20Learning">Quantum Computing</a></li>
+          <li><a href="https://github.com/trutadan/University-Work/tree/main/Semester%205/Formal%20Languages%20and%20Compiler%20Design">Software Systems Verification and Validation</a></li>
         </ul>
       </li>
     </ul>
