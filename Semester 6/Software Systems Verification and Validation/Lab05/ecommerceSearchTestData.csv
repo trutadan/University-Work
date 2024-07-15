@@ -1,0 +1,3 @@
+searchQuery,resultType,expectedText
+apple,valid,Showing 1 to 15 of 18 (2 Pages)
+5sad6#$123^,invalid,There is no product that matches the search criteria.

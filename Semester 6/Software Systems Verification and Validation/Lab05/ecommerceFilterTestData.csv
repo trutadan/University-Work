@@ -1,0 +1,4 @@
+lowerPrice,higherPrice,resultType,expectedText
+98,97,invalid,"There is no product that matches the search criteria.
+"
+100,150,valid,Showing 1 to 15 of 44 (3 Pages)
